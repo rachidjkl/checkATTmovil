@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CheckATTmovil.iml" filepath="$PROJECT_DIR$/.idea/modules/CheckATTmovil.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CheckATTmovil.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CheckATTmovil.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CheckATTmovil.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CheckATTmovil.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CheckATTmovil.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CheckATTmovil.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CheckATTmovil.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CheckATTmovil.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MenuLateral.iml" filepath="$PROJECT_DIR$/.idea/modules/MenuLateral.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MenuLateral.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MenuLateral.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MenuLateral.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MenuLateral.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MenuLateral.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MenuLateral.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MenuLateral.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MenuLateral.app.unitTest.iml" />
     </modules>
   </component>
 </project>
