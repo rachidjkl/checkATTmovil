@@ -21,5 +21,22 @@
             android:id="@+id/nav_verfaltas"
             android:icon="@drawable/ic_eye"
             android:title="Ver faltas"/>
+        <item
+            android:id="@+id/configuration_section"
+            android:title="">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/logOut"
+                        android:icon="@drawable/ic_exit"
+                        android:title="LogOut"/>
+                    <item
+                        android:id="@+id/settings"
+                        android:icon="@drawable/ic_settings"
+                        android:title="Settings "/>
+                </group>
+            </menu>
+        </item>
     </group>
+
 </menu>
