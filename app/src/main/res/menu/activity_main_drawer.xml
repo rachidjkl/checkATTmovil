@@ -27,13 +27,13 @@
             <menu>
                 <group android:checkableBehavior="single">
                     <item
-                        android:id="@+id/logOut"
-                        android:icon="@drawable/ic_exit"
-                        android:title="LogOut"/>
-                    <item
                         android:id="@+id/settings"
                         android:icon="@drawable/ic_settings"
                         android:title="Settings "/>
+                    <item
+                        android:id="@+id/logOut"
+                        android:icon="@drawable/ic_exit"
+                        android:title="LogOut"/>
                 </group>
             </menu>
         </item>
