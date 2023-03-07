@@ -14,7 +14,6 @@
           <stringArguments>
             <stringArg name="classpath">
               <args>
-                <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/d6b8c7076041e2db19698ad921c991ec/transformed/viewbinding-7.2.2-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/a45988e51c941878bc491f6f6e6d42c8/transformed/navigation-fragment-ktx-2.3.5-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/97a73efedd0fe09bae630fe9b1f00f74/transformed/navigation-ui-ktx-2.3.5-api.jar</arg>
@@ -134,7 +133,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../app/src/test/java" isTestSource="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../app/src/testDebug" />
-    <orderEntry type="jdk" jdkName="Android API 33 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 33, extension level 3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="MenuLateral.app.main" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation:1.3.0" level="project" />
