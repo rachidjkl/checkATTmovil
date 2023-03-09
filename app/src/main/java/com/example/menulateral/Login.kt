@@ -20,15 +20,24 @@ class Login : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            if (validar()){
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+
+            }
+
         }
     }
 
 
-    private fun validar(){
-        
+    private fun validar() : Boolean{
+        var next = true
+        val result = arrayOf(validateEmail(),validatePassword())
+        if (false in result){
+            next = false
+        }
+        return next
     }
 
 
@@ -62,7 +71,7 @@ class Login : AppCompatActivity() {
         if (passwordTxt.isEmpty()){
             binding.password.error = "Filed can not be empty"
             next = false;
-        }else if (passRegex.matcher(passwordTxt).matches()){
+        }else if (!passRegex.matcher(passwordTxt).matches()){
             binding.password.error = "Please enter a valid password address"
             next = false;
         }else {
