@@ -1,4 +1,4 @@
-package com.example.menulateral.ui.home
+package com.example.menulateral.ui.visorAsistencia
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.menulateral.databinding.FragmentHomeBinding
+import com.example.menulateral.databinding.FragmentVisorAsistenciaBinding
 
-class HomeFragment : Fragment() {
+class VisorAsistenciaFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentVisorAsistenciaBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val visorAsistenciaViewModel =
+            ViewModelProvider(this).get(VisorAsistenciaViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        visorAsistenciaViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

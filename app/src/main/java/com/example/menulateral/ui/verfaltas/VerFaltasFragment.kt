@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.*
 import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentVerFaltasBinding
-import com.example.menulateral.ui.slideshow.SlideshowViewModel
 
 class VerFaltasFragment : Fragment() {
 

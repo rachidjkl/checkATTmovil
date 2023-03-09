@@ -1,13 +1,13 @@
-package com.example.menulateral.ui.gallery
+package com.example.menulateral.ui.visorAsistencia
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class GalleryViewModel : ViewModel() {
+class VisorAsistenciaViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is gallery Fragment"
+        value = "Mario Leiva"
     }
     val text: LiveData<String> = _text
 }
