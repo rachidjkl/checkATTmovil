@@ -25,11 +25,13 @@
     </ImageView>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
         app:startIconDrawable="@drawable/ic_email"
+        app:errorEnabled="true"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="341dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,11 +49,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
         app:endIconMode="password_toggle"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
