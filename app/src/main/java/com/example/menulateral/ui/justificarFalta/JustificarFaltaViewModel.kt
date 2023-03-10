@@ -6,9 +6,4 @@ import androidx.lifecycle.ViewModel
 
 class JustificarFaltaViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "justificar"
-    }
-
-    val text: LiveData<String> = _text
 }

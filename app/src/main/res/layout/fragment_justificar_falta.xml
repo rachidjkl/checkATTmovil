@@ -10,8 +10,9 @@
 
 
     <Button
-        android:layout_width="107dp"
-        android:layout_height="54dp"
+        android:id="@+id/btn_enviar"
+        app:backgroundTint="@null"
+        style="@style/estiloBoton1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.947"
@@ -24,128 +25,121 @@
     <TextView
         android:id="@+id/text_reason"
         style="@style/estiloTexto"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/txt_motivo"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/edit_reason"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/edit_reason"
-        android:layout_width="373dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
+        style="@style/estiloEditText"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/menu_item_background"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_marginEnd="25dp"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintVertical_bias="0.142" />
 
     <TextView
         android:id="@+id/text_comentario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        style="@style/estiloTexto"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/txt_comentario"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/edit_comentario"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.231" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/edit_comentario"
-        android:layout_width="358dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/menu_item_background"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        style="@style/estiloEditText"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="25dp"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.162"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.28" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_reason"
+        app:layout_constraintVertical_bias="0.011" />
 
     <TextView
         android:id="@+id/text_adjuntar_documento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        style="@style/estiloTexto"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/txt_adjuntar_documento"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/edit_adjuntar_documento"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.028"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
 
     <EditText
         android:id="@+id/edit_adjuntar_documento"
-        android:layout_width="308dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/menu_item_background"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        style="@style/estiloEditText"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginTop="25dp"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_comentario"
+        app:layout_constraintVertical_bias="0.011" />
+
+
+    <TextView
+        android:id="@+id/text_seleccionar_fecha"
+        style="@style/estiloTexto"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/txt_seleccionar_fecha"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.421" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="54dp"
+        app:backgroundTint="@null"
+        style="@style/estiloBoton2"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
         android:text="02/03/2023"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_adjuntar_documento"
+        app:layout_constraintVertical_bias="0.011" />
 
-    <TextView
-        android:id="@+id/text_adjuntar_documento2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/txt_adjuntar_documento"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.028"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
