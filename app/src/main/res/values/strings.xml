@@ -7,13 +7,28 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_hom">Visor de asistencia</string>
-    <string name="menu_gallery">Justificar Faltas</string>
-    <string name="menu_slideshow">Faltas Justificadas</string>
-    <string name="menu_verfaltas">Ver Faltas</string>
+    <string name="menu_visor_asistencia">Visor de asistencia</string>
+    <string name="menu_justificar_faltas">Justificar Faltas</string>
+    <string name="menu_faltas_justificadas">Faltas Justificadas</string>
+    <string name="menu_ver_faltas">Ver Faltas</string>
+
+    <string name="menu_ajustes">Ajustes</string>
+    <string name="menu_salir">Salir</string>
+
 
     <string name="btn_enviar">enviar</string>
-    <string name="txt_reason">Reason</string>
+    <string name="txt_motivo">Motivo</string>
+    <string name="txt_comentario">Comentario</string>
+    <string name="txt_adjuntar_documento">Adjuntar Documento</string>
+    <string name="txt_seleccionar_fecha">Seleccionar Fecha</string>
+
+
+    <string name="txt_validadas">Validadas</string>
+    <string name="txt_pendientes">Pendientes</string>
+    <string name="txt_rechazadas">Rechazadas</string>
+
+
+    <string name="txt_faltas_totales">Motivo</string>
 
     <string-array name="spinner_options">
         <item>M03 - Base de datos</item>

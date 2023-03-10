@@ -3,15 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/drawable/menu_item_background.xml" value="0.2005" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/app_bar_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/dropdown_item.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/fragment_faltas_justificadas.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/fragment_gallery.xml" value="0.33" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/fragment_justificar_falta.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/fragment_slideshow.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/fragment_ver_faltas.xml" value="0.3625" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/fragment_visor_asistencia.xml" value="0.33" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/layout/nav_header_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/menu/main.xml" value="0.36666666666666664" />

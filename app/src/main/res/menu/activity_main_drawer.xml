@@ -5,35 +5,35 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_visor_asistencia"
             android:icon="@drawable/ic_person"
-            android:title="Visor de asistencia"/>
+            android:title="@string/menu_visor_asistencia"/>
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_justificar_faltas"
             android:icon="@drawable/ic_listcheck"
-            android:title="Justificar falta"/>
+            android:title="@string/menu_justificar_faltas"/>
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_faltas_justificadas"
             android:icon="@drawable/ic_check"
-            android:title="Faltas justificadas"/>
+            android:title="@string/menu_faltas_justificadas"/>
 
         <item
-            android:id="@+id/nav_verfaltas"
+            android:id="@+id/nav_ver_faltas"
             android:icon="@drawable/ic_eye"
-            android:title="Ver faltas"/>
+            android:title="@string/menu_ver_faltas"/>
         <item
             android:id="@+id/configuration_section"
             android:title="">
             <menu>
                 <group android:checkableBehavior="single">
                     <item
-                        android:id="@+id/settings"
+                        android:id="@+id/nav_ajustes"
                         android:icon="@drawable/ic_settings"
-                        android:title="Settings "/>
+                        android:title="@string/menu_ajustes"/>
                     <item
-                        android:id="@+id/logOut"
+                        android:id="@+id/nav_salir"
                         android:icon="@drawable/ic_exit"
-                        android:title="LogOut"/>
+                        android:title="@string/menu_salir"/>
                 </group>
             </menu>
         </item>
