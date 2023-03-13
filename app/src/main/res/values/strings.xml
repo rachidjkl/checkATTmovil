@@ -23,6 +23,9 @@
     <string name="txt_seleccionar_fecha">Seleccionar Fecha</string>
 
 
+    <string name="txt_tutor">Tutor:</string>
+    <string name="txt_gmail">Gmail:</string>
+
     <string name="txt_validadas">Validadas</string>
     <string name="txt_pendientes">Pendientes</string>
     <string name="txt_rechazadas">Rechazadas</string>
