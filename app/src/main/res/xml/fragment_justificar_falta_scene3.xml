@@ -31,12 +31,12 @@
             android:layout_width="match_parent"
             android:id="@+id/recyclerView2" />
         <Constraint
-            motion:layout_editor_absoluteY="260dp"
+            motion:layout_editor_absoluteY="270dp"
             android:layout_height="32dp"
             android:layout_width="31dp"
             motion:layout_constraintStart_toEndOf="@+id/edit_adjuntar_documento"
             android:id="@+id/imageViewPapelera"
-            motion:layout_editor_absoluteX="401dp" />
+            motion:layout_constraintEnd_toEndOf="parent" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
