@@ -5,21 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gris_claro"
+    app:layoutDescription="@xml/fragment_justificar_falta_scene2"
     tools:context=".ui.justificarFalta.JustificarFaltaFragment">
-
 
 
     <Button
         android:id="@+id/btn_enviar"
-        app:backgroundTint="@null"
         style="@style/estiloBoton1"
+        android:text="@string/btn_enviar"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        android:text="@string/btn_enviar"/>
+        app:layout_constraintVertical_bias="0.023" />
 
 
     <TextView
@@ -70,8 +70,8 @@
         android:id="@+id/edit_comentario"
         style="@style/estiloEditText"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginTop="25dp"
         android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,8 +100,8 @@
         android:id="@+id/edit_adjuntar_documento"
         style="@style/estiloEditText"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="75dp"
-        android:layout_marginTop="25dp"
         android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,8 +115,8 @@
         android:id="@+id/text_seleccionar_fecha"
         style="@style/estiloTexto"
         android:layout_marginStart="25dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/txt_seleccionar_fecha"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/button"
@@ -128,18 +128,53 @@
 
     <Button
         android:id="@+id/button"
-        app:backgroundTint="@null"
         style="@style/estiloBoton2"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="40dp"
         android:text="02/03/2023"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_adjuntar_documento"
-        app:layout_constraintVertical_bias="0.011" />
+        app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/imageViewPapelera"
+        android:layout_width="31dp"
+        android:layout_height="32dp"
+        android:src="@drawable/papelera"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="406dp"
+        tools:layout_editor_absoluteY="270dp" />
+
+    <ImageView
+        android:id="@+id/imageViewClip"
+        android:layout_width="19dp"
+        android:layout_height="21dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/clip"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_adjuntar_documento"
+        app:layout_constraintEnd_toEndOf="@+id/edit_adjuntar_documento"
+        app:layout_constraintTop_toTopOf="@+id/edit_adjuntar_documento" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button">
+
+        <ListView
+            android:id="@+id/recyclerView2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

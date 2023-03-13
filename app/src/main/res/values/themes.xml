@@ -49,7 +49,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14sp</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/gothic</item>
         <item name="android:background">@drawable/btn_principal</item>
