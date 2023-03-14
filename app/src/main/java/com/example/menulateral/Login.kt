@@ -19,12 +19,17 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnLogin2.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding.btnLogin.setOnClickListener {
             if (validar()){
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
-
             }
 
         }
