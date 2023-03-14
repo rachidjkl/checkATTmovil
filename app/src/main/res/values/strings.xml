@@ -7,7 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    
+
     <string name="menu_visor_asistencia">Visor de asistencia</string>
     <string name="menu_justificar_faltas">Justificar Faltas</string>
     <string name="menu_faltas_justificadas">Faltas Justificadas</string>
@@ -33,7 +33,6 @@
 
 
     <string name="txt_faltas_totales">Motivo</string>
->>>>>>> main
 
     <string-array name="spinner_options">
         <item>M03 - Base de datos</item>
