@@ -30,6 +30,15 @@ class VisorAsistenciaFragment : Fragment() {
     ): View {
         _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        //------------------------------------------------------PreogressBar-----------------------------------------------------------//
+        binding.progressBar.clearAnimation();
+        val currentProgres = 60000
+        binding.progressBar.max = 10000;
+        ObjectAnimator.ofInt( binding.progressBar, "progress", currentProgres)
+            .setDuration(15000)
+            .start()
+        //-----------------------------------------------------------------------------------------------------------------------------//
         return root
     }
 
