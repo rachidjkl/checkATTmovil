@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+       <KeyFrameSet>
+           <KeyAttribute
+               motion:motionTarget="@+id/recyclerView2"
+               motion:framePosition="100"
+               android:alpha="1" />
+       </KeyFrameSet>
+        <OnSwipe motion:touchAnchorId="@+id/recyclerView2"
+            motion:maxAcceleration="100.0" />
+        <OnSwipe
+            motion:touchAnchorId="@+id/recyclerView2"
+            motion:touchAnchorSide="bottom" />
+        <OnSwipe motion:touchAnchorId="@+id/recyclerView2" />
+        <OnSwipe />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            motion:layout_editor_absoluteY="256dp"
+            android:layout_height="32dp"
+            motion:layout_editor_absoluteX="407dp"
+            android:layout_width="31dp"
+            android:id="@+id/imageViewPapelera" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/recyclerView2" />
+        <Constraint
+            android:id="@+id/text_reason"
+            motion:layout_editor_absoluteX="25dp" />
+        <Constraint
+            android:id="@+id/edit_reason"
+            motion:layout_editor_absoluteX="25dp" />
+        <Constraint
+            android:id="@+id/text_comentario"
+            motion:layout_editor_absoluteX="25dp" />
+        <Constraint
+            android:id="@+id/edit_comentario"
+            motion:layout_editor_absoluteX="25dp" />
+        <Constraint
+            android:id="@+id/text_adjuntar_documento"
+            motion:layout_editor_absoluteX="25dp" />
+        <Constraint
+            android:id="@+id/edit_adjuntar_documento"
+            motion:layout_editor_absoluteX="25dp" />
+        <Constraint
+            android:id="@+id/text_seleccionar_fecha"
+            motion:layout_editor_absoluteX="25dp" />
+        <Constraint
+            android:id="@+id/button"
+            motion:layout_editor_absoluteX="25dp" />
+        <Constraint
+            android:layout_height="1dp"
+            android:layout_width="31dp"
+            android:id="@+id/imageView2"
+            motion:layout_editor_absoluteX="392dp" />
+        <Constraint
+            android:layout_height="1dp"
+            android:layout_width="19dp"
+            android:id="@+id/imageView3"
+            motion:layout_editor_absoluteY="260dp" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/constraint"
+            motion:layout_constraintTop_toBottomOf="@+id/button"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:layout_height="32dp"
+            android:layout_width="31dp"
+            android:id="@+id/imageViewPapelera"
+            motion:layout_constraintBottom_toTopOf="@+id/text_seleccionar_fecha"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/edit_adjuntar_documento"
+            motion:layout_editor_absoluteY="395dp"
+            motion:layout_editor_absoluteX="263dp" />
+        <Constraint
+            android:layout_height="21dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/edit_adjuntar_documento"
+            android:layout_width="19dp"
+            android:id="@+id/imageViewClip"
+            android:layout_marginRight="10dp"
+            motion:layout_constraintEnd_toEndOf="@+id/edit_adjuntar_documento" />
+    </ConstraintSet>
+</MotionScene>
