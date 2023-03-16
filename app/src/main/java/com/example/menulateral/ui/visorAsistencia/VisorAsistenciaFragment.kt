@@ -24,7 +24,7 @@ class VisorAsistenciaFragment : Fragment() {
         _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val porcentajeAlumno = 80
+        val porcentajeAlumno = 84
         binding.progressBar.max = 100;
         binding.progressBar.setProgress(0)
         var cont = 0;
