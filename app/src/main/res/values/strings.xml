@@ -25,13 +25,14 @@
 
     <string name="txt_tutor">Tutor:</string>
     <string name="txt_gmail">Gmail:</string>
+    <string name="txt_faltas_totales">Faltas Totales:</string>
 
     <string name="txt_validadas">Validadas</string>
     <string name="txt_pendientes">Pendientes</string>
     <string name="txt_rechazadas">Rechazadas</string>
 
 
-    <string name="txt_faltas_totales">Motivo</string>
+
 
     <string-array name="spinner_options">
         <item>M03 - Base de datos</item>
