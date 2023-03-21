@@ -28,16 +28,12 @@ class VerFaltasFragment : Fragment() {
 
         _binding = FragmentVerFaltasBinding.inflate(inflater, container, false)
 
-        val modulos = resources.getStringArray(R.array.spinner_options)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, modulos)
-        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+
+
 
         val root: View = binding.root
 
-        val textView: TextView = binding.textVerfaltas
-        verFaltasViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+
         return root
 
     }
