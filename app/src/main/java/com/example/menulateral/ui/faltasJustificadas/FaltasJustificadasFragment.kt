@@ -13,10 +13,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.R
 import com.example.menulateral.Uf
 import com.example.menulateral.databinding.FragmentFaltasJustificadasBinding
+import com.example.menulateral.ui.Faltas
 import com.google.android.material.tabs.TabLayout
 
 class FaltasJustificadasFragment : Fragment() {
@@ -44,13 +46,13 @@ class FaltasJustificadasFragment : Fragment() {
         val root: View = binding.root
 
         //crear una clase para que pueda usar la lista de cards
-        val ufCard = mutableListOf<Uf>(
-            Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
-            Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
-            Uf(3, 103, 125, "UF3 - Estructuras de datos y algoritmos", "10", "11"),
-            Uf(4, 101, 126, "UF4 - Bases de datos y SQL", "11", "12"),
-            Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
-            Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
+        val faltasList = mutableListOf<Faltas>(
+            Faltas(1, 101, "12/03/23", "UF1 - Introducción a la programación", "08", "V", "m"),
+            Faltas(2, 102, "02/03/23", "UF2 - Programación orientada a objetos", "09", "P","m"),
+            Faltas(3, 103, "31/03/23", "UF3 - Estructuras de datos y algoritmos", "10", "R","m"),
+            Faltas(4, 101, "07/03/23", "UF4 - Bases de datos y SQL", "11", "V","m"),
+            Faltas(5, 102, "24/05/23", "UF5 - Desarrollo web con JavaScript", "12", "V","m"),
+            Faltas(6, 103, "12/04/23", "UF6 - Desarrollo móvil con Kotlin", "13", "V","m")
         )
 
         val ufList = mutableListOf<Uf>(
@@ -61,7 +63,7 @@ class FaltasJustificadasFragment : Fragment() {
             Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
             Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
         )
-        val adapter = FaltasJustificadasAdapter(ufList)
+        val adapter = FaltasJustificadasAdapter(ufList, faltasList)
         binding.RecyclerView.adapter = adapter
 
         return root

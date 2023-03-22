@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.R
 import com.example.menulateral.Uf
 
-class UfColorRectangleAdapter(private val ufList: MutableList<Uf>):
+class UfColorRectangleAdapter( private val ufList: MutableList<Uf>):
     RecyclerView.Adapter<UfColorRectangleAdapter.UfViewHolder>(){
 
     private val layout = R.layout.item_uf_color // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
@@ -28,7 +28,7 @@ class UfColorRectangleAdapter(private val ufList: MutableList<Uf>):
         }
     }
 
-    override fun onBindViewHolder(holder: UfViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UfColorRectangleAdapter.UfViewHolder, position: Int) {
         val uf = ufList[position]
         bindPackage(holder, uf)
     }
