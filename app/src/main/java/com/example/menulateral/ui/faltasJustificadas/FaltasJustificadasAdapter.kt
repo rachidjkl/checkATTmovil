@@ -18,13 +18,13 @@ class FaltasJustificadasAdapter( private val ufList: MutableList<Uf>):
 
     class UfViewHolder (val view: View): RecyclerView.ViewHolder(view){
         var alumnName: TextView
-        /*var recyclerViewRellenar: RecyclerView*/
+        var recyclerViewRellenar: RecyclerView
 
 
 
         init {
             alumnName = view.findViewById(R.id.alumnName)
-            /*recyclerViewRellenar = view.findViewById(R.id.recyclerUfColorRectangle)*/
+            recyclerViewRellenar = view.findViewById(R.id.recyclerUfColorRectangle)
         }
     }
 
@@ -44,7 +44,7 @@ class FaltasJustificadasAdapter( private val ufList: MutableList<Uf>):
     fun bindPackage(holder: UfViewHolder, uf: Uf){
 
         holder.alumnName?.text = "12/04/23"
-       /* holder.recyclerViewRellenar.adapter= adapter*/
+        holder.recyclerViewRellenar.adapter= adapter
 
     }
 

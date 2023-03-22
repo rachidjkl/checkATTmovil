@@ -43,6 +43,16 @@ class FaltasJustificadasFragment : Fragment() {
 
         val root: View = binding.root
 
+        //crear una clase para que pueda usar la lista de cards
+        val ufCard = mutableListOf<Uf>(
+            Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
+            Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
+            Uf(3, 103, 125, "UF3 - Estructuras de datos y algoritmos", "10", "11"),
+            Uf(4, 101, 126, "UF4 - Bases de datos y SQL", "11", "12"),
+            Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
+            Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
+        )
+
         val ufList = mutableListOf<Uf>(
             Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
             Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
@@ -51,9 +61,8 @@ class FaltasJustificadasFragment : Fragment() {
             Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
             Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
         )
-        val cardViewRecycler = binding.RecyclerView
         val adapter = FaltasJustificadasAdapter(ufList)
-        cardViewRecycler.adapter = adapter
+        binding.RecyclerView.adapter = adapter
 
         return root
     }
