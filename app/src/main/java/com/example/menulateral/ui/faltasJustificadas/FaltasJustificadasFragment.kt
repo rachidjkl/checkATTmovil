@@ -13,7 +13,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.R
+import com.example.menulateral.Uf
 import com.example.menulateral.databinding.FragmentFaltasJustificadasBinding
 import com.google.android.material.tabs.TabLayout
 
@@ -40,6 +42,18 @@ class FaltasJustificadasFragment : Fragment() {
         binding.autoCompleteTextView6.setAdapter(arrayAdapter)
 
         val root: View = binding.root
+
+        val ufList = mutableListOf<Uf>(
+            Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
+            Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
+            Uf(3, 103, 125, "UF3 - Estructuras de datos y algoritmos", "10", "11"),
+            Uf(4, 101, 126, "UF4 - Bases de datos y SQL", "11", "12"),
+            Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
+            Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
+        )
+        val cardViewRecycler = binding.RecyclerView
+        val adapter = FaltasJustificadasAdapter(ufList)
+        cardViewRecycler.adapter = adapter
 
         return root
     }
@@ -91,7 +105,7 @@ class FaltasJustificadasFragment : Fragment() {
                     //Codigo al seleccionar el primer tab
                     //Ejecutara este codigo por defecto
                     square.paint.color = resources.getColor(R.color.pendiente)
-                    binding.imgCuadradoOf.background = square
+                    //binding.imgCuadradoOf.background = square
                 }
                 1 -> {
                     //Codigo al seleccionar el segundo tab
@@ -102,7 +116,7 @@ class FaltasJustificadasFragment : Fragment() {
             }
         }
 
-        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        /*binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 val position = tab.position
                 when (position) {
@@ -132,7 +146,7 @@ class FaltasJustificadasFragment : Fragment() {
                 TODO("Not yet implemented")
             }
 
-        })
+        })*/
     }
 
     override fun onDestroyView() {
