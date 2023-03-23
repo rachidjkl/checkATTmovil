@@ -1,6 +1,8 @@
 package com.example.menulateral.ui.faltasJustificadas
 
 import android.content.Context
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -16,17 +18,19 @@ import com.example.menulateral.R
 import com.example.menulateral.Uf
 import com.example.menulateral.ui.Faltas
 
-class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList : MutableList<Faltas>):
+class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList : MutableList<Faltas>, private val estado : Int):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
     val adapter = UfColorRectangleAdapter(ufList)
 
     private val layout = R.layout.adapter_item_color // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
+    val square = ShapeDrawable(RectShape())
 
     class FaltasJustificadasHolder (view: View): RecyclerView.ViewHolder(view){
         var alumnName: TextView
         var recyclerViewRellenar: RecyclerView
         var deployModule : ImageView
+        var imgCuadrado : ImageView
         var cardview : CardView
 
 
@@ -36,6 +40,7 @@ class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList
             recyclerViewRellenar.layoutManager = LinearLayoutManager(view.context)
             deployModule = view.findViewById(R.id.deployModuleColorRectangle)
             cardview = view.findViewById(R.id.cardView1)
+            imgCuadrado = view.findViewById(R.id.imgCuadradoOf)
         }
     }
 
@@ -78,6 +83,11 @@ class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList
         holder.alumnName?.text = falta.fecha
         holder.recyclerViewRellenar?.adapter= adapter
         holder.recyclerViewRellenar.visibility = View.GONE
+        if (estado == 0){
+            //holder.imgCuadrado.setImageResource(R.drawable.)
+        }else((estado == 0))
+
+
 
     }
 
