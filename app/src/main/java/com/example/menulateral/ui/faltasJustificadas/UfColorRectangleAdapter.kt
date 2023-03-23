@@ -13,7 +13,7 @@ class UfColorRectangleAdapter( private val ufList: MutableList<Uf>):
     RecyclerView.Adapter<UfColorRectangleAdapter.UfViewHolder>(){
 
     private val layout = R.layout.item_uf_color // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
-    private var clickListener: View.OnClickListener? = null
+
 
     class UfViewHolder (val view: View): RecyclerView.ViewHolder(view){
         var hourAbsence: TextView
@@ -48,6 +48,7 @@ class UfColorRectangleAdapter( private val ufList: MutableList<Uf>):
         holder.ufNameColorRectangle?.text = uf.nombre_completo
 
     }
+
 
 
 }

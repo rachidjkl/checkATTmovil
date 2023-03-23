@@ -5,9 +5,12 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
@@ -64,8 +67,10 @@ class FaltasJustificadasFragment : Fragment() {
             Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
         )
         val adapter = FaltasJustificadasAdapter(ufList, faltasList)
+        binding.RecyclerView.hasFixedSize()
+        binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.RecyclerView.adapter = adapter
-
+        
         return root
     }
 
@@ -164,5 +169,7 @@ class FaltasJustificadasFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 
 }
