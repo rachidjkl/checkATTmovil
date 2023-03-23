@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.R
 import com.example.menulateral.Uf
+import com.example.menulateral.databinding.AdapterItemColorBinding
 import com.example.menulateral.databinding.FragmentFaltasJustificadasBinding
 import com.example.menulateral.ui.Faltas
 import com.google.android.material.tabs.TabLayout
@@ -27,10 +28,14 @@ import com.google.android.material.tabs.TabLayout
 class FaltasJustificadasFragment : Fragment() {
 
     private var _binding: FragmentFaltasJustificadasBinding? = null
+    private var _bindingUf: AdapterItemColorBinding? = null
+
+    private val bindingUf get() = _bindingUf!!
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +75,6 @@ class FaltasJustificadasFragment : Fragment() {
         binding.RecyclerView.hasFixedSize()
         binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.RecyclerView.adapter = adapter
-        
         return root
     }
 

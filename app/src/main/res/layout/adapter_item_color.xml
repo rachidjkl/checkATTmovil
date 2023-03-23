@@ -11,13 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
-        android:onClick="expand2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="20dp">
+        app:cardElevation="4dp"
+        android:layout_margin="5dp"
+        android:onClick="expand2">
         <LinearLayout
             android:id="@+id/cardLayout1"
             android:layout_width="match_parent"
@@ -33,11 +29,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:layout_constraintWidth_percent="0.85"
                     android:background="@android:color/white" >
 
                     <TextView
@@ -80,12 +71,7 @@
                         android:layout_height="match_parent"
                         android:paddingRight="6dp"
                         android:paddingBottom="6dp"
-                        android:paddingLeft="6dp"
-                        app:layoutManager="LinearLayoutManager"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:paddingLeft="6dp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

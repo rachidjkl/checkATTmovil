@@ -10,9 +10,10 @@ import com.example.menulateral.R
 import com.example.menulateral.Uf
 
 class UfColorRectangleAdapter( private val ufList: MutableList<Uf>):
-    RecyclerView.Adapter<UfColorRectangleAdapter.UfViewHolder>(){
+    RecyclerView.Adapter<UfColorRectangleAdapter.UfViewHolder>(),View.OnClickListener{
 
     private val layout = R.layout.item_uf_color // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
+    private var clickListener: View.OnClickListener? = null
 
 
     class UfViewHolder (val view: View): RecyclerView.ViewHolder(view){
@@ -34,6 +35,7 @@ class UfColorRectangleAdapter( private val ufList: MutableList<Uf>):
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UfViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
+        view.setOnClickListener(this)
         return UfViewHolder(view)
     }
 
@@ -47,6 +49,13 @@ class UfColorRectangleAdapter( private val ufList: MutableList<Uf>):
         holder.moduleNameAbsence?.text = "MO3"
         holder.ufNameColorRectangle?.text = uf.nombre_completo
 
+    }
+    override fun onClick(view: View?) {
+        clickListener?.onClick(view)
+    }
+
+    fun setOnClickListener(listener: View.OnClickListener) {
+        clickListener = listener
     }
 
 

@@ -9,23 +9,25 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.R
 import com.example.menulateral.Uf
 import com.example.menulateral.ui.Faltas
 
-class FaltasJustificadasAdapter( val ufList: MutableList<Uf>, private val faltasList : MutableList<Faltas>):
+class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList : MutableList<Faltas>):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
     val adapter = UfColorRectangleAdapter(ufList)
 
     private val layout = R.layout.adapter_item_color // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
 
-    class FaltasJustificadasHolder (val view: View): RecyclerView.ViewHolder(view){
+    class FaltasJustificadasHolder (view: View): RecyclerView.ViewHolder(view){
         var alumnName: TextView
         var recyclerViewRellenar: RecyclerView
-        val deployModule : ImageView
+        var deployModule : ImageView
+        var cardview : CardView
 
 
         init {
@@ -33,11 +35,32 @@ class FaltasJustificadasAdapter( val ufList: MutableList<Uf>, private val faltas
             recyclerViewRellenar = view.findViewById(R.id.recyclerUfColorRectangle)
             recyclerViewRellenar.layoutManager = LinearLayoutManager(view.context)
             deployModule = view.findViewById(R.id.deployModuleColorRectangle)
+            cardview = view.findViewById(R.id.cardView1)
         }
     }
 
     override fun onBindViewHolder(holder: FaltasJustificadasAdapter.FaltasJustificadasHolder, position: Int) {
         val falta = faltasList[position]
+        holder.cardview.setOnClickListener(){
+            if (holder.recyclerViewRellenar.visibility == View.GONE) {
+                // Creamos un objeto Transition que afecte a los cambios en las vistas
+                val transition = ChangeBounds()
+
+                // Indicamos el tiempo de duración de la animación
+                transition.duration = 300
+
+                // Indicamos que se animen los cambios de manera fluida
+                transition.interpolator = AccelerateDecelerateInterpolator()
+
+                // Llamamos a la función beginDelayedTransition con nuestro ViewGroup y nuestro Transition
+                TransitionManager.beginDelayedTransition( holder.cardview as ViewGroup, transition)
+                holder.recyclerViewRellenar.visibility = View.VISIBLE
+                holder.deployModule.setImageResource(R.drawable.expand_less)
+            } else {
+                holder.recyclerViewRellenar.visibility = View.GONE
+                holder.deployModule.setImageResource(R.drawable.expand_more)
+            }
+        }
         bindPackage(holder, falta)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaltasJustificadasHolder {
@@ -62,28 +85,10 @@ class FaltasJustificadasAdapter( val ufList: MutableList<Uf>, private val faltas
         clickListener?.onClick(view)
     }
 
-    fun setOnClickListener(holder: FaltasJustificadasHolder, listener: View.OnClickListener){
+    fun setOnClickListener(listener: View.OnClickListener){
         clickListener = listener
-        fun expand2(view: View) {
-
-            if (holder.recyclerViewRellenar.visibility == View.GONE) {
-                // Creamos un objeto Transition que afecte a los cambios en las vistas
-                val transition = ChangeBounds()
-
-                // Indicamos el tiempo de duración de la animación
-                transition.duration = 500
-
-                // Indicamos que se animen los cambios de manera fluida
-                transition.interpolator = AccelerateDecelerateInterpolator()
-
-                // Llamamos a la función beginDelayedTransition con nuestro ViewGroup y nuestro Transition
-                TransitionManager.beginDelayedTransition(view as ViewGroup, transition)
-                holder.recyclerViewRellenar.visibility = View.VISIBLE
-                holder.deployModule.setImageResource(R.drawable.expand_less)
-            } else {
-                holder.recyclerViewRellenar.visibility = View.GONE
-                holder.deployModule.setImageResource(R.drawable.expand_more)
-            }
-        }
     }
+
+
+
 }
