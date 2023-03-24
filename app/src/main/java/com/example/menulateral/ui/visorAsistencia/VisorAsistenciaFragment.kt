@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.menulateral.Uf
 import com.example.menulateral.databinding.FragmentVisorAsistenciaBinding
-import com.example.menulateral.ui.Faltas
-import com.example.menulateral.ui.faltasJustificadas.FaltasJustificadasAdapter
 
 class VisorAsistenciaFragment : Fragment() {
 

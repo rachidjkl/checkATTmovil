@@ -1,6 +1,5 @@
 package com.example.menulateral.ui.faltasJustificadas
 
-import android.content.Context
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import android.transition.ChangeBounds
@@ -12,11 +11,11 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.R
 import com.example.menulateral.Uf
-import com.example.menulateral.ui.Faltas
 
 class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList : MutableList<Faltas>, private val estado : Int):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
@@ -83,9 +82,25 @@ class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList
         holder.alumnName?.text = falta.fecha
         holder.recyclerViewRellenar?.adapter= adapter
         holder.recyclerViewRellenar.visibility = View.GONE
+        val square = ShapeDrawable(RectShape())
         if (estado == 0){
-            //holder.imgCuadrado.setImageResource(R.drawable.)
-        }else((estado == 0))
+            val square = ShapeDrawable(RectShape())
+            val color = ContextCompat.getColor(holder.itemView.context, R.color.pendiente)
+            square.paint.color = color
+            holder.imgCuadrado.background = square
+        }else if(estado == 1){
+            val square = ShapeDrawable(RectShape())
+            val color = ContextCompat.getColor(holder.itemView.context, R.color.validado)
+            square.paint.color = color
+            holder.imgCuadrado.background = square
+
+        }else if(estado == -1){
+            val square = ShapeDrawable(RectShape())
+            val color = ContextCompat.getColor(holder.itemView.context, R.color.rechazado)
+            square.paint.color = color
+            holder.imgCuadrado.background = square
+
+        }
 
 
 

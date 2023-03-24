@@ -1,28 +1,21 @@
 package com.example.menulateral.ui.faltasJustificadas
 
 import android.graphics.*
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import android.os.Bundle
-import android.transition.ChangeBounds
-import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.menulateral.Faltas
 import com.example.menulateral.R
 import com.example.menulateral.Uf
 import com.example.menulateral.databinding.AdapterItemColorBinding
 import com.example.menulateral.databinding.FragmentFaltasJustificadasBinding
-import com.example.menulateral.ui.Faltas
 import com.google.android.material.tabs.TabLayout
 
 class FaltasJustificadasFragment : Fragment() {
@@ -70,13 +63,7 @@ class FaltasJustificadasFragment : Fragment() {
         binding.autoCompleteTextView6.setAdapter(arrayAdapter)
 
         val root: View = binding.root
-
         //crear una clase para que pueda usar la lista de cards
-
-        val adapter = FaltasJustificadasAdapter(ufList, faltasList, -1)
-        binding.RecyclerView.hasFixedSize()
-        binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
-        binding.RecyclerView.adapter = adapter
         return root
     }
 
@@ -144,37 +131,40 @@ class FaltasJustificadasFragment : Fragment() {
             }
         }
 
-       /* binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 val position = tab.position
+                var sel0 = false
+                var sel1 = false
+                var sel2 = false
                 when (position) {
                     0 -> {
-                        quare.paint.color = resources.getColor(R.color.pendiente)
-                        binding.imgCuadradoOf.background = square
-                        binding.imgCuadradoOf.invalidate()
-                        //Codigo al seleccionar el primer tab
+                        val adapter = FaltasJustificadasAdapter(ufList, faltasList, 0)
+                        binding.RecyclerView.hasFixedSize()
+                        binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+                        binding.RecyclerView.adapter = adapter
                     }
                     1 -> {
-                        square.paint.color = resources.getColor(R.color.validado)
-                        binding.imgCuadradoOf.background = square
-                        binding.imgCuadradoOf.invalidate()
-                        //Codigo al seleccionar el segundo tab
+                        val adapter = FaltasJustificadasAdapter(ufList, faltasList, 1)
+                        binding.RecyclerView.hasFixedSize()
+                        binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+                        binding.RecyclerView.adapter = adapter
                     }
                     2 -> {
-                        square.paint.color = resources.getColor(R.color.rechazado)
-                        binding.imgCuadradoOf.background = square
-                        binding.imgCuadradoOf.invalidate()
-                        //Codigo al seleccionar el tercer tab
+                        val adapter = FaltasJustificadasAdapter(ufList, faltasList, -1)
+                        binding.RecyclerView.hasFixedSize()
+                        binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+                        binding.RecyclerView.adapter = adapter
                     }
                 }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+            }
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
             }
 
-        })*/
+        })
     }
 
     override fun onDestroyView() {
