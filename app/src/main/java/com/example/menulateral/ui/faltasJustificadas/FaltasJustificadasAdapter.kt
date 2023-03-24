@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.menulateral.Faltas
 import com.example.menulateral.R
 import com.example.menulateral.Uf
 
