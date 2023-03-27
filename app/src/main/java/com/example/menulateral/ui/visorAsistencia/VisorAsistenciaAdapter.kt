@@ -27,7 +27,6 @@ class VisorAsistenciaAdapter (private val ufList: MutableList<Uf>, private val m
 
     private val layout = R.layout.module_item // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
-    val square = ShapeDrawable(RectShape())
 
     class VisorAsistenciaHolder(view: View) : RecyclerView.ViewHolder(view) {
         var moduloName: TextView

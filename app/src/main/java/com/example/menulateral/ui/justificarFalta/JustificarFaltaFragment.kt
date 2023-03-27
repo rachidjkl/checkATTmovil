@@ -8,7 +8,13 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.menulateral.Faltas
+import com.example.menulateral.Uf
 import com.example.menulateral.databinding.FragmentJustificarFaltaBinding
+import com.example.menulateral.ui.faltasJustificadas.FaltasJustificadasAdapter
+import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
+
 
 class JustificarFaltaFragment : Fragment() {
 
@@ -17,6 +23,25 @@ class JustificarFaltaFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    val faltasList = mutableListOf<Faltas>(
+        Faltas(1, 101, "12/03/23", "UF1 - Introducción a la programación", "08", "V", -1),
+        Faltas(2, 102, "02/03/23", "UF2 - Programación orientada a objetos", "09", "P",-1),
+        Faltas(3, 103, "31/03/23", "UF3 - Estructuras de datos y algoritmos", "10", "R",1),
+        Faltas(4, 101, "07/03/23", "UF4 - Bases de datos y SQL", "11", "V",1),
+        Faltas(5, 102, "24/05/23", "UF5 - Desarrollo web con JavaScript", "12", "V",0),
+        Faltas(6, 103, "12/04/23", "UF6 - Desarrollo móvil con Kotlin", "13", "V",0)
+    )
+
+    val ufList = mutableListOf<Uf>(
+        Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
+        Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
+        Uf(3, 103, 125, "UF3 - Estructuras de datos y algoritmos", "10", "11"),
+        Uf(4, 101, 126, "UF4 - Bases de datos y SQL", "11", "12"),
+        Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
+        Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
+    )
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,27 +54,11 @@ class JustificarFaltaFragment : Fragment() {
         _binding = FragmentJustificarFaltaBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val stringList = listOf(
-            "Lorem ipsum dolor sit amet",
-            "Consectetur adipiscing elit",
-            "Sed do eiusmod tempor incididunt",
-            "Ut labore et dolore magna aliqua",
-            "Ut enim ad minim veniam",
-            "Quis nostrud exercitation ullamco",
-            "Laboris nisi ut aliquip ex ea commodo consequat",
-            "Duis aute irure dolor in reprehenderit in voluptate velit",
-            "Esse cillum dolore eu fugiat nulla pariatur",
-            "Excepteur sint occaecat cupidatat non proident",
-            "Sunt in culpa qui officia deserunt mollit anim id est laborum",
-            "Nemo enim ipsam voluptatem quia voluptas sit aspernatur",
-            "Aut odit aut fugit",
-            "Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt",
-            "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet",
-            "Consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt"
-        )
 
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, stringList)
-        binding.recyclerView2.adapter = adapter
+        val adapter = justificarFaltaAdapter(ufList, faltasList)
+        binding.RecyclerView.hasFixedSize()
+        binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.RecyclerView.adapter = adapter
 
         val textView: TextView = binding.textReason
         return root
