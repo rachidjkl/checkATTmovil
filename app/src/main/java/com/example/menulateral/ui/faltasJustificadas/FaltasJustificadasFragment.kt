@@ -29,13 +29,13 @@ class FaltasJustificadasFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    val faltasList = mutableListOf<Faltas>(
-        Faltas(1, 101, "12/03/23", "UF1 - Introducción a la programación", "08", "V", -1),
-        Faltas(2, 102, "02/03/23", "UF2 - Programación orientada a objetos", "09", "P",-1),
-        Faltas(3, 103, "31/03/23", "UF3 - Estructuras de datos y algoritmos", "10", "R",1),
-        Faltas(4, 101, "07/03/23", "UF4 - Bases de datos y SQL", "11", "V",1),
-        Faltas(5, 102, "24/05/23", "UF5 - Desarrollo web con JavaScript", "12", "V",0),
-        Faltas(6, 103, "12/04/23", "UF6 - Desarrollo móvil con Kotlin", "13", "V",0)
+    val faltasList = mutableListOf<Faltas>(//
+        Faltas(1, 101, "12/03/23", "Medico", "08", "V", -1),
+        Faltas(2, 102, "02/03/23", "Trabajo", "09", "P",-1),
+        Faltas(3, 103, "31/03/23", "Trabajo", "10", "R",1),
+        Faltas(4, 101, "07/03/23", "Examen onducir", "11", "V",1),
+        Faltas(5, 102, "24/05/23", "Bar", "12", "V",0),
+        Faltas(6, 103, "12/04/23", "Sida", "13", "V",0)
     )
 
     val ufList = mutableListOf<Uf>(

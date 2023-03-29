@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -61,6 +62,7 @@ class justificarFaltaAdapter (private val ufList: MutableList<Uf>, private val f
                 // Llamamos a la función beginDelayedTransition con nuestro ViewGroup y nuestro Transition
                 TransitionManager.beginDelayedTransition(holder.cardview as ViewGroup, transition)
                 holder.recyclerViewRellenar.visibility = View.VISIBLE
+
                 holder.deployModule.setImageResource(R.drawable.expand_less)
             } else {
                 holder.recyclerViewRellenar.visibility = View.GONE
@@ -82,7 +84,7 @@ class justificarFaltaAdapter (private val ufList: MutableList<Uf>, private val f
 
     fun bindPackage(holder: justificarFaltaHolder, faltas: Faltas) {
 
-        holder.moduloName?.text = faltas.fecha
+        holder.moduloName?.text = faltas.motivo
         holder.recyclerViewRellenar?.adapter = adapter
         holder.recyclerViewRellenar.visibility = View.GONE
 

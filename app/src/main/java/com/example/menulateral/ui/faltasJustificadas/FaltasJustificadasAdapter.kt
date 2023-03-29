@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -32,6 +33,7 @@ class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList
         var deployModule : ImageView
         var imgCuadrado : ImageView
         var cardview : CardView
+        var buttonVer : Button
 
 
         init {
@@ -41,6 +43,7 @@ class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList
             deployModule = view.findViewById(R.id.deployModuleColorRectangle)
             cardview = view.findViewById(R.id.cardView1)
             imgCuadrado = view.findViewById(R.id.imgCuadradoOf)
+            buttonVer = view.findViewById(R.id.botonVer)
         }
     }
 
@@ -60,9 +63,11 @@ class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList
                 // Llamamos a la función beginDelayedTransition con nuestro ViewGroup y nuestro Transition
                 TransitionManager.beginDelayedTransition( holder.cardview as ViewGroup, transition)
                 holder.recyclerViewRellenar.visibility = View.VISIBLE
+                holder.buttonVer.visibility = View.VISIBLE
                 holder.deployModule.setImageResource(R.drawable.expand_less)
             } else {
                 holder.recyclerViewRellenar.visibility = View.GONE
+                holder.buttonVer.visibility = View.GONE
                 holder.deployModule.setImageResource(R.drawable.expand_more)
             }
         }
@@ -80,9 +85,10 @@ class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList
 
     fun bindPackage(holder: FaltasJustificadasHolder, falta: Faltas){
 
-        holder.alumnName?.text = falta.fecha
+        holder.alumnName?.text = falta.motivo
         holder.recyclerViewRellenar?.adapter= adapter
         holder.recyclerViewRellenar.visibility = View.GONE
+        holder.buttonVer.visibility = View.GONE
         val square = ShapeDrawable(RectShape())
         if (estado == 0){
             val square = ShapeDrawable(RectShape())

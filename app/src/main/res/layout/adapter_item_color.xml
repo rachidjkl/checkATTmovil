@@ -72,6 +72,18 @@
                         android:paddingRight="6dp"
                         android:paddingBottom="6dp"
                         android:paddingLeft="6dp" />
+                    <Button
+                        android:id="@+id/botonVer"
+                        android:layout_width="60dp"
+                        android:layout_height="32dp"
+                        android:text="Ver"
+                        android:textSize="9sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.954"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
