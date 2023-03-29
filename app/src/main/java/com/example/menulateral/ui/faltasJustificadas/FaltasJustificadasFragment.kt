@@ -29,6 +29,7 @@ class FaltasJustificadasFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+
     val faltasList = mutableListOf<Faltas>(//
         Faltas(1, 101, "12/03/23", "Medico", "08", "V", -1),
         Faltas(2, 102, "02/03/23", "Trabajo", "09", "P",-1),
