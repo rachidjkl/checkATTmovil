@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/estiloTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Motivo"
@@ -21,18 +22,20 @@
 
     <TextView
         android:id="@+id/txtMotivo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/estiloEditText"
+        android:layout_width="370dp"
+        android:layout_height="29dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.144" />
 
     <TextView
         android:id="@+id/textView2"
+        style="@style/estiloTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Horas: "
@@ -45,18 +48,20 @@
 
     <TextView
         android:id="@+id/txtComentario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/estiloEditText"
+        android:layout_width="370dp"
+        android:layout_height="29dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.254" />
 
     <TextView
         android:id="@+id/verJustificante"
+        style="@style/estiloTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ver Justificante"
@@ -80,6 +85,7 @@
         app:layout_constraintVertical_bias="0.668" />
     <TextView
         android:id="@+id/textView3"
+        style="@style/estiloTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Comentario"
