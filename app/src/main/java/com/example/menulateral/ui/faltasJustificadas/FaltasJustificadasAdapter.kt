@@ -19,10 +19,16 @@ import com.example.menulateral.Faltas
 import com.example.menulateral.JustificarFaltas
 import com.example.menulateral.R
 import com.example.menulateral.Uf
+import com.google.android.material.tabs.TabLayout
 
-class FaltasJustificadasAdapter(FaltasList: MutableList<Faltas>, private val justificarFaltasList : MutableList<JustificarFaltas>, private val estado : Int):
+class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment,
+                                FaltasList: MutableList<Faltas>, private val justificarFaltasList: MutableList<JustificarFaltas>, private val estado: Int):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
     val adapter = UfColorRectangleAdapter(FaltasList)
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
 
     private val layout = R.layout.adapter_item_color // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
@@ -50,6 +56,10 @@ class FaltasJustificadasAdapter(FaltasList: MutableList<Faltas>, private val jus
 
     override fun onBindViewHolder(holder: FaltasJustificadasAdapter.FaltasJustificadasHolder, position: Int) {
         val justificarFalta = justificarFaltasList[position]
+        val btn = holder.itemView.findViewById<Button>(R.id.botonVer)
+        btn.setOnClickListener {
+            listener.onItemClick(position)
+        }
         holder.cardview.setOnClickListener(){
             if (holder.recyclerViewRellenar.visibility == View.GONE) {
                 // Creamos un objeto Transition que afecte a los cambios en las vistas
@@ -121,6 +131,7 @@ class FaltasJustificadasAdapter(FaltasList: MutableList<Faltas>, private val jus
     fun setOnClickListener(listener: View.OnClickListener){
         clickListener = listener
     }
+
 
 
 

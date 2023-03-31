@@ -1,8 +1,6 @@
 package com.example.menulateral.ui.faltasJustificadas
 
 import android.graphics.*
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.RectShape
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,21 +12,31 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.Faltas
 import com.example.menulateral.JustificarFaltas
 import com.example.menulateral.R
-import com.example.menulateral.Uf
-import com.example.menulateral.databinding.AdapterItemColorBinding
 import com.example.menulateral.databinding.FragmentFaltasJustificadasBinding
+import com.example.menulateral.extensionFaltasJustificadas
 import com.google.android.material.tabs.TabLayout
 
 class FaltasJustificadasFragment : Fragment() {
 
     private var _binding: FragmentFaltasJustificadasBinding? = null
-    private var _bindingUf: AdapterItemColorBinding? = null
 
-    private val bindingUf get() = _bindingUf!!
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    fun onItemClick(position: Int) {
+        //-------------------------------------------------Cambiar fragment-------------------------------------------//
+        val fragmentoPasarLista = extensionFaltasJustificadas()
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        // Agregar el fragmento actual a la pila de fragmentos
+        // Reemplazar el fragmento actual con el FragmentNuevo
+        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragmentoPasarLista)
+        fragmentTransaction.commit()
+
+        //------------------------------------------------------------------------------------------------------------//
+    }
 
 
     val faltasList = mutableListOf<Faltas>(
@@ -62,13 +70,23 @@ class FaltasJustificadasFragment : Fragment() {
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, modulos)
         binding.autoCompleteTextView6.setAdapter(arrayAdapter)
 
+
         val root: View = binding.root
-        //crear una clase para que pueda usar la lista de cards
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val adapter = FaltasJustificadasAdapter(this,faltasList, justificarFaltasList, 0)
+        binding.RecyclerView.hasFixedSize()
+        binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.RecyclerView.adapter = adapter
+        adapter
+        adapter.setOnClickListener(){
+            binding.nombreTutor.text = "mmg"
+
+        }
 
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.alumno_ideal) // Cargar imagen desde drawable
         val diameter = 200 // Diámetro del círculo
@@ -94,15 +112,6 @@ class FaltasJustificadasFragment : Fragment() {
         binding.tabs.addTab(binding.tabs.newTab().setText("Validadas"))
         binding.tabs.addTab(binding.tabs.newTab().setText("Rechazadas"))
 
-        // Encuentra la vista por su ID
-
-        // Crea un ShapeDrawable en forma de cuadrado
-        val square = ShapeDrawable(RectShape())
-
-
-
-
-
         //Se muestra este tab seleccionado por defecto
         val defaultTab = binding.tabs.getTabAt(0)
         defaultTab?.select()
@@ -111,19 +120,19 @@ class FaltasJustificadasFragment : Fragment() {
             val position = it.position
             when (position) {
                 0 -> {
-                    val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, 0)
+                    val adapter = FaltasJustificadasAdapter(this,faltasList, justificarFaltasList, 0)
                     binding.RecyclerView.hasFixedSize()
                     binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
                     binding.RecyclerView.adapter = adapter
                 }
                 1 -> {
-                    val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, 1)
+                    val adapter = FaltasJustificadasAdapter(this,faltasList, justificarFaltasList, 1)
                     binding.RecyclerView.hasFixedSize()
                     binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
                     binding.RecyclerView.adapter = adapter
                 }
                 2 -> {
-                    val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, -1)
+                    val adapter = FaltasJustificadasAdapter(this,faltasList, justificarFaltasList, -1)
                     binding.RecyclerView.hasFixedSize()
                     binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
                     binding.RecyclerView.adapter = adapter
@@ -139,19 +148,19 @@ class FaltasJustificadasFragment : Fragment() {
                 var sel2 = false
                 when (position) {
                     0 -> {
-                        val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, 0)
+                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, justificarFaltasList, 0)
                         binding.RecyclerView.hasFixedSize()
                         binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerView.adapter = adapter
                     }
                     1 -> {
-                        val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, 1)
+                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, justificarFaltasList, 1)
                         binding.RecyclerView.hasFixedSize()
                         binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerView.adapter = adapter
                     }
                     2 -> {
-                        val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, -1)
+                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, justificarFaltasList, -1)
                         binding.RecyclerView.hasFixedSize()
                         binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerView.adapter = adapter
@@ -166,6 +175,9 @@ class FaltasJustificadasFragment : Fragment() {
 
         })
     }
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

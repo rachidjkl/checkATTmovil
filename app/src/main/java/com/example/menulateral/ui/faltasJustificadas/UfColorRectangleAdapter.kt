@@ -4,11 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.Faltas
 import com.example.menulateral.R
 import com.example.menulateral.Uf
+import com.example.menulateral.extensionFaltasJustificadas
 
 class UfColorRectangleAdapter( private val faltasList: MutableList<Faltas>):
     RecyclerView.Adapter<UfColorRectangleAdapter.UfViewHolder>(),View.OnClickListener{
@@ -23,7 +25,9 @@ class UfColorRectangleAdapter( private val faltasList: MutableList<Faltas>):
         var ufNameColorRectangle: TextView
 
 
+
         init {
+
             hourAbsence = view.findViewById(R.id.hourAbsenceColorRectangle)
             moduleNameAbsence = view.findViewById(R.id.moduleColorRectangle)
             ufNameColorRectangle = view.findViewById(R.id.ufNameColorRectangle)
@@ -37,6 +41,7 @@ class UfColorRectangleAdapter( private val faltasList: MutableList<Faltas>):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UfViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         view.setOnClickListener(this)
+
         return UfViewHolder(view)
     }
 
@@ -55,7 +60,7 @@ class UfColorRectangleAdapter( private val faltasList: MutableList<Faltas>):
         clickListener?.onClick(view)
     }
 
-    fun setOnClickListener(listener: View.OnClickListener) {
+    fun setOnClickListenerr(listener: View.OnClickListener) {
         clickListener = listener
     }
 
