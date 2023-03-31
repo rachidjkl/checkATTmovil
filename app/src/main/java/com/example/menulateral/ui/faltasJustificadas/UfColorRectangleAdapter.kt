@@ -1,16 +1,12 @@
 package com.example.menulateral.ui.faltasJustificadas
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.Faltas
 import com.example.menulateral.R
-import com.example.menulateral.Uf
-import com.example.menulateral.extensionFaltasJustificadas
 
 class UfColorRectangleAdapter( private val faltasList: MutableList<Faltas>):
     RecyclerView.Adapter<UfColorRectangleAdapter.UfViewHolder>(),View.OnClickListener{

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.Modulos
 import com.example.menulateral.Uf
 import com.example.menulateral.databinding.FragmentVisorAsistenciaBinding
-import com.example.menulateral.ui.faltasJustificadas.FaltasJustificadasAdapter
 
 class VisorAsistenciaFragment : Fragment() {
 

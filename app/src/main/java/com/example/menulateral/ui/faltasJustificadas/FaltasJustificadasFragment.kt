@@ -13,7 +13,7 @@ import com.example.menulateral.Faltas
 import com.example.menulateral.JustificarFaltas
 import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentFaltasJustificadasBinding
-import com.example.menulateral.extensionFaltasJustificadas
+import com.example.menulateral.extension.extensionFaltasJustificadas
 import com.google.android.material.tabs.TabLayout
 
 class FaltasJustificadasFragment : Fragment() {
