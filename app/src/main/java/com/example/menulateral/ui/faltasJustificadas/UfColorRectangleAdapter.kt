@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.menulateral.Faltas
 import com.example.menulateral.R
 import com.example.menulateral.Uf
 
-class UfColorRectangleAdapter( private val ufList: MutableList<Uf>):
+class UfColorRectangleAdapter( private val faltasList: MutableList<Faltas>):
     RecyclerView.Adapter<UfColorRectangleAdapter.UfViewHolder>(),View.OnClickListener{
 
     private val layout = R.layout.item_uf_color // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
@@ -30,7 +31,7 @@ class UfColorRectangleAdapter( private val ufList: MutableList<Uf>):
     }
 
     override fun onBindViewHolder(holder: UfColorRectangleAdapter.UfViewHolder, position: Int) {
-        val uf = ufList[position]
+        val uf = faltasList[position]
         bindPackage(holder, uf)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UfViewHolder {
@@ -40,14 +41,14 @@ class UfColorRectangleAdapter( private val ufList: MutableList<Uf>):
     }
 
     override fun getItemCount(): Int {
-        return ufList.size
+        return faltasList.size
     }
 
-    fun bindPackage(holder: UfViewHolder, uf: Uf){
+    fun bindPackage(holder: UfViewHolder, falta: Faltas){
 
         holder.hourAbsence?.text = "10:40" + "-" + "11:40"
         holder.moduleNameAbsence?.text = "MO3"
-        holder.ufNameColorRectangle?.text = uf.nombre_completo
+        holder.ufNameColorRectangle?.text = falta.hora_falta
 
     }
     override fun onClick(view: View?) {

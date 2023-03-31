@@ -16,12 +16,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.Faltas
+import com.example.menulateral.JustificarFaltas
 import com.example.menulateral.R
 import com.example.menulateral.Uf
 
-class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList : MutableList<Faltas>, private val estado : Int):
+class FaltasJustificadasAdapter(FaltasList: MutableList<Faltas>, private val justificarFaltasList : MutableList<JustificarFaltas>, private val estado : Int):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
-    val adapter = UfColorRectangleAdapter(ufList)
+    val adapter = UfColorRectangleAdapter(FaltasList)
 
     private val layout = R.layout.adapter_item_color // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
@@ -48,7 +49,7 @@ class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList
     }
 
     override fun onBindViewHolder(holder: FaltasJustificadasAdapter.FaltasJustificadasHolder, position: Int) {
-        val falta = faltasList[position]
+        val justificarFalta = justificarFaltasList[position]
         holder.cardview.setOnClickListener(){
             if (holder.recyclerViewRellenar.visibility == View.GONE) {
                 // Creamos un objeto Transition que afecte a los cambios en las vistas
@@ -71,7 +72,7 @@ class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList
                 holder.deployModule.setImageResource(R.drawable.expand_more)
             }
         }
-        bindPackage(holder, falta)
+        bindPackage(holder, justificarFalta)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaltasJustificadasHolder {
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
@@ -80,12 +81,12 @@ class FaltasJustificadasAdapter( ufList: MutableList<Uf>, private val faltasList
     }
 
     override fun getItemCount(): Int {
-        return faltasList.size
+        return justificarFaltasList.size
     }
 
-    fun bindPackage(holder: FaltasJustificadasHolder, falta: Faltas){
+    fun bindPackage(holder: FaltasJustificadasHolder, justificarFalta: JustificarFaltas){
 
-        holder.alumnName?.text = falta.motivo
+        holder.alumnName?.text = justificarFalta.motivo
         holder.recyclerViewRellenar?.adapter= adapter
         holder.recyclerViewRellenar.visibility = View.GONE
         holder.buttonVer.visibility = View.GONE

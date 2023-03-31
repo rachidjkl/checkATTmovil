@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.Faltas
+import com.example.menulateral.JustificarFaltas
 import com.example.menulateral.R
 import com.example.menulateral.Uf
 import com.example.menulateral.databinding.AdapterItemColorBinding
@@ -30,22 +31,20 @@ class FaltasJustificadasFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    val faltasList = mutableListOf<Faltas>(//
-        Faltas(1, 101, "12/03/23", "Medico", "08", "V", -1),
-        Faltas(2, 102, "02/03/23", "Trabajo", "09", "P",-1),
-        Faltas(3, 103, "31/03/23", "Trabajo", "10", "R",1),
-        Faltas(4, 101, "07/03/23", "Examen onducir", "11", "V",1),
-        Faltas(5, 102, "24/05/23", "Bar", "12", "V",0),
-        Faltas(6, 103, "12/04/23", "Sida", "13", "V",0)
+    val faltasList = mutableListOf<Faltas>(
+        Faltas(1, 101, 1, "09:00"),
+        Faltas(2, 102, 1, "11:00"),
+        Faltas(3, 103, 1, "12:00"),
+        Faltas(4, 101, 2, "13:00"),
+        Faltas(5, 102, 2, "14:00"),
+        Faltas(6, 103, 2, "08:00")
     )
 
-    val ufList = mutableListOf<Uf>(
-        Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
-        Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
-        Uf(3, 103, 125, "UF3 - Estructuras de datos y algoritmos", "10", "11"),
-        Uf(4, 101, 126, "UF4 - Bases de datos y SQL", "11", "12"),
-        Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
-        Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
+    val justificarFaltasList = mutableListOf<JustificarFaltas>(
+        JustificarFaltas(1, "Medico", "123", "UF1 - Introducción a la programación", "08"),
+        JustificarFaltas(2, "Pedo", "124", "UF2 - Programación orientada a objetos", "09"),
+        JustificarFaltas(3, "Examen Conducir", "125", "UF3 - Estructuras de datos y algoritmos", "10"),
+        JustificarFaltas(4, "Sida", "126", "UF4 - Bases de datos y SQL", "11")
     )
 
 
@@ -112,19 +111,19 @@ class FaltasJustificadasFragment : Fragment() {
             val position = it.position
             when (position) {
                 0 -> {
-                    val adapter = FaltasJustificadasAdapter(ufList, faltasList, 0)
+                    val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, 0)
                     binding.RecyclerView.hasFixedSize()
                     binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
                     binding.RecyclerView.adapter = adapter
                 }
                 1 -> {
-                    val adapter = FaltasJustificadasAdapter(ufList, faltasList, 1)
+                    val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, 1)
                     binding.RecyclerView.hasFixedSize()
                     binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
                     binding.RecyclerView.adapter = adapter
                 }
                 2 -> {
-                    val adapter = FaltasJustificadasAdapter(ufList, faltasList, -1)
+                    val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, -1)
                     binding.RecyclerView.hasFixedSize()
                     binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
                     binding.RecyclerView.adapter = adapter
@@ -140,19 +139,19 @@ class FaltasJustificadasFragment : Fragment() {
                 var sel2 = false
                 when (position) {
                     0 -> {
-                        val adapter = FaltasJustificadasAdapter(ufList, faltasList, 0)
+                        val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, 0)
                         binding.RecyclerView.hasFixedSize()
                         binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerView.adapter = adapter
                     }
                     1 -> {
-                        val adapter = FaltasJustificadasAdapter(ufList, faltasList, 1)
+                        val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, 1)
                         binding.RecyclerView.hasFixedSize()
                         binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerView.adapter = adapter
                     }
                     2 -> {
-                        val adapter = FaltasJustificadasAdapter(ufList, faltasList, -1)
+                        val adapter = FaltasJustificadasAdapter(faltasList, justificarFaltasList, -1)
                         binding.RecyclerView.hasFixedSize()
                         binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerView.adapter = adapter

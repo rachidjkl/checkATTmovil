@@ -84,7 +84,7 @@ class justificarFaltaAdapter (private val ufList: MutableList<Uf>, private val f
 
     fun bindPackage(holder: justificarFaltaHolder, faltas: Faltas) {
 
-        holder.moduloName?.text = faltas.motivo
+        holder.moduloName?.text = faltas.hora_falta
         holder.recyclerViewRellenar?.adapter = adapter
         holder.recyclerViewRellenar.visibility = View.GONE
 

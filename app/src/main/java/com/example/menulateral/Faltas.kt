@@ -2,5 +2,4 @@ package com.example.menulateral
 
 import java.io.Serializable
 
-class Faltas (val id_falta: Int,val  id_pasarLista: Int,val fecha:String, val  motivo:String, val documento_adjunto: String,  val comentario: String, val estado: Int):
-    Serializable
+class Faltas (val id_falta: Int,val  id_pasarLista: Int,val id_justificar_faltas:Int, val  hora_falta:String): Serializable
