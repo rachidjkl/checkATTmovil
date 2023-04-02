@@ -143,9 +143,6 @@ class FaltasJustificadasFragment : Fragment() {
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 val position = tab.position
-                var sel0 = false
-                var sel1 = false
-                var sel2 = false
                 when (position) {
                     0 -> {
                         val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, justificarFaltasList, 0)
@@ -174,6 +171,11 @@ class FaltasJustificadasFragment : Fragment() {
             }
 
         })
+    }
+
+
+    fun cargarListFaltasJustificada(){
+
     }
 
 
