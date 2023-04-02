@@ -24,6 +24,7 @@ import com.google.android.material.tabs.TabLayout
 class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment,
                                 FaltasList: MutableList<Faltas>, private val justificarFaltasList: MutableList<JustificarFaltas>, private val estado: Int):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
+
     val adapter = UfColorRectangleAdapter(FaltasList)
 
     interface OnItemClickListener {
@@ -58,7 +59,7 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
         val justificarFalta = justificarFaltasList[position]
         val btn = holder.itemView.findViewById<Button>(R.id.botonVer)
         btn.setOnClickListener {
-            listener.onItemClick(position)
+            listener.onItemClick(position) //, motivo)
         }
         holder.cardview.setOnClickListener(){
             if (holder.recyclerViewRellenar.visibility == View.GONE) {
@@ -96,11 +97,12 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
 
     fun bindPackage(holder: FaltasJustificadasHolder, justificarFalta: JustificarFaltas){
 
-        holder.alumnName?.text = justificarFalta.motivo
-        holder.recyclerViewRellenar?.adapter= adapter
+        holder.alumnName.text = justificarFalta.motivo
+        //val FaltasList: MutableList<Faltas> = cargarListaHoras();
+        holder.recyclerViewRellenar.adapter= adapter //UfColorRectangleAdapter(FaltasList)
         holder.recyclerViewRellenar.visibility = View.GONE
         holder.buttonVer.visibility = View.GONE
-        val square = ShapeDrawable(RectShape())
+
         if (estado == 0){
             val square = ShapeDrawable(RectShape())
             val color = ContextCompat.getColor(holder.itemView.context, R.color.pendiente)
@@ -119,9 +121,6 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
             holder.imgCuadrado.background = square
 
         }
-
-
-
     }
 
     override fun onClick(view: View?) {
@@ -131,6 +130,17 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
     fun setOnClickListener(listener: View.OnClickListener){
         clickListener = listener
     }
+
+    /*fun cargarListaHoras() : MutableList<Faltas>{
+        val FaltasList: MutableList<Faltas>
+        *//*SELECT f.hora_falta
+        FROM Justificar_faltas jf
+        INNER JOIN Falta f ON jf.id_justificar_falta = f.id_justificar_falta
+        INNER JOIN Pasar_lista pl ON f.id_pasar_lista = pl.id_pasar_lista
+        INNER JOIN Alumno a ON pl.id_alumno = a.id_alumno
+        WHERE a.id_alumno = (ID_ALUMNO) AND jf.motivo_falta = (MOTIVO);*//*
+        return FaltasList
+    }*/
 
 
 

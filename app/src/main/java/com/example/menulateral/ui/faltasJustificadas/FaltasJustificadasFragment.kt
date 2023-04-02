@@ -83,10 +83,6 @@ class FaltasJustificadasFragment : Fragment() {
         binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.RecyclerView.adapter = adapter
         adapter
-        adapter.setOnClickListener(){
-            binding.nombreTutor.text = "mmg"
-
-        }
 
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.alumno_ideal) // Cargar imagen desde drawable
         val diameter = 200 // Diámetro del círculo
@@ -175,9 +171,13 @@ class FaltasJustificadasFragment : Fragment() {
 
 
     fun cargarListFaltasJustificada(){
-
+        /*SELECT jf.motivo_falta
+        FROM Justificar_faltas jf
+        INNER JOIN Falta f ON jf.id_justificar_falta = f.id_justificar_falta
+        INNER JOIN Pasar_lista pl ON f.id_pasar_lista = pl.id_pasar_lista
+        INNER JOIN Alumno a ON pl.id_alumno = a.id_alumno
+        WHERE a.id_alumno = 20001;*/
     }
-
 
 
 
