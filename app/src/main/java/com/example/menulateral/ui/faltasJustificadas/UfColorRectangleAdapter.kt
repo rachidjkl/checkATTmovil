@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.menulateral.Faltas
+import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.R
 
 class UfColorRectangleAdapter( private val faltasList: MutableList<Faltas>):

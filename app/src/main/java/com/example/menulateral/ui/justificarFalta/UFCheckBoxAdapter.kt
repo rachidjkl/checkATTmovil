@@ -1,6 +1,5 @@
 package com.example.menulateral.ui.justificarFalta
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.R
-import com.example.menulateral.Uf
+import com.example.menulateral.DataModel.Uf
 
 class UFCheckBoxAdapter(private val ufList: MutableList<Uf>, private val isChecked: Boolean):
     RecyclerView.Adapter<UFCheckBoxAdapter.UfViewHolder>(){
