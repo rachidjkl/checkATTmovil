@@ -1,4 +1,4 @@
-package com.example.menulateral
+package com.example.menulateral.DataModel
 
 import java.io.Serializable
 

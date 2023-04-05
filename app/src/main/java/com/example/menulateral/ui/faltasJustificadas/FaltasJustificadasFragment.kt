@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.menulateral.Faltas
+import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.JustificarFaltas
 import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentFaltasJustificadasBinding

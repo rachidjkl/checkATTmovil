@@ -1,13 +1,12 @@
     package com.example.menulateral.ui.visorAsistencia
 
-    import android.content.Context
     import android.view.LayoutInflater
     import android.view.View
     import android.view.ViewGroup
     import android.widget.TextView
     import androidx.recyclerview.widget.RecyclerView
     import com.example.menulateral.R
-    import com.example.menulateral.Uf
+    import com.example.menulateral.DataModel.Uf
 
     class UfPercentAdapter( private val ufList: MutableList<Uf>):
         RecyclerView.Adapter <UfPercentAdapter.UfViewHolder> (){

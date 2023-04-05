@@ -1,26 +1,19 @@
 package com.example.menulateral.ui.visorAsistencia
 
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.RectShape
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.menulateral.Faltas
-import com.example.menulateral.Modulos
+import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.R
-import com.example.menulateral.Uf
-import com.example.menulateral.ui.faltasJustificadas.FaltasJustificadasAdapter
-import com.example.menulateral.ui.faltasJustificadas.UfColorRectangleAdapter
+import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.ui.justificarFalta.UFCheckBoxAdapter
 
 class justificarFaltaAdapter (private val ufList: MutableList<Uf>, private val faltaList : MutableList<Faltas>):

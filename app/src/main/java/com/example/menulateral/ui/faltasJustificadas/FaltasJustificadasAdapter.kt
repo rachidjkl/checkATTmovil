@@ -15,11 +15,9 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.menulateral.Faltas
+import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.JustificarFaltas
 import com.example.menulateral.R
-import com.example.menulateral.Uf
-import com.google.android.material.tabs.TabLayout
 
 class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment,
                                 FaltasList: MutableList<Faltas>, private val justificarFaltasList: MutableList<JustificarFaltas>, private val estado: Int):

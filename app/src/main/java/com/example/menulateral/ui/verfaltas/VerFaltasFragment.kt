@@ -6,14 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.menulateral.Faltas
-import com.example.menulateral.R
-import com.example.menulateral.Uf
+import com.example.menulateral.DataModel.Faltas
+import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.databinding.FragmentVerFaltasBinding
-import com.example.menulateral.ui.faltasJustificadas.FaltasJustificadasAdapter
-import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
 
 val faltasList = mutableListOf<Faltas>(
     Faltas(1, 101, 1, "Medico"),

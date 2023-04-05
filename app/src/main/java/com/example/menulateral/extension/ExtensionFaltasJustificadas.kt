@@ -6,17 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.menulateral.Modulos
-import com.example.menulateral.R
-import com.example.menulateral.Uf
+import com.example.menulateral.DataModel.Modulos
+import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.databinding.FragmentExtensionFaltasJustificadasBinding
-import com.example.menulateral.databinding.FragmentVisorAsistenciaBinding
 import com.example.menulateral.ui.visorAsistencia.AdapterExtensionFaltasJustificadas
-import com.example.menulateral.ui.visorAsistencia.VisorAsistenciaAdapter
-
-
-
-
 
 
 class extensionFaltasJustificadas : Fragment() {

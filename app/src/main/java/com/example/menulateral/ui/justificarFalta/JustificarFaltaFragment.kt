@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.menulateral.Faltas
-import com.example.menulateral.Uf
+import com.example.menulateral.DataModel.Faltas
+import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.databinding.FragmentJustificarFaltaBinding
-import com.example.menulateral.ui.faltasJustificadas.FaltasJustificadasAdapter
 import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
 
 
