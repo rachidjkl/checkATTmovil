@@ -8,7 +8,7 @@ interface ApiGetUserCep {
 
     companion object
     {
-        val BASE_URL = "https://192.168.1.167:44376/"
+        val BASE_URL = "https://localhost:44376/"
     }
 
     @GET("api/Usuarios_CEP")
