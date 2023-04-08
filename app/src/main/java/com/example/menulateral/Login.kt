@@ -30,7 +30,7 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userLogin = UserCep(40001, "jl@gmail.com", "1234",1);
+        userLogin = UserCep(40001, "jl@gmail.com", "1234",2);
 
 //        lstUserCep = binding.listUsers
 //        val userCepApi = RetrofitClient.getInstance().create(ApiGetUserCep::class.java)
@@ -61,7 +61,9 @@ class Login : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }else{
-                    // intent a alumno
+                    val intent = Intent(this, Main2Activity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
 
             }
