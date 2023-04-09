@@ -54,9 +54,9 @@ class JustificarFaltaFragment : Fragment() {
 
 
         val adapter = justificarFaltaAdapter(ufList, faltasList)
-        binding.RecyclerView.hasFixedSize()
-        binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
-        binding.RecyclerView.adapter = adapter
+        binding.RecyclerViewJustificarFalta.hasFixedSize()
+        binding.RecyclerViewJustificarFalta.layoutManager = LinearLayoutManager(this.context)
+        binding.RecyclerViewJustificarFalta.adapter = adapter
 
         val textView: TextView = binding.textReason
         return root

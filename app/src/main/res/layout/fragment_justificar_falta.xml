@@ -174,7 +174,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecyclerView"
+            android:id="@+id/RecyclerViewJustificarFalta"
             android:layout_marginLeft="20dp"
             android:layout_width="369dp"
             android:layout_height="352dp"
