@@ -1,15 +1,18 @@
 package com.example.menulateral.ui.justificarFalta
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.Faltas
+import com.example.menulateral.DataModel.FaltasPorFecha
 import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.databinding.FragmentJustificarFaltaBinding
 import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
@@ -44,15 +47,15 @@ class JustificarFaltaFragment : Fragment() {
     )
 
     val faltasToShowList = listOf(
-        FaltaToShow("2022-04-09T10:30:00Z", "10:30", "12:30", "UF1", "Unidad Formativa 1", 1),
-        FaltaToShow("2022-04-09T14:00:00Z", "14:00", "16:00", "UF2", "Unidad Formativa 2", 2),
-        FaltaToShow("2022-04-10T09:00:00Z", "09:00", "11:00", "UF1", "Unidad Formativa 1", 3),
-        FaltaToShow("2022-04-10T11:30:00Z", "11:30", "13:30", "UF2", "Unidad Formativa 2", 4),
-        FaltaToShow("2023-04-10T14:00:00Z", "14:00", "16:00", "UF1", "Unidad Formativa 1", 5),
-        FaltaToShow("2023-04-11T09:00:00Z", "09:00", "11:00", "UF2", "Unidad Formativa 2", 6),
-        FaltaToShow("2023-04-12T10:00:00Z", "10:00", "12:00", "UF1", "Unidad Formativa 1", 7),
-        FaltaToShow("2023-04-12T15:00:00Z", "15:00", "17:00", "UF2", "Unidad Formativa 2", 8),
-        FaltaToShow("2025-04-12T17:30:00Z", "17:30", "19:30", "UF1", "Unidad Formativa 1", 9)
+        FaltaToShow("2022-04-09 10:30:00", "10:30", "12:30", "UF1", "Unidad Formativa 1", 1),
+        FaltaToShow("2022-04-09 10:30:00", "14:00", "16:00", "UF2", "Unidad Formativa 2", 2),
+        FaltaToShow("2022-04-09 10:30:00", "09:00", "11:00", "UF1", "Unidad Formativa 1", 3),
+        FaltaToShow("2022-05-09 10:30:00", "11:30", "13:30", "UF2", "Unidad Formativa 2", 4),
+        FaltaToShow("2022-05-09 10:30:00", "14:00", "16:00", "UF1", "Unidad Formativa 1", 5),
+        FaltaToShow("2022-05-09 10:30:00", "09:00", "11:00", "UF2", "Unidad Formativa 2", 6),
+        FaltaToShow("2022-06-09 10:30:00", "10:00", "12:00", "UF1", "Unidad Formativa 1", 7),
+        FaltaToShow("2022-06-09 10:30:00", "15:00", "17:00", "UF2", "Unidad Formativa 2", 8),
+        FaltaToShow("2022-06-09 10:30:00", "17:30", "19:30", "UF1", "Unidad Formativa 1", 9)
     )
 
 
@@ -65,6 +68,10 @@ class JustificarFaltaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        var faltasfecha = agruparFaltasPorFecha(faltasToShowList)
+
+        var cac :String
+//
         val galleryViewModel =
             ViewModelProvider(this).get(JustificarFaltaViewModel::class.java)
 
@@ -80,27 +87,30 @@ class JustificarFaltaFragment : Fragment() {
         val textView: TextView = binding.textReason
         return root
 
-        data class FaltasPorFecha(val fecha: LocalDate, val faltas: List<FaltaToShow>)
 
-        fun agruparFaltasPorFecha(faltasToShowList: List<FaltaToShow>): List<FaltasPorFecha> {
-            val faltasPorFecha = mutableMapOf<LocalDate, MutableList<FaltaToShow>>()
 
-            for (falta in faltasToShowList) {
-                val fecha = LocalDate.parse(falta.id_datetime.substringBefore("T"))
 
-                if (fecha in faltasPorFecha) {
-                    faltasPorFecha[fecha]?.add(falta)
-                } else {
-                    faltasPorFecha[fecha] = mutableListOf(falta)
-                }
-            }
 
-            return faltasPorFecha.entries.map { FaltasPorFecha(it.key, it.value) }
-        }
 
 
     }
 
+
+    fun agruparFaltasPorFecha(faltasToShowList: List<FaltaToShow>): List<FaltasPorFecha> {
+        val faltasPorFecha = mutableMapOf<LocalDate, MutableList<FaltaToShow>>()
+
+        for (falta in faltasToShowList) {
+            val fecha = LocalDate.parse(falta.id_datetime.substringBefore("T"))
+
+            if (fecha in faltasPorFecha) {
+                faltasPorFecha[fecha]?.add(falta)
+            } else {
+                faltasPorFecha[fecha] = mutableListOf(falta)
+            }
+        }
+
+        return faltasPorFecha.entries.map { FaltasPorFecha(it.key, it.value) }
+    }
 
 
     override fun onDestroyView() {
