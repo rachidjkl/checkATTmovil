@@ -8,10 +8,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.databinding.FragmentJustificarFaltaBinding
 import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
 
 
 class JustificarFaltaFragment : Fragment() {
@@ -30,7 +34,6 @@ class JustificarFaltaFragment : Fragment() {
         Faltas(5, 102, 2, "Bar"),
         Faltas(6, 103, 2, "Sida")
     )
-
     val ufList = mutableListOf<Uf>(
         Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
         Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
@@ -39,6 +42,22 @@ class JustificarFaltaFragment : Fragment() {
         Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
         Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
     )
+
+    val faltasToShowList = listOf(
+        FaltaToShow("2022-04-09T10:30:00Z", "10:30", "12:30", "UF1", "Unidad Formativa 1", 1),
+        FaltaToShow("2022-04-09T14:00:00Z", "14:00", "16:00", "UF2", "Unidad Formativa 2", 2),
+        FaltaToShow("2022-04-10T09:00:00Z", "09:00", "11:00", "UF1", "Unidad Formativa 1", 3),
+        FaltaToShow("2022-04-10T11:30:00Z", "11:30", "13:30", "UF2", "Unidad Formativa 2", 4),
+        FaltaToShow("2023-04-10T14:00:00Z", "14:00", "16:00", "UF1", "Unidad Formativa 1", 5),
+        FaltaToShow("2023-04-11T09:00:00Z", "09:00", "11:00", "UF2", "Unidad Formativa 2", 6),
+        FaltaToShow("2023-04-12T10:00:00Z", "10:00", "12:00", "UF1", "Unidad Formativa 1", 7),
+        FaltaToShow("2023-04-12T15:00:00Z", "15:00", "17:00", "UF2", "Unidad Formativa 2", 8),
+        FaltaToShow("2025-04-12T17:30:00Z", "17:30", "19:30", "UF1", "Unidad Formativa 1", 9)
+    )
+
+
+
+
 
 
     override fun onCreateView(
@@ -60,7 +79,29 @@ class JustificarFaltaFragment : Fragment() {
 
         val textView: TextView = binding.textReason
         return root
+
+        data class FaltasPorFecha(val fecha: LocalDate, val faltas: List<FaltaToShow>)
+
+        fun agruparFaltasPorFecha(faltasToShowList: List<FaltaToShow>): List<FaltasPorFecha> {
+            val faltasPorFecha = mutableMapOf<LocalDate, MutableList<FaltaToShow>>()
+
+            for (falta in faltasToShowList) {
+                val fecha = LocalDate.parse(falta.id_datetime.substringBefore("T"))
+
+                if (fecha in faltasPorFecha) {
+                    faltasPorFecha[fecha]?.add(falta)
+                } else {
+                    faltasPorFecha[fecha] = mutableListOf(falta)
+                }
+            }
+
+            return faltasPorFecha.entries.map { FaltasPorFecha(it.key, it.value) }
+        }
+
+
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
