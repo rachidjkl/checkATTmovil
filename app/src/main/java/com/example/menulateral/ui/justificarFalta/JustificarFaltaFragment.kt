@@ -100,7 +100,7 @@ class JustificarFaltaFragment : Fragment() {
         val faltasPorFecha = mutableMapOf<LocalDate, MutableList<FaltaToShow>>()
 
         for (falta in faltasToShowList) {
-            val fecha = LocalDate.parse(falta.id_datetime.substringBefore("T"))
+            val fecha = LocalDate.parse(falta.id_datetime.substringBefore(" "))
 
             if (fecha in faltasPorFecha) {
                 faltasPorFecha[fecha]?.add(falta)
@@ -111,6 +111,7 @@ class JustificarFaltaFragment : Fragment() {
 
         return faltasPorFecha.entries.map { FaltasPorFecha(it.key, it.value) }
     }
+
 
 
     override fun onDestroyView() {
