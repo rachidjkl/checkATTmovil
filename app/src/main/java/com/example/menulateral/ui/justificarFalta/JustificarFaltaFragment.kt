@@ -68,6 +68,7 @@ class JustificarFaltaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         var faltasfecha = agruparFaltasPorFecha(faltasToShowList)
 
         var cac :String
