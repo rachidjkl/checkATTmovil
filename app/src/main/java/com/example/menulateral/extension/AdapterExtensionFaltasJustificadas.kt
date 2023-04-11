@@ -31,7 +31,7 @@ class AdapterExtensionFaltasJustificadas (private val ufList: MutableList<Uf>, p
 
         init {
             moduloName = view.findViewById(R.id.alumnName)
-            recyclerViewRellenar = view.findViewById(R.id.recyclerUfColorRectangle)
+            recyclerViewRellenar = view.findViewById(R.id.recyclerUf)
             recyclerViewRellenar.layoutManager = LinearLayoutManager(view.context)
             deployModule = view.findViewById(R.id.deployModuleColorRectangle)
             cardview = view.findViewById(R.id.cardView1)
