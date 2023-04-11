@@ -12,14 +12,13 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.DataModel.Faltas
-import com.example.menulateral.DataModel.FaltasPorFecha
 import com.example.menulateral.R
 import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.ui.justificarFalta.UFCheckBoxAdapter
 
-class justificarFaltaAdapter ( private val faltasfecha : List<FaltasPorFecha>):
+class justificarFaltaAdapter (private val ufList: MutableList<Uf>, private val faltaList : MutableList<Faltas>):
     RecyclerView.Adapter<justificarFaltaAdapter.justificarFaltaHolder>(), View.OnClickListener {
-
+    val adapter = UFCheckBoxAdapter(ufList,false)
 
     private val layout = R.layout.attendance_item_checkbox // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
@@ -41,7 +40,7 @@ class justificarFaltaAdapter ( private val faltasfecha : List<FaltasPorFecha>):
     }
 
     override fun onBindViewHolder(holder: justificarFaltaHolder, position: Int) {
-        val falta = faltasfecha[position]
+        val falta = faltaList[position]
         holder.cardview.setOnClickListener() {
             if (holder.recyclerViewRellenar.visibility == View.GONE) {
                 // Creamos un objeto Transition que afecte a los cambios en las vistas
@@ -73,14 +72,12 @@ class justificarFaltaAdapter ( private val faltasfecha : List<FaltasPorFecha>):
     }
 
     override fun getItemCount(): Int {
-        return faltasfecha.size
+        return faltaList.size
     }
 
-    fun bindPackage(holder: justificarFaltaHolder, faltafecha: FaltasPorFecha) {
+    fun bindPackage(holder: justificarFaltaHolder, faltas: Faltas) {
 
-        val adapter = UFCheckBoxAdapter(faltafecha.faltas,false) //ADAPTER INTERNO DEL CARDVIEW
-
-        holder.moduloName?.text = faltafecha.fecha.toString()
+        holder.moduloName?.text = faltas.hora_falta
         holder.recyclerViewRellenar?.adapter = adapter
         holder.recyclerViewRellenar.visibility = View.GONE
 
