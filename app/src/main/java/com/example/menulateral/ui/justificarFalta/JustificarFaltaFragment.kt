@@ -88,12 +88,6 @@ class JustificarFaltaFragment : Fragment() {
         val textView: TextView = binding.textReason
         return root
 
-
-
-
-
-
-
     }
 
 
