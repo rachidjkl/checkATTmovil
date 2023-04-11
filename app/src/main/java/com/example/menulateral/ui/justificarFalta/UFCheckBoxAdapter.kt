@@ -13,20 +13,18 @@ import com.example.menulateral.DataModel.Uf
 class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChecked: Boolean):
     RecyclerView.Adapter<UFCheckBoxAdapter.UfViewHolder>(){
 
-    private val layout = R.layout.item_uf_checkbox // especificamos en layout
+    private val layout = R.layout.item_ver_faltas // especificamos en layout
     private var clickListener: View.OnClickListener? = null
 
     class UfViewHolder (val view: View): RecyclerView.ViewHolder(view){
         var hourAbsence: TextView
         var moduleNameAbsence: TextView
         var ufNameCheckBox: TextView
-        var checkBoxHourAbsence: CheckBox
 
         init {
             hourAbsence = view.findViewById(R.id.hourAbsence)
             moduleNameAbsence = view.findViewById(R.id.moduleNameAbsence)
             ufNameCheckBox = view.findViewById(R.id.ufNameCheckBox)
-            checkBoxHourAbsence = view.findViewById(R.id.checkBoxHourAbsence)
         }
     }
 
@@ -39,10 +37,6 @@ class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChe
         val falta = faltas[position]
         bindPackage(holder, falta)
 
-        // Marca el checkbox al hacer clic en un elemento de la lista
-        holder.itemView.setOnClickListener {
-            holder.checkBoxHourAbsence.isChecked = !holder.checkBoxHourAbsence.isChecked
-        }
     }
 
     override fun getItemCount(): Int {
@@ -54,7 +48,6 @@ class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChe
         holder.hourAbsence?.text = falta.hora_inicio+ "-" + falta.hora_fin
         holder.moduleNameAbsence?.text = falta.siglas_uf
         holder.ufNameCheckBox?.text = falta.nombreUf
-        holder.checkBoxHourAbsence.isChecked = isChecked
 
     }
 }
