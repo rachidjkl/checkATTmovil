@@ -7,7 +7,7 @@ object RetrofitClient {
 
     fun getInstance():Retrofit
     {
-        return  Retrofit.Builder().baseUrl(ApiGetUserCep.BASE_URL).
+        return  Retrofit.Builder().baseUrl(ApiGets.BASE_URL).
                 addConverterFactory(GsonConverterFactory.create()).
                 build()
     }
