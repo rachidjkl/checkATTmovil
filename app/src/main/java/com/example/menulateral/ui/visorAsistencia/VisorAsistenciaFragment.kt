@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.menulateral.DataModel.ModuloUFVisorAsistencia
 import com.example.menulateral.DataModel.Modulos
 import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.databinding.FragmentVisorAsistenciaBinding
@@ -18,6 +19,7 @@ class VisorAsistenciaFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
     val ufList = mutableListOf<Uf>(
         Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
         Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
@@ -26,6 +28,7 @@ class VisorAsistenciaFragment : Fragment() {
         Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
         Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
     )
+
     val moduloList = mutableListOf<Modulos>(
         Modulos(1, 101, "Introducción a la programación", "M01"),
         Modulos(2, 102, "Introducción a la programación", "M02"),
@@ -33,6 +36,17 @@ class VisorAsistenciaFragment : Fragment() {
         Modulos(4, 101, "Introducción a la programación", "M04"),
         Modulos(5, 102, "Introducción a la programación", "M05"),
         Modulos(6, 103, "Introducción a la programación", "M06")
+    )
+
+    val moduloUfAsistencia = mutableListOf<ModuloUFVisorAsistencia>(
+        ModuloUFVisorAsistencia("M06", "Acces a dades", "UF1 - Gestionar fitxers i directoris"),
+        ModuloUFVisorAsistencia("M06", "Acces a dades", "UF2 -  Aplicacions Bases de dades relacionals"),
+        ModuloUFVisorAsistencia("M08", "Programació multimèdia", "UF1 - Anàlisi de SSOO en dispositius mòbils"),
+        ModuloUFVisorAsistencia("M08", "Programació multimèdia", "UF2 - Programació d'aplicacions amb elements bàsics"),
+        ModuloUFVisorAsistencia("M08", "Programació multimèdia", "UF3 - Activitats i llistes complexes"),
+        ModuloUFVisorAsistencia("M09", "Programació de serveis", "UF1 - Socols i serveis"),
+        ModuloUFVisorAsistencia("M09", "Programació de serveis", "UF2 - Seguretat i criptografia")
+
     )
 
     override fun onCreateView(
