@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.DataModel.Faltas
-import com.example.menulateral.JustificarFaltas
+import com.example.menulateral.DataModel.JustificarFalta
 import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentFaltasJustificadasBinding
 import com.example.menulateral.extension.extensionFaltasJustificadas
@@ -48,11 +48,11 @@ class FaltasJustificadasFragment : Fragment() {
         Faltas(6, 103, 2, "08:00")
     )
 
-    val justificarFaltasList = mutableListOf<JustificarFaltas>(
-        JustificarFaltas(1, "Medico", "123", "UF1 - Introducción a la programación", "08"),
-        JustificarFaltas(2, "Pedo", "124", "UF2 - Programación orientada a objetos", "09"),
-        JustificarFaltas(3, "Examen Conducir", "125", "UF3 - Estructuras de datos y algoritmos", "10"),
-        JustificarFaltas(4, "Sida", "126", "UF4 - Bases de datos y SQL", "11")
+    val justificarFaltasList = mutableListOf<JustificarFalta>(
+        JustificarFalta(1, "Medico", "123", "UF1 - Introducción a la programación", "08"),
+        JustificarFalta(2, "Pedo", "124", "UF2 - Programación orientada a objetos", "09"),
+        JustificarFalta(3, "Examen Conducir", "125", "UF3 - Estructuras de datos y algoritmos", "10"),
+        JustificarFalta(4, "Sida", "126", "UF4 - Bases de datos y SQL", "11")
     )
 
 
