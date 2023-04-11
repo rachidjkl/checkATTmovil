@@ -47,15 +47,15 @@ class JustificarFaltaFragment : Fragment() {
     )
 
     val faltasToShowList = listOf(
-        FaltaToShow("2022-04-09 10:30:00", "10:30", "12:30", "UF1", "Unidad Formativa 1", 1),
-        FaltaToShow("2022-04-09 10:30:00", "14:00", "16:00", "UF2", "Unidad Formativa 2", 2),
-        FaltaToShow("2022-04-09 10:30:00", "09:00", "11:00", "UF1", "Unidad Formativa 1", 3),
-        FaltaToShow("2022-05-09 10:30:00", "11:30", "13:30", "UF2", "Unidad Formativa 2", 4),
-        FaltaToShow("2022-05-09 10:30:00", "14:00", "16:00", "UF1", "Unidad Formativa 1", 5),
-        FaltaToShow("2022-05-09 10:30:00", "09:00", "11:00", "UF2", "Unidad Formativa 2", 6),
-        FaltaToShow("2022-06-09 10:30:00", "10:00", "12:00", "UF1", "Unidad Formativa 1", 7),
-        FaltaToShow("2022-06-09 10:30:00", "15:00", "17:00", "UF2", "Unidad Formativa 2", 8),
-        FaltaToShow("2022-06-09 10:30:00", "17:30", "19:30", "UF1", "Unidad Formativa 1", 9)
+        FaltaToShow("2022-04-09 10:30:00", "10:30", "12:30", "MO1", "Unidad Formativa 1", 1),
+        FaltaToShow("2022-04-09 10:30:00", "14:00", "16:00", "MO2", "Unidad Formativa 2", 2),
+        FaltaToShow("2022-04-09 10:30:00", "09:00", "11:00", "MO3", "Unidad Formativa 1", 3),
+        FaltaToShow("2022-05-09 10:30:00", "11:30", "13:30", "MO1", "Unidad Formativa 2", 4),
+        FaltaToShow("2022-05-09 10:30:00", "14:00", "16:00", "MO2", "Unidad Formativa 1", 5),
+        FaltaToShow("2022-05-09 10:30:00", "09:00", "11:00", "MO3", "Unidad Formativa 2", 6),
+        FaltaToShow("2022-06-09 10:30:00", "10:00", "12:00", "MO3", "Unidad Formativa 1", 7),
+        FaltaToShow("2022-06-09 10:30:00", "15:00", "17:00", "MO3", "Unidad Formativa 2", 8),
+        FaltaToShow("2022-06-09 10:30:00", "17:30", "19:30", "MO1", "Unidad Formativa 1", 9)
     )
 
 
@@ -68,10 +68,11 @@ class JustificarFaltaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         var faltasfecha = agruparFaltasPorFecha(faltasToShowList)
 
-        var cac :String
-//
+
+
         val galleryViewModel =
             ViewModelProvider(this).get(JustificarFaltaViewModel::class.java)
 
@@ -79,7 +80,7 @@ class JustificarFaltaFragment : Fragment() {
         val root: View = binding.root
 
 
-        val adapter = justificarFaltaAdapter(ufList, faltasList)
+        val adapter = justificarFaltaAdapter(faltasfecha)
         binding.RecyclerViewJustificarFalta.hasFixedSize()
         binding.RecyclerViewJustificarFalta.layoutManager = LinearLayoutManager(this.context)
         binding.RecyclerViewJustificarFalta.adapter = adapter
