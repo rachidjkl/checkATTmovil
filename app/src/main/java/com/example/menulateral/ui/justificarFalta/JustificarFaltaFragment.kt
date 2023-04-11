@@ -1,11 +1,13 @@
 package com.example.menulateral.ui.justificarFalta
 
 import android.R
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -59,10 +61,6 @@ class JustificarFaltaFragment : Fragment() {
     )
 
 
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -86,14 +84,48 @@ class JustificarFaltaFragment : Fragment() {
         binding.RecyclerViewJustificarFalta.adapter = adapter
 
         val textView: TextView = binding.textReason
+
+        val cal = Calendar.getInstance()
+
+            // Obtiene la fecha actual
+        val year = cal.get(Calendar.YEAR)
+        val month = cal.get(Calendar.MONTH)
+        val dayOfMonth = cal.get(Calendar.DAY_OF_MONTH)
+
+        // Crea un objeto Calendar para la fecha actual
+        val currentCalendar = Calendar.getInstance()
+        currentCalendar.set(year, month, dayOfMonth)
+
+        // Obtiene el nombre del día de la semana correspondiente a la fecha actual
+        val currentDayOfWeek = currentCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+
+        binding.datePickerButton.text = "${dayOfMonth}/${month + 1}/${year}"
+
+
+        binding.datePickerButton.setOnClickListener {
+
+            val datePicker = DatePickerDialog(
+                requireContext(),
+                { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                    // Aquí se ejecutará el código cuando el usuario seleccione una fecha
+                    val selectedDate = "${selectedDayOfMonth}/${selectedMonth + 1}/${selectedYear}"
+
+                    // Crea un objeto Calendar para la fecha seleccionada
+                    val selectedCalendar = Calendar.getInstance()
+                    selectedCalendar.set(selectedYear, selectedMonth, selectedDayOfMonth)
+
+                    // Obtiene el nombre del día de la semana correspondiente a la fecha seleccionada
+                    val selectedDayOfWeek = selectedCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+
+                    binding.datePickerButton.text = selectedDate
+
+                },
+                year, month, dayOfMonth
+            )
+
+            datePicker.show()
+        }
         return root
-
-
-
-
-
-
-
     }
 
 

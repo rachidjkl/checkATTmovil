@@ -118,7 +118,7 @@
         android:layout_marginBottom="4dp"
         android:text="@string/txt_seleccionar_fecha"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/date_picker_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +126,7 @@
         app:layout_constraintVertical_bias="0.979" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/date_picker_button"
         style="@style/estiloBoton2"
         android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
