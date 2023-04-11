@@ -30,7 +30,7 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userLogin = UserCep(40001, "jl@gmail.com", "1234",2);
+        userLogin = UserCep(40001, "jl@gmail.com", "1234",1);
 
 //        lstUserCep = binding.listUsers
 //        val userCepApi = RetrofitClient.getInstance().create(ApiGetUserCep::class.java)
