@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +23,7 @@ import java.util.*
 
 class JustificarFaltaFragment : Fragment() {
 
+    companion object var selectedFaltas = mutableListOf<FaltaToShow>()
     private var _binding: FragmentJustificarFaltaBinding? = null
 
     // This property is only valid between onCreateView and
@@ -101,6 +100,12 @@ class JustificarFaltaFragment : Fragment() {
 
         binding.datePickerButton.text = "${dayOfMonth}/${month + 1}/${year}"
 
+        binding.btnEnviar.setOnClickListener(){
+            
+
+                val adapter4 = ArrayAdapter (this.context?, android.R.layout.simple_list_item_1, UFCheckBoxAdapter.selectedFaltas)
+
+        }
 
         binding.datePickerButton.setOnClickListener {
 
