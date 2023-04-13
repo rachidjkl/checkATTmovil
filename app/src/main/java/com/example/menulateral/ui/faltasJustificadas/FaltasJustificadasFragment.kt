@@ -85,7 +85,9 @@ class FaltasJustificadasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, cargarListFaltaJustificada(Login.alumno.idAlumno, 0), 0)
+        val mmg = cargarListFaltaJustificada(20001, 1)
+
+        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, mmg, 0)
         binding.RecyclerView.hasFixedSize()
         binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.RecyclerView.adapter = adapter
