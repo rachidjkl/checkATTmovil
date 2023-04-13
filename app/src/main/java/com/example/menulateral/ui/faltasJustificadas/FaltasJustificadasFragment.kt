@@ -85,7 +85,7 @@ class FaltasJustificadasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = FaltasJustificadasAdapter(this,faltasList, faltaJustificadaList, 0)
+        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, cargarListFaltaJustificada(Login.alumno.idAlumno, 0), 0)
         binding.RecyclerView.hasFixedSize()
         binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.RecyclerView.adapter = adapter
@@ -118,30 +118,6 @@ class FaltasJustificadasFragment : Fragment() {
         //Se muestra este tab seleccionado por defecto
         val defaultTab = binding.tabs.getTabAt(0)
         defaultTab?.select()
-
-        defaultTab?.let {
-            val position = it.position
-            when (position) {
-                0 -> {
-                    val adapter = FaltasJustificadasAdapter(this,faltasList, faltaJustificadaList, 0)
-                    binding.RecyclerView.hasFixedSize()
-                    binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
-                    binding.RecyclerView.adapter = adapter
-                }
-                1 -> {
-                    val adapter = FaltasJustificadasAdapter(this,faltasList, faltaJustificadaList, 1)
-                    binding.RecyclerView.hasFixedSize()
-                    binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
-                    binding.RecyclerView.adapter = adapter
-                }
-                2 -> {
-                    val adapter = FaltasJustificadasAdapter(this,faltasList, faltaJustificadaList, -1)
-                    binding.RecyclerView.hasFixedSize()
-                    binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
-                    binding.RecyclerView.adapter = adapter
-                }
-            }
-        }
 
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

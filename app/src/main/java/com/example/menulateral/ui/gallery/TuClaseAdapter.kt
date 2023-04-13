@@ -56,7 +56,7 @@ class TuClaseAdapter (private val AlumnosList : MutableList<Alumno>):
 
     fun bindPackage(holder: TuClaseHolder, alumno: Alumno) {
 
-        holder.alumnName?.text = alumno.nombreAlumno+" "+alumno.apellido1Alumno+" "+alumno.apellido2Alumno
+        holder.alumnName?.text = alumno.nombreAlumno+" "+alumno.apellido1Alumno+" "
         holder.porcentajetxt.text = "88"
     }
 

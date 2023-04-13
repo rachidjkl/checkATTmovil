@@ -47,44 +47,6 @@ class Login : AppCompatActivity() {
     }
 
 
-    private fun validar(): Boolean {
-        var next = true
-        val result = arrayOf(validateEmail(), validatePassword())
-        if (false in result) {
-            next = false
-        }
-        return next
-    }
-
-
-    private fun validateEmail(): Boolean {
-        var next = false;
-        val emailTxt = binding.email.editText?.text.toString()
-        if (emailTxt.isEmpty()) {
-            binding.email.error = "Filed can not be empty"
-        } else if(emailTxt == userLogin.correoCep) {
-            next = true;
-        }else{
-            binding.email.error = "Wrong email"
-        }
-        return next;
-    }
-
-
-    private fun validatePassword(): Boolean {
-        var next = false;
-        val passwordTxt = binding.password.editText?.text.toString()
-
-        if (passwordTxt.isEmpty()) {
-            binding.password.error = "Filed can not be empty"
-        } else if(passwordTxt == userLogin.contraUserCep) {
-            next = true;
-        }else{
-            binding.password.error = "Wrong password"
-        }
-        return next;
-    }
-
     private fun globalFun(email :String ){
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)

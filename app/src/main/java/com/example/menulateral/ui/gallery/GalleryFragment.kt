@@ -16,9 +16,9 @@ import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
 class GalleryFragment : Fragment() {
 
     val alumnoList = mutableListOf<Alumno>(
-        Alumno(1, 101, "123", "Rachid", "Ghenem", "Arias","12",6,12,12,12,"12",2,2,),
-        Alumno(2, 102, "124", "Marc", "Alzamora", "Tonto","12",6,12,1212,12,"12",12,12),
-        Alumno(3, 103, "125", "Joel", "Mamagranao", "Tonto","12",6,12,12,12,"12",12,12)
+        Alumno(1, "101", "123", "Rachid"),
+        Alumno(2, "102", "124", "Marc"),
+        Alumno(3, "103", "125", "Joel")
     )
 
 
