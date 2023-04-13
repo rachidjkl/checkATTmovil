@@ -13,6 +13,11 @@ import com.example.menulateral.DataModel.Uf
 class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChecked: Boolean):
     RecyclerView.Adapter<UFCheckBoxAdapter.UfViewHolder>(){
 
+    companion object{
+        var selectedFaltas = mutableListOf<FaltaToShow>()
+    }
+
+
     private val layout = R.layout.item_uf_checkbox // especificamos en layout
     private var clickListener: View.OnClickListener? = null
 
@@ -37,11 +42,20 @@ class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChe
 
     override fun onBindViewHolder(holder: UfViewHolder, position: Int) {
         val falta = faltas[position]
+
         bindPackage(holder, falta)
 
         // Marca el checkbox al hacer clic en un elemento de la lista
         holder.itemView.setOnClickListener {
             holder.checkBoxHourAbsence.isChecked = !holder.checkBoxHourAbsence.isChecked
+        }
+        // Agrega o quita el objeto seleccionado de la lista según el estado del CheckBox
+        holder.checkBoxHourAbsence.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                selectedFaltas.add(falta)
+            } else {
+                selectedFaltas.remove(falta)
+            }
         }
     }
 
