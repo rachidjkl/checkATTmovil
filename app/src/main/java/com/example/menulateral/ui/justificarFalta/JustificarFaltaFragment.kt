@@ -22,6 +22,7 @@ import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -35,7 +36,16 @@ class JustificarFaltaFragment : Fragment() {
 
     companion object var selectedFaltas = mutableListOf<FaltaToShow>()
     private var _binding: FragmentJustificarFaltaBinding? = null
-    private var faltasToShowList: List<FaltaToShow>? = globalFun()
+    private var faltasToShowList: List<FaltaToShow>? = null
+
+    init {
+        main()
+    }
+
+    fun main() = runBlocking {
+        faltasToShowList = globalFun()
+    }
+
     private var date: Date = getCurrentDateTime()
 
     // This property is only valid between onCreateView and
@@ -91,6 +101,7 @@ class JustificarFaltaFragment : Fragment() {
 
 
             UFCheckBoxAdapter.selectedFaltas
+
 
         }
 
@@ -150,23 +161,17 @@ class JustificarFaltaFragment : Fragment() {
 
 
 
-    private fun globalFun():List<FaltaToShow>?{
+    private suspend fun globalFun(): List<FaltaToShow>? {
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
-        var localUserCep: List<FaltaToShow>? = null
 
-        GlobalScope.launch() {
-
-            val action = async {
-                val call = userCepApi.getFaltasToShow()
-                val response = call.execute();
-                localUserCep = response.body()
-            }
-            action.await()
-        }
-        return localUserCep;
-
+        return GlobalScope.async {
+            val call = userCepApi.getFaltasToShow()
+            val response = call.execute()
+            response.body()
+        }.await()
     }
+
 
     fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time
