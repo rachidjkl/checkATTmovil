@@ -20,7 +20,7 @@ import com.example.menulateral.DataModel.FaltaJustificada
 import com.example.menulateral.R
 
 class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment,
-                                FaltasList: MutableList<Faltas>, private val justificarFaltasList: MutableList<FaltaJustificada>, private val estado: Int):
+                                FaltasList: MutableList<Faltas>, private val justificarFaltasList: MutableList<FaltaJustificada>?, private val estado: Int):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
 
     val adapter = UfColorRectangleAdapter(FaltasList)
@@ -54,7 +54,7 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
     }
 
     override fun onBindViewHolder(holder: FaltasJustificadasAdapter.FaltasJustificadasHolder, position: Int) {
-        val justificarFalta = justificarFaltasList[position]
+        val justificarFalta = justificarFaltasList?.get(position)
         val btn = holder.itemView.findViewById<Button>(R.id.botonVer)
         btn.setOnClickListener {
             listener.onItemClick(position) //, motivo)
@@ -81,7 +81,9 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
                 holder.deployModule.setImageResource(R.drawable.expand_more)
             }
         }
-        bindPackage(holder, justificarFalta)
+        if (justificarFalta != null) {
+            bindPackage(holder, justificarFalta)
+        }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaltasJustificadasHolder {
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
@@ -90,12 +92,12 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
     }
 
     override fun getItemCount(): Int {
-        return justificarFaltasList.size
+        return justificarFaltasList!!.size
     }
 
     fun bindPackage(holder: FaltasJustificadasHolder, justificarFalta: FaltaJustificada){
 
-        holder.alumnName.text = justificarFalta.motivo
+        holder.alumnName.text = justificarFalta.motivoFalta
         //val FaltasList: MutableList<Faltas> = cargarListaHoras();
         holder.recyclerViewRellenar.adapter= adapter //UfColorRectangleAdapter(FaltasList)
         holder.recyclerViewRellenar.visibility = View.GONE
