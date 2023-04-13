@@ -22,6 +22,7 @@ import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -35,29 +36,22 @@ class JustificarFaltaFragment : Fragment() {
 
     companion object var selectedFaltas = mutableListOf<FaltaToShow>()
     private var _binding: FragmentJustificarFaltaBinding? = null
-    private var faltasToShowList: List<FaltaToShow>? = globalFun()
+    private var faltasToShowList: List<FaltaToShow>? = null
+
+    init {
+        main()
+    }
+
+    fun main() = runBlocking {
+        faltasToShowList = globalFun()
+    }
+
     private var date: Date = getCurrentDateTime()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    val faltasList = mutableListOf<Faltas>(
-        Faltas(1, 101, 1, "Medico"),
-        Faltas(2, 102, 1, "Trabajo"),
-        Faltas(3, 103, 1, "Trabajo"),
-        Faltas(4, 101, 2, "Examen onducir"),
-        Faltas(5, 102, 2, "Bar"),
-        Faltas(6, 103, 2, "Sida")
-    )
-    val ufList = mutableListOf<Uf>(
-        Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
-        Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
-        Uf(3, 103, 125, "UF3 - Estructuras de datos y algoritmos", "10", "11"),
-        Uf(4, 101, 126, "UF4 - Bases de datos y SQL", "11", "12"),
-        Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
-        Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
-    )
 
     val faltasToShowList1 = listOf(
         FaltaToShow("2005-03-25T00:05:00", "10:30", "12:30", "MO1", "Unidad Formativa 1", 1),
@@ -119,6 +113,7 @@ class JustificarFaltaFragment : Fragment() {
 
             UFCheckBoxAdapter.selectedFaltas
 
+
         }
 
         binding.datePickerButton.setOnClickListener {
@@ -177,23 +172,17 @@ class JustificarFaltaFragment : Fragment() {
 
 
 
-    private fun globalFun():List<FaltaToShow>?{
+    private suspend fun globalFun(): List<FaltaToShow>? {
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
-        var localUserCep: List<FaltaToShow>? = null
 
-        GlobalScope.launch() {
-
-            val action = async {
-                val call = userCepApi.getFaltasToShow()
-                val response = call.execute();
-                localUserCep = response.body()
-            }
-            action.await()
-        }
-        return localUserCep;
-
+        return GlobalScope.async {
+            val call = userCepApi.getFaltasToShow()
+            val response = call.execute()
+            response.body()
+        }.await()
     }
+
 
     fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time

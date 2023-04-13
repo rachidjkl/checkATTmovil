@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
+import com.example.menulateral.DataModel.Alumno
+import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.UserCep
 import com.example.menulateral.databinding.ActivityLoginBinding
 import kotlinx.coroutines.GlobalScope
@@ -13,7 +15,12 @@ import kotlinx.coroutines.launch
 
 class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    public lateinit var userLogin: UserCep
+
+    companion object{
+        lateinit var userLogin: UserCep
+        lateinit var alumno: Alumno
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
