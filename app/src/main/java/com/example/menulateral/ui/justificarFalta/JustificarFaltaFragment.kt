@@ -42,34 +42,7 @@ class JustificarFaltaFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    val faltasList = mutableListOf<Faltas>(
-        Faltas(1, 101, 1, "Medico"),
-        Faltas(2, 102, 1, "Trabajo"),
-        Faltas(3, 103, 1, "Trabajo"),
-        Faltas(4, 101, 2, "Examen onducir"),
-        Faltas(5, 102, 2, "Bar"),
-        Faltas(6, 103, 2, "Sida")
-    )
-    val ufList = mutableListOf<Uf>(
-        Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
-        Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
-        Uf(3, 103, 125, "UF3 - Estructuras de datos y algoritmos", "10", "11"),
-        Uf(4, 101, 126, "UF4 - Bases de datos y SQL", "11", "12"),
-        Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
-        Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
-    )
 
-    val faltasToShowList1 = listOf(
-        FaltaToShow("2005-03-25T00:05:00", "10:30", "12:30", "MO1", "Unidad Formativa 1", 1),
-        FaltaToShow("2023-04-13T08:18:30.523Z", "14:00", "16:00", "MO2", "Unidad Formativa 2", 2),
-        FaltaToShow("2022-04-09 10:30:00", "09:00", "11:00", "MO3", "Unidad Formativa 1", 3),
-        FaltaToShow("2022-05-09 10:30:00", "11:30", "13:30", "MO1", "Unidad Formativa 2", 4),
-        FaltaToShow("2022-05-09 10:30:00", "14:00", "16:00", "MO2", "Unidad Formativa 1", 5),
-        FaltaToShow("2022-05-09 10:30:00", "09:00", "11:00", "MO3", "Unidad Formativa 2", 6),
-        FaltaToShow("2022-06-09 10:30:00", "10:00", "12:00", "MO3", "Unidad Formativa 1", 7),
-        FaltaToShow("2022-06-09 10:30:00", "15:00", "17:00", "MO3", "Unidad Formativa 2", 8),
-        FaltaToShow("2022-06-09 10:30:00", "17:30", "19:30", "MO1", "Unidad Formativa 1", 9)
-    )
 
 
 

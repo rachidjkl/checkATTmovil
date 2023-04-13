@@ -16,11 +16,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.DataModel.Faltas
-import com.example.menulateral.DataModel.JustificarFalta
+import com.example.menulateral.DataModel.FaltaJustificada
 import com.example.menulateral.R
 
 class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment,
-                                FaltasList: MutableList<Faltas>, private val justificarFaltasList: MutableList<JustificarFalta>, private val estado: Int):
+                                FaltasList: MutableList<Faltas>, private val justificarFaltasList: MutableList<FaltaJustificada>, private val estado: Int):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
 
     val adapter = UfColorRectangleAdapter(FaltasList)
@@ -93,7 +93,7 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
         return justificarFaltasList.size
     }
 
-    fun bindPackage(holder: FaltasJustificadasHolder, justificarFalta: JustificarFalta){
+    fun bindPackage(holder: FaltasJustificadasHolder, justificarFalta: FaltaJustificada){
 
         holder.alumnName.text = justificarFalta.motivo
         //val FaltasList: MutableList<Faltas> = cargarListaHoras();

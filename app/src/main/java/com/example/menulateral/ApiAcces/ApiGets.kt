@@ -1,6 +1,7 @@
 package com.example.menulateral.ApiAcces
 
 
+import com.example.menulateral.DataModel.FaltaJustificada
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.UserCep
 import retrofit2.Call
@@ -19,4 +20,7 @@ interface ApiGets {
 
     @GET("api/Faltas/FaltasToShow")
     fun getFaltasToShow(): Call<List<FaltaToShow>>
+
+    @GET("api/Justificar_faltas/Validada/idAlumno/{idAlumno}/estadoFalta/{estadoFalta}")
+    fun getFaltaJustificada(@Path("idAlumno") alumno: Int, @Path("estadoFalta") estadoFalta: Int): Call<List<FaltaJustificada>>
 }
