@@ -17,6 +17,6 @@ interface ApiGets {
     @GET("api/Usuarios_CEP/email/{email}")
     fun getUsuarioCep(@Path("email") email: String): Call<UserCep>
 
-    @GET("api/Faltas/FaltasToShow")
-    fun getFaltasToShow(): Call<List<FaltaToShow>>
+    @GET("api/Faltas/FaltasToShow/idAlumno/{idAlumno}")
+    fun getFaltasToShow(@Path("idAlumno") idAlumno: Int): Call<List<FaltaToShow>>
 }

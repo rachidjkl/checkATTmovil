@@ -48,25 +48,10 @@ class JustificarFaltaFragment : Fragment() {
     }
 
     private var date: Date = getCurrentDateTime()
+    private val binding get() = _binding!!
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
-
-
-    val faltasToShowList1 = listOf(
-        FaltaToShow("2005-03-25T00:05:00", "10:30", "12:30", "MO1", "Unidad Formativa 1", 1),
-        FaltaToShow("2023-04-13T08:18:30.523Z", "14:00", "16:00", "MO2", "Unidad Formativa 2", 2),
-        FaltaToShow("2022-04-09 10:30:00", "09:00", "11:00", "MO3", "Unidad Formativa 1", 3),
-        FaltaToShow("2022-05-09 10:30:00", "11:30", "13:30", "MO1", "Unidad Formativa 2", 4),
-        FaltaToShow("2022-05-09 10:30:00", "14:00", "16:00", "MO2", "Unidad Formativa 1", 5),
-        FaltaToShow("2022-05-09 10:30:00", "09:00", "11:00", "MO3", "Unidad Formativa 2", 6),
-        FaltaToShow("2022-06-09 10:30:00", "10:00", "12:00", "MO3", "Unidad Formativa 1", 7),
-        FaltaToShow("2022-06-09 10:30:00", "15:00", "17:00", "MO3", "Unidad Formativa 2", 8),
-        FaltaToShow("2022-06-09 10:30:00", "17:30", "19:30", "MO1", "Unidad Formativa 1", 9)
-    )
-
-
 
 
     override fun onCreateView(
@@ -177,7 +162,7 @@ class JustificarFaltaFragment : Fragment() {
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
         return GlobalScope.async {
-            val call = userCepApi.getFaltasToShow()
+            val call = userCepApi.getFaltasToShow(Login.alumno.idAlumno)
             val response = call.execute()
             response.body()
         }.await()
