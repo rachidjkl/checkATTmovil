@@ -2,6 +2,7 @@ package com.example.menulateral.ui.justificarFalta
 
 import android.R
 import android.app.DatePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +11,23 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.menulateral.ApiAcces.ApiGets
+import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.DataModel.FaltasPorFecha
 import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.databinding.FragmentJustificarFaltaBinding
 import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -25,6 +35,8 @@ class JustificarFaltaFragment : Fragment() {
 
     companion object var selectedFaltas = mutableListOf<FaltaToShow>()
     private var _binding: FragmentJustificarFaltaBinding? = null
+    private var faltasToShowList: List<FaltaToShow>? = globalFun()
+    private var date: Date = getCurrentDateTime()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -47,9 +59,9 @@ class JustificarFaltaFragment : Fragment() {
         Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
     )
 
-    val faltasToShowList = listOf(
-        FaltaToShow("2022-04-09 10:30:00", "10:30", "12:30", "MO1", "Unidad Formativa 1", 1),
-        FaltaToShow("2022-04-09 10:30:00", "14:00", "16:00", "MO2", "Unidad Formativa 2", 2),
+    val faltasToShowList1 = listOf(
+        FaltaToShow("2005-03-25T00:05:00", "10:30", "12:30", "MO1", "Unidad Formativa 1", 1),
+        FaltaToShow("2023-04-13T08:18:30.523Z", "14:00", "16:00", "MO2", "Unidad Formativa 2", 2),
         FaltaToShow("2022-04-09 10:30:00", "09:00", "11:00", "MO3", "Unidad Formativa 1", 3),
         FaltaToShow("2022-05-09 10:30:00", "11:30", "13:30", "MO1", "Unidad Formativa 2", 4),
         FaltaToShow("2022-05-09 10:30:00", "14:00", "16:00", "MO2", "Unidad Formativa 1", 5),
@@ -58,6 +70,8 @@ class JustificarFaltaFragment : Fragment() {
         FaltaToShow("2022-06-09 10:30:00", "15:00", "17:00", "MO3", "Unidad Formativa 2", 8),
         FaltaToShow("2022-06-09 10:30:00", "17:30", "19:30", "MO1", "Unidad Formativa 1", 9)
     )
+
+
 
 
     override fun onCreateView(
@@ -101,9 +115,9 @@ class JustificarFaltaFragment : Fragment() {
         binding.datePickerButton.text = "${dayOfMonth}/${month + 1}/${year}"
 
         binding.btnEnviar.setOnClickListener(){
-            
 
-                val adapter4 = ArrayAdapter (this.context?, android.R.layout.simple_list_item_1, UFCheckBoxAdapter.selectedFaltas)
+
+            UFCheckBoxAdapter.selectedFaltas
 
         }
 
@@ -134,16 +148,24 @@ class JustificarFaltaFragment : Fragment() {
     }
 
 
-    fun agruparFaltasPorFecha(faltasToShowList: List<FaltaToShow>): List<FaltasPorFecha> {
+    fun agruparFaltasPorFecha(faltasToShowList: List<FaltaToShow>?): List<FaltasPorFecha> {
         val faltasPorFecha = mutableMapOf<LocalDate, MutableList<FaltaToShow>>()
 
-        for (falta in faltasToShowList) {
-            val fecha = LocalDate.parse(falta.id_datetime.substringBefore(" "))
+        if (faltasToShowList != null) {
 
-            if (fecha in faltasPorFecha) {
-                faltasPorFecha[fecha]?.add(falta)
-            } else {
-                faltasPorFecha[fecha] = mutableListOf(falta)
+            for (falta in faltasToShowList) {
+                val fecha = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    LocalDate.parse(falta.id_datetime.substringBefore("T"))
+                } else {
+                    val dateParts = falta.id_datetime.substringBefore("T").split("-")
+                    LocalDate.of(dateParts[0].toInt(), dateParts[1].toInt(), dateParts[2].toInt())
+                }
+
+                if (fecha in faltasPorFecha) {
+                    faltasPorFecha[fecha]?.add(falta)
+                } else {
+                    faltasPorFecha[fecha] = mutableListOf(falta)
+                }
             }
         }
 
@@ -151,6 +173,31 @@ class JustificarFaltaFragment : Fragment() {
     }
 
 
+
+
+
+
+    private fun globalFun():List<FaltaToShow>?{
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+        var localUserCep: List<FaltaToShow>? = null
+
+        GlobalScope.launch() {
+
+            val action = async {
+                val call = userCepApi.getFaltasToShow()
+                val response = call.execute();
+                localUserCep = response.body()
+            }
+            action.await()
+        }
+        return localUserCep;
+
+    }
+
+    fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
