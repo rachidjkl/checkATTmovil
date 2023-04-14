@@ -1,6 +1,7 @@
 package com.example.menulateral.ApiAcces
 
 
+import com.example.menulateral.DataModel.Alumno
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.UserCep
 import retrofit2.Call
@@ -16,6 +17,9 @@ interface ApiGets {
 
     @GET("api/Usuarios_CEP/email/{email}")
     fun getUsuarioCep(@Path("email") email: String): Call<UserCep>
+
+    @GET("api/Alumnoes/idUserCep/{idUserCep}")
+    fun getAlumno(@Path("idUserCep") idUserCep: Int): Call<Alumno>
 
     @GET("api/Faltas/FaltasToShow/idAlumno/{idAlumno}")
     fun getFaltasToShow(@Path("idAlumno") idAlumno: Int): Call<List<FaltaToShow>>
