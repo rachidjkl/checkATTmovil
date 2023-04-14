@@ -15,15 +15,30 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.menulateral.ApiAcces.ApiGets
+import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.DataModel.FaltaJustificada
+import com.example.menulateral.DataModel.FaltaToShow
+import com.example.menulateral.Login
 import com.example.menulateral.R
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 
 class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment,
                                 FaltasList: MutableList<Faltas>, private val justificarFaltasList: MutableList<FaltaJustificada>?, private val estado: Int):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
 
-    val adapter = UfColorRectangleAdapter(FaltasList)
+    private var faltasToShowList: List<FaltaToShow>? = null
+    init {
+        main()
+    }
+    fun main() = runBlocking {
+        faltasToShowList = globalFun()
+    }
+
+    val adapter = UfColorRectangleAdapter(faltasToShowList as MutableList<FaltaToShow>)
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
@@ -57,7 +72,9 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
         val justificarFalta = justificarFaltasList?.get(position)
         val btn = holder.itemView.findViewById<Button>(R.id.botonVer)
         btn.setOnClickListener {
-            listener.onItemClick(position) //, motivo)
+            if (justificarFaltasList != null) {
+                listener.onItemClick(position, faltasToShowList as MutableList<FaltaToShow>, justificarFaltasList)
+            } //, motivo)
         }
         holder.cardview.setOnClickListener(){
             if (holder.recyclerViewRellenar.visibility == View.GONE) {
@@ -131,17 +148,16 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
         clickListener = listener
     }
 
-    /*fun cargarListaHoras() : MutableList<Faltas>{
-        val FaltasList: MutableList<Faltas>
-        *//*SELECT f.hora_falta
-        FROM Justificar_faltas jf
-        INNER JOIN Falta f ON jf.id_justificar_falta = f.id_justificar_falta
-        INNER JOIN Pasar_lista pl ON f.id_pasar_lista = pl.id_pasar_lista
-        INNER JOIN Alumno a ON pl.id_alumno = a.id_alumno
-        WHERE a.id_alumno = (ID_ALUMNO) AND jf.motivo_falta = (MOTIVO);*//*
-        return FaltasList
-    }*/
+    private suspend fun globalFun(): List<FaltaToShow>? {
 
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        return GlobalScope.async {
+            val call = userCepApi.getFaltasToShow(Login.alumno.idAlumno)
+            val response = call.execute()
+            response.body()
+        }.await()
+    }
 
 
 

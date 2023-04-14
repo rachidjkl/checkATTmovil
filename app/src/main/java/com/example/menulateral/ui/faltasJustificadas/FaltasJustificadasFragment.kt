@@ -21,7 +21,6 @@ import com.example.menulateral.extension.extensionFaltasJustificadas
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class FaltasJustificadasFragment : Fragment() {
@@ -36,9 +35,9 @@ class FaltasJustificadasFragment : Fragment() {
     }
 
     fun main() = runBlocking {
-        faltaJustificadaListValidada = cargarListFaltaJustificada(20001, 1)
-        faltaJustificadaListPendiente = cargarListFaltaJustificada(20001, 0)
-        faltaJustificadaListRechazada = cargarListFaltaJustificada(20001, -1)
+        faltaJustificadaListValidada = cargarListFaltaJustificada(Login.alumno.idAlumno, 1)
+        faltaJustificadaListPendiente = cargarListFaltaJustificada(Login.alumno.idAlumno, 0)
+        faltaJustificadaListRechazada = cargarListFaltaJustificada(Login.alumno.idAlumno, -1)
     }
 
 
@@ -46,9 +45,9 @@ class FaltasJustificadasFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    fun onItemClick(position: Int) {
+    fun onItemClick(position: Int, infoFalta: MutableList<FaltaToShow>, infoJustificante: MutableList<FaltaJustificada>) {
         //-------------------------------------------------Cambiar fragment-------------------------------------------//
-        val fragmentoPasarLista = extensionFaltasJustificadas()
+        val fragmentoPasarLista = extensionFaltasJustificadas(infoFalta, infoJustificante.get(position))
         val fragmentManager = requireActivity().supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         // Agregar el fragmento actual a la pila de fragmentos
@@ -101,11 +100,15 @@ class FaltasJustificadasFragment : Fragment() {
 
 
 
-        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListValidada, 0)
-        binding.RecyclerView.hasFixedSize()
-        binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
-        binding.RecyclerView.adapter = adapter
-        adapter
+        if(faltaJustificadaListPendiente != null){
+            binding.RecyclerView.visibility = View.VISIBLE
+            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListPendiente, 0)
+            binding.RecyclerView.hasFixedSize()
+            binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+            binding.RecyclerView.adapter = adapter
+        }else{
+            binding.RecyclerView.visibility = View.GONE
+        }
 
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.alumno_ideal) // Cargar imagen desde drawable
         val diameter = 200 // Diámetro del círculo
@@ -140,22 +143,38 @@ class FaltasJustificadasFragment : Fragment() {
                 val position = tab.position
                 when (position) {
                     0 -> {
-                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListPendiente, 0)
-                        binding.RecyclerView.hasFixedSize()
-                        binding.RecyclerView.layoutManager = LinearLayoutManager(context)
-                        binding.RecyclerView.adapter = adapter
+                        if(faltaJustificadaListPendiente != null){
+                            binding.RecyclerView.visibility = View.VISIBLE
+                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListPendiente, 0)
+                            binding.RecyclerView.hasFixedSize()
+                            binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+                            binding.RecyclerView.adapter = adapter
+                        }else{
+                            binding.RecyclerView.visibility = View.GONE
+                        }
+
                     }
                     1 -> {
-                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListValidada, 1)
-                        binding.RecyclerView.hasFixedSize()
-                        binding.RecyclerView.layoutManager = LinearLayoutManager(context)
-                        binding.RecyclerView.adapter = adapter
+                        if(faltaJustificadaListValidada != null){
+                            binding.RecyclerView.visibility = View.VISIBLE
+                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListValidada, 1)
+                            binding.RecyclerView.hasFixedSize()
+                            binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+                            binding.RecyclerView.adapter = adapter
+                        }else{
+                            binding.RecyclerView.visibility = View.GONE
+                        }
                     }
                     2 -> {
-                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListRechazada, -1)
-                        binding.RecyclerView.hasFixedSize()
-                        binding.RecyclerView.layoutManager = LinearLayoutManager(context)
-                        binding.RecyclerView.adapter = adapter
+                        if(faltaJustificadaListRechazada != null){
+                            binding.RecyclerView.visibility = View.VISIBLE
+                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListRechazada, -1)
+                            binding.RecyclerView.hasFixedSize()
+                            binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+                            binding.RecyclerView.adapter = adapter
+                        }else{
+                            binding.RecyclerView.visibility = View.GONE
+                        }
                     }
                 }
             }
@@ -178,11 +197,7 @@ class FaltasJustificadasFragment : Fragment() {
             val response = call.execute()
             response.body()
         }.await()
-
-
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.R
 
-class UfColorRectangleAdapter( private val faltasList: MutableList<Faltas>):
+class UfColorRectangleAdapter( private val faltasList: MutableList<FaltaToShow>):
     RecyclerView.Adapter<UfColorRectangleAdapter.UfViewHolder>(),View.OnClickListener{
 
     private val layout = R.layout.item_uf_color // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
@@ -45,11 +46,14 @@ class UfColorRectangleAdapter( private val faltasList: MutableList<Faltas>):
         return faltasList.size
     }
 
-    fun bindPackage(holder: UfViewHolder, falta: Faltas){
+    fun bindPackage(holder: UfViewHolder, falta: FaltaToShow){
 
-        holder.hourAbsence?.text = "10:40" + "-" + "11:40"
-        holder.moduleNameAbsence?.text = "MO3"
-        holder.ufNameColorRectangle?.text = falta.hora_falta
+        val horaInicio = if (falta.hora_inicio.length > 5) falta.hora_inicio.substring(0, 5) else falta.hora_inicio
+        val horaFin = if (falta.hora_fin.length > 5) falta.hora_fin.substring(0, 5) else falta.hora_fin
+
+        holder.hourAbsence?.text = horaInicio + "-" + horaFin
+        holder.moduleNameAbsence?.text = falta.siglas_uf
+        holder.ufNameColorRectangle?.text = falta.nombreUf
 
     }
     override fun onClick(view: View?) {

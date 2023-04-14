@@ -50,6 +50,7 @@ class JustificarFaltaFragment : Fragment() {
     private var date: Date = getCurrentDateTime()
     private val binding get() = _binding!!
 
+
     // This property is only valid between onCreateView and
     // onDestroyView.
 
