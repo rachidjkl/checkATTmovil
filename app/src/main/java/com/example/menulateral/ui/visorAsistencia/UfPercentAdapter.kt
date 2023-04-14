@@ -5,11 +5,17 @@
     import android.view.ViewGroup
     import android.widget.TextView
     import androidx.recyclerview.widget.RecyclerView
+    import com.example.menulateral.DataModel.FaltaToShow
+    import com.example.menulateral.DataModel.ModuloUFVisorAsistencia
     import com.example.menulateral.R
     import com.example.menulateral.DataModel.Uf
 
-    class UfPercentAdapter( private val ufList: MutableList<Uf>):
+    class UfPercentAdapter( private val ufList: List<ModuloUFVisorAsistencia>):
         RecyclerView.Adapter <UfPercentAdapter.UfViewHolder> (){
+
+        companion object{
+            var selectedUF = mutableListOf<ModuloUFVisorAsistencia>()
+        }
 
         private val layout = R.layout.item_uf_percent
         private var clickListener: View.OnClickListener? = null
@@ -38,11 +44,9 @@
             return ufList.size
         }
 
-        fun bindPackage(holder: UfViewHolder, uf: Uf){
-
-
-            holder.ufName?.text = uf.nombre_completo
-            holder.ufPercentage?.text = (uf.horas_cursadas).toInt().toString()+"%"
+        fun bindPackage(holder: UfViewHolder, uf: ModuloUFVisorAsistencia){
+            holder.ufName?.text = uf.nombre_uf
+            holder.ufPercentage?.text = (uf.porcentaje_asistencia).toInt().toString()+"%"
 
         }
 

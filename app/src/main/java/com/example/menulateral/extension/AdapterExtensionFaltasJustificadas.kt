@@ -17,7 +17,7 @@ import com.example.menulateral.DataModel.Uf
 
 class AdapterExtensionFaltasJustificadas (private val ufList: MutableList<Uf>, private val moduloList : MutableList<Modulos>):
     RecyclerView.Adapter<AdapterExtensionFaltasJustificadas.AdapterExtensionFaltasJustificadasHolder>(), View.OnClickListener {
-    val adapter = UfPercentAdapter(ufList)
+    //val adapter = UfPercentAdapter(ufList)
 
     private val layout = R.layout.card_view_extension_falta_judtificada // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
@@ -76,7 +76,7 @@ class AdapterExtensionFaltasJustificadas (private val ufList: MutableList<Uf>, p
     fun bindPackage(holder: AdapterExtensionFaltasJustificadasHolder, modulo: Modulos) {
 
         holder.moduloName?.text = modulo.siglas
-        holder.recyclerViewRellenar?.adapter = adapter
+        //holder.recyclerViewRellenar?.adapter = adapter
         holder.recyclerViewRellenar.visibility = View.GONE
 
     }

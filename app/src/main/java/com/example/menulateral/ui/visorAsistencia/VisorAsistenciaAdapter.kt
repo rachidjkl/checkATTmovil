@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.DataModel.Modulos
 import com.example.menulateral.R
 import com.example.menulateral.DataModel.Uf
+import com.example.menulateral.DataModel.UfConModulo
+import com.example.menulateral.ui.justificarFalta.UFCheckBoxAdapter
 
-class VisorAsistenciaAdapter (private val ufModulo : List):
+class VisorAsistenciaAdapter (private val ufModulo : List<UfConModulo>):
     RecyclerView.Adapter<VisorAsistenciaAdapter.VisorAsistenciaHolder>(), View.OnClickListener {
-    val adapter = UfPercentAdapter(ufList)
+
 
     private val layout = R.layout.module_item // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
@@ -39,7 +41,8 @@ class VisorAsistenciaAdapter (private val ufModulo : List):
     }
 
     override fun onBindViewHolder(holder: VisorAsistenciaHolder, position: Int) {
-        val modulo = moduloList[position]
+        val uf = ufModulo[position]
+
         holder.cardview.setOnClickListener() {
             if (holder.recyclerViewRellenar.visibility == View.GONE) {
                 // Creamos un objeto Transition que afecte a los cambios en las vistas
@@ -60,7 +63,7 @@ class VisorAsistenciaAdapter (private val ufModulo : List):
                 holder.deployModule.setImageResource(R.drawable.expand_more)
             }
         }
-        bindPackage(holder, modulo)
+        bindPackage(holder, uf)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VisorAsistenciaHolder {
@@ -70,12 +73,14 @@ class VisorAsistenciaAdapter (private val ufModulo : List):
     }
 
     override fun getItemCount(): Int {
-        return moduloList.size
+        return ufModulo.size
     }
 
-    fun bindPackage(holder: VisorAsistenciaHolder, modulo: Modulos) {
+    fun bindPackage(holder: VisorAsistenciaHolder, uf: UfConModulo) {
 
-        holder.moduloName?.text = modulo.siglas
+        val adapter = UfPercentAdapter(uf.ufs) //ADAPTER INTERNO DEL CARDVIEW
+
+        holder.moduloName?.text = uf.nombreModulo
         holder.recyclerViewRellenar?.adapter = adapter
         holder.recyclerViewRellenar.visibility = View.GONE
 
