@@ -1,13 +1,9 @@
 package com.example.menulateral.ApiAcces
 
 
-import com.example.menulateral.DataModel.Alumno
-import com.example.menulateral.DataModel.FaltaToShow
-import com.example.menulateral.DataModel.UserCep
+import com.example.menulateral.DataModel.*
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiGets {
 
@@ -26,5 +22,8 @@ interface ApiGets {
     fun getFaltasToShow(@Path("idAlumno") idAlumno: Int): Call<List<FaltaToShow>>
 
     @POST("api/Faltas/SetFalta/idFalta/{idFalta}/idFaltaJustificada/{idFaltaJustificada}")
-    fun updateFaltas(@Path("idFalta") idFalta: Int, @Path("idFaltaJustificada") idFaltaJustificada: Int): Call<Void>
+    fun updateFaltas(@Path("idFalta") idFalta: Int, @Path("idFaltaJustificada") idFaltaJustificada: Int?): Call<Void>
+
+    @POST("api/Justificar_faltas/{Justificar_faltas}")
+    fun createFaltaJustificada(@Body Justificar_faltas: FaltaJustificada): Call<Int>
 }

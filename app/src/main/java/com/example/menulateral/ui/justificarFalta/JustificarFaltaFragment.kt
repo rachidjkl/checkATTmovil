@@ -13,10 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
-import com.example.menulateral.DataModel.FaltaToShow
-import com.example.menulateral.DataModel.Faltas
-import com.example.menulateral.DataModel.FaltasPorFecha
-import com.example.menulateral.DataModel.Uf
+import com.example.menulateral.DataModel.*
 import com.example.menulateral.Login
 import com.example.menulateral.databinding.FragmentJustificarFaltaBinding
 import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
@@ -41,6 +38,7 @@ class JustificarFaltaFragment : Fragment() {
     private var updateExit: Boolean = true
 
 
+
     // LA CORRUTINA SE HA DE LLAMAR DESDE OTRA CORRUTINA
     init {
         main()
@@ -48,6 +46,8 @@ class JustificarFaltaFragment : Fragment() {
     fun main() = runBlocking {
         faltasToShowList = globalFun()
     }
+
+
 
     private var date: Date = getCurrentDateTime()
     private val binding get() = _binding!!
@@ -96,10 +96,20 @@ class JustificarFaltaFragment : Fragment() {
         binding.datePickerButton.text = "${dayOfMonth}/${month + 1}/${year}"
 
         binding.btnEnviar.setOnClickListener(){
+            _binding!!.editReason.text.toString()
+
+            var faltaJustificada: FaltaJustificada = FaltaJustificada(_binding!!.editReason.text.toString(),_binding!!.editAdjuntarDocumento.text.toString()
+                                                                        ,_binding!!.editComentario.text.toString(),0)
+
+
+            var idFaltaJustificada: Int = -1
+
+            //creamos la faltajustificada llamando a la corrutina para que se espere con el await
+            idFaltaJustificada = createFaltaJustificada(faltaJustificada)
 
 
             UFCheckBoxAdapter.selectedFaltas.forEach {
-                updateApi(it.idFalta)
+                updateApi(it.idFalta, idFaltaJustificada)
             }
             if (!updateExit){
                 Toast.makeText(requireActivity(), "Error al hacer Update", Toast.LENGTH_SHORT).show()
@@ -178,17 +188,32 @@ class JustificarFaltaFragment : Fragment() {
         }.await()
     }
 
+     private fun createFaltaJustificada(faltaJustificada: FaltaJustificada):Int{
 
-     fun updateApi(idFalta: Int) {
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+         var idFaltaJustificada: Int = 0
+         GlobalScope.launch() {
+            val call = userCepApi.createFaltaJustificada(faltaJustificada)
+            val response = call.execute()
+             val localidFaltaJustificada = response.body()
+
+             idFaltaJustificada = localidFaltaJustificada!!.toInt()
+
+        }
+         return idFaltaJustificada
+    }
+
+
+     fun updateApi(idFalta: Int, idFaltaJustificada: Int) {
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
         GlobalScope.launch() {
-            val call = userCepApi.updateFaltas(idFalta, 110000)
+            val call = userCepApi.updateFaltas(idFalta, idFaltaJustificada)
             val response = call.execute()
 
             if (response.code() != 204){
-                updateExit = true
+                updateExit = false
             }else{
 
             }
