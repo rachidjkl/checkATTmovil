@@ -46,7 +46,7 @@
 
         fun bindPackage(holder: UfViewHolder, uf: ModuloUFVisorAsistencia){
             holder.ufName?.text = uf.nombre_uf
-            holder.ufPercentage?.text = (uf.porcentaje_asistencia).toInt().toString()+"%"
+            holder.ufPercentage?.text = (uf.porcentaje_asistencia.toString()) + "%"
 
         }
 
