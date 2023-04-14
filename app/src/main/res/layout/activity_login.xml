@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="jl@politecnics_barcelona"
+            android:text="joel@politecnics_barcelona"
             android:inputType="textEmailAddress">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -67,7 +67,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="12345678A"
+            android:text="12345678B"
             android:inputType="textPassword">
 
         </com.google.android.material.textfield.TextInputEditText>
