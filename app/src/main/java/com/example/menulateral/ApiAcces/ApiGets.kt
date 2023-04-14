@@ -6,6 +6,7 @@ import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.UserCep
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiGets {
@@ -21,6 +22,10 @@ interface ApiGets {
     @GET("api/Faltas/FaltasToShow")
     fun getFaltasToShow(): Call<List<FaltaToShow>>
 
-    @GET("api/Justificar_faltas/Validada/idAlumno/{idAlumno}/estadoFalta/{estadoFalta}")
-    fun getFaltaJustificada(@Path("idAlumno") alumno: Int, @Path("estadoFalta") estadoFalta: Int): Call<MutableList<FaltaJustificada>>
+
+    @GET("api/Faltas/FaltasToShow/idAlumno/{idAlumno}")
+    fun getFaltasToShow(@Path("idAlumno") idAlumno: Int): Call<List<FaltaToShow>>
+
+    @POST("api/Faltas/SetFalta/idFalta/{idFalta}/idFaltaJustificada/{idFaltaJustificada}")
+    fun updaateFaltas(@Path("idFalta") idFalta: Int, @Path("idFaltaJustificada") idFaltaJustificada: Int): Call<Void>
 }
