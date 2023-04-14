@@ -22,5 +22,5 @@ interface ApiGets {
     fun getFaltasToShow(): Call<List<FaltaToShow>>
 
     @GET("api/Justificar_faltas/Validada/idAlumno/{idAlumno}/estadoFalta/{estadoFalta}")
-    fun getFaltaJustificada(@Path("idAlumno") alumno: Int, @Path("estadoFalta") estadoFalta: Int): Call<List<FaltaJustificada>>
+    fun getFaltaJustificada(@Path("idAlumno") alumno: Int, @Path("estadoFalta") estadoFalta: Int): Call<MutableList<FaltaJustificada>>
 }

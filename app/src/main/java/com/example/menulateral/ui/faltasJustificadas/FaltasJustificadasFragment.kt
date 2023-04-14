@@ -22,10 +22,24 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class FaltasJustificadasFragment : Fragment() {
 
     private var _binding: FragmentFaltasJustificadasBinding? = null
+    private var faltaJustificadaListValidada: MutableList<FaltaJustificada>? = null
+    private var faltaJustificadaListPendiente: MutableList<FaltaJustificada>? = null
+    private var faltaJustificadaListRechazada: MutableList<FaltaJustificada>? = null
+
+    init {
+        main()
+    }
+
+    fun main() = runBlocking {
+        faltaJustificadaListValidada = cargarListFaltaJustificada(20001, 1)
+        faltaJustificadaListPendiente = cargarListFaltaJustificada(20001, 0)
+        faltaJustificadaListRechazada = cargarListFaltaJustificada(20001, -1)
+    }
 
 
     // This property is only valid between onCreateView and
@@ -55,7 +69,7 @@ class FaltasJustificadasFragment : Fragment() {
         Faltas(6, 103, 2, "08:00")
     )
 
-    val faltaJustificadaList = mutableListOf<FaltaJustificada>(
+    val faltaJustificadaList2 = mutableListOf<FaltaJustificada>(
         FaltaJustificada(1, "Medico", "123", "UF1 - Introducción a la programación", 8),
         FaltaJustificada(2, "Pedo", "124", "UF2 - Programación orientada a objetos", 9),
         FaltaJustificada(3, "Examen Conducir", "125", "UF3 - Estructuras de datos y algoritmos", 10),
@@ -85,9 +99,9 @@ class FaltasJustificadasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mmg = cargarListFaltaJustificada(20001, 1)
 
-        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, mmg, 0)
+
+        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListValidada, 0)
         binding.RecyclerView.hasFixedSize()
         binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.RecyclerView.adapter = adapter
@@ -126,19 +140,19 @@ class FaltasJustificadasFragment : Fragment() {
                 val position = tab.position
                 when (position) {
                     0 -> {
-                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, cargarListFaltaJustificada(Login.alumno.idAlumno, 0), 0)
+                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListPendiente, 0)
                         binding.RecyclerView.hasFixedSize()
                         binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerView.adapter = adapter
                     }
                     1 -> {
-                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, cargarListFaltaJustificada(Login.alumno.idAlumno, 1), 1)
+                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListValidada, 1)
                         binding.RecyclerView.hasFixedSize()
                         binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerView.adapter = adapter
                     }
                     2 -> {
-                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, cargarListFaltaJustificada(Login.alumno.idAlumno, -1), -1)
+                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListRechazada, -1)
                         binding.RecyclerView.hasFixedSize()
                         binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerView.adapter = adapter
@@ -155,21 +169,15 @@ class FaltasJustificadasFragment : Fragment() {
     }
 
 
-    fun cargarListFaltaJustificada(alumno : Int, estado : Int):MutableList<FaltaJustificada>?{
+    suspend fun cargarListFaltaJustificada(alumno : Int, estado : Int):MutableList<FaltaJustificada>?{
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
-        var localUserCep: MutableList<FaltaJustificada>? = null
 
-        GlobalScope.launch() {
-
-            val action = async {
-                val call = userCepApi.getFaltaJustificada(alumno, estado)
-                val response = call.execute();
-                localUserCep = response.body() as MutableList<FaltaJustificada>?
-            }
-            action.await()
-        }
-        return localUserCep;
+        return GlobalScope.async {
+            val call = userCepApi.getFaltaJustificada(alumno,estado)
+            val response = call.execute()
+            response.body()
+        }.await()
 
 
     }
