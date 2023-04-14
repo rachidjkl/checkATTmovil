@@ -38,6 +38,8 @@ class JustificarFaltaFragment : Fragment() {
     companion object var selectedFaltas = mutableListOf<FaltaToShow>()
     private var _binding: FragmentJustificarFaltaBinding? = null
     private var faltasToShowList: List<FaltaToShow>? = null
+    private var updateExit: Boolean = true
+
 
     // LA CORRUTINA SE HA DE LLAMAR DESDE OTRA CORRUTINA
     init {
@@ -96,7 +98,15 @@ class JustificarFaltaFragment : Fragment() {
         binding.btnEnviar.setOnClickListener(){
 
 
-            UFCheckBoxAdapter.selectedFaltas
+            UFCheckBoxAdapter.selectedFaltas.forEach {
+                updateApi(it.idFalta)
+            }
+            if (!updateExit){
+                Toast.makeText(requireActivity(), "Error al hacer Update", Toast.LENGTH_SHORT).show()
+                updateExit == true
+            }else{
+                Toast.makeText(requireActivity(), "Update hecho con exito", Toast.LENGTH_SHORT).show()
+            }
 
 
         }
@@ -167,6 +177,23 @@ class JustificarFaltaFragment : Fragment() {
             response.body()
         }.await()
     }
+
+
+     fun updateApi(idFalta: Int) {
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        GlobalScope.launch() {
+            val call = userCepApi.updateFaltas(idFalta, 110000)
+            val response = call.execute()
+
+            if (response.code() != 204){
+                updateExit = true
+            }else{
+
+            }
+        }
+     }
 
 
     fun getCurrentDateTime(): Date {

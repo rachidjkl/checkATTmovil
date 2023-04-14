@@ -26,5 +26,5 @@ interface ApiGets {
     fun getFaltasToShow(@Path("idAlumno") idAlumno: Int): Call<List<FaltaToShow>>
 
     @POST("api/Faltas/SetFalta/idFalta/{idFalta}/idFaltaJustificada/{idFaltaJustificada}")
-    fun updaateFaltas(@Path("idFalta") idFalta: Int, @Path("idFaltaJustificada") idFaltaJustificada: Int): Call<Void>
+    fun updateFaltas(@Path("idFalta") idFalta: Int, @Path("idFaltaJustificada") idFaltaJustificada: Int): Call<Void>
 }
