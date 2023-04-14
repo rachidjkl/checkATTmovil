@@ -125,10 +125,6 @@ class JustificarFaltaFragment : Fragment() {
             datePicker.show()
         }
         return root
-<<<<<<< HEAD
-
-=======
->>>>>>> JoelBranch1
     }
 
 

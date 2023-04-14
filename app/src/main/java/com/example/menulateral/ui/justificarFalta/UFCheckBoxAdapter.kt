@@ -13,27 +13,25 @@ import com.example.menulateral.DataModel.Uf
 class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChecked: Boolean):
     RecyclerView.Adapter<UFCheckBoxAdapter.UfViewHolder>(){
 
-<<<<<<< HEAD
-    private val layout = R.layout.item_ver_faltas // especificamos en layout
-=======
     companion object{
         var selectedFaltas = mutableListOf<FaltaToShow>()
     }
 
 
     private val layout = R.layout.item_uf_checkbox // especificamos en layout
->>>>>>> JoelBranch1
     private var clickListener: View.OnClickListener? = null
 
     class UfViewHolder (val view: View): RecyclerView.ViewHolder(view){
         var hourAbsence: TextView
         var moduleNameAbsence: TextView
         var ufNameCheckBox: TextView
+        var checkBoxHourAbsence: CheckBox
 
         init {
             hourAbsence = view.findViewById(R.id.hourAbsence)
             moduleNameAbsence = view.findViewById(R.id.moduleNameAbsence)
             ufNameCheckBox = view.findViewById(R.id.ufNameCheckBox)
+            checkBoxHourAbsence = view.findViewById(R.id.checkBoxHourAbsence)
         }
     }
 
@@ -47,8 +45,6 @@ class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChe
 
         bindPackage(holder, falta)
 
-<<<<<<< HEAD
-=======
         // Marca el checkbox al hacer clic en un elemento de la lista
         holder.itemView.setOnClickListener {
             holder.checkBoxHourAbsence.isChecked = !holder.checkBoxHourAbsence.isChecked
@@ -61,7 +57,6 @@ class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChe
                 selectedFaltas.remove(falta)
             }
         }
->>>>>>> JoelBranch1
     }
 
     override fun getItemCount(): Int {
@@ -76,11 +71,7 @@ class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChe
         holder.hourAbsence?.text = horaInicio + "-" + horaFin
         holder.moduleNameAbsence?.text = falta.siglas_uf
         holder.ufNameCheckBox?.text = falta.nombreUf
-<<<<<<< HEAD
-
-=======
         holder.checkBoxHourAbsence.isChecked = isChecked
->>>>>>> JoelBranch1
     }
 
 }
