@@ -3,6 +3,7 @@ package com.example.menulateral.ApiAcces
 
 import com.example.menulateral.DataModel.Alumno
 import com.example.menulateral.DataModel.FaltaToShow
+import com.example.menulateral.DataModel.ModuloUFVisorAsistencia
 import com.example.menulateral.DataModel.UserCep
 import retrofit2.Call
 import retrofit2.http.GET
@@ -27,4 +28,8 @@ interface ApiGets {
 
     @POST("api/Faltas/SetFalta/idFalta/{idFalta}/idFaltaJustificada/{idFaltaJustificada}")
     fun updaateFaltas(@Path("idFalta") idFalta: Int, @Path("idFaltaJustificada") idFaltaJustificada: Int): Call<Void>
+
+    @GET("api/Modulos/ModuloUf/idAlumno/{idAlumno}")
+    fun getVisorAistencia(@Path("idAlumno") idAlumno: Int): Call<List<ModuloUFVisorAsistencia>>
+
 }

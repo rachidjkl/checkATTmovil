@@ -1,5 +1,6 @@
 package com.example.menulateral.ui.visorAsistencia
 
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -7,14 +8,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.menulateral.DataModel.ModuloUFVisorAsistencia
-import com.example.menulateral.DataModel.Modulos
-import com.example.menulateral.DataModel.Uf
+import com.example.menulateral.ApiAcces.ApiGets
+import com.example.menulateral.ApiAcces.RetrofitClient
+import com.example.menulateral.DataModel.*
+import com.example.menulateral.Login
 import com.example.menulateral.databinding.FragmentVisorAsistenciaBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+import java.time.LocalDate
 
 class VisorAsistenciaFragment : Fragment() {
 
     private var _binding: FragmentVisorAsistenciaBinding? = null
+    private var modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>? = null
+
+    init {
+        main()
+    }
+    fun main() = runBlocking {
+        modulosUFVisorAsistenciaList = globalFun()
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -38,22 +52,14 @@ class VisorAsistenciaFragment : Fragment() {
         Modulos(6, 103, "Introducción a la programación", "M06")
     )
 
-    val moduloUfAsistencia = mutableListOf<ModuloUFVisorAsistencia>(
-        ModuloUFVisorAsistencia("M06", "Acces a dades", "UF1 - Gestionar fitxers i directoris"),
-        ModuloUFVisorAsistencia("M06", "Acces a dades", "UF2 -  Aplicacions Bases de dades relacionals"),
-        ModuloUFVisorAsistencia("M08", "Programació multimèdia", "UF1 - Anàlisi de SSOO en dispositius mòbils"),
-        ModuloUFVisorAsistencia("M08", "Programació multimèdia", "UF2 - Programació d'aplicacions amb elements bàsics"),
-        ModuloUFVisorAsistencia("M08", "Programació multimèdia", "UF3 - Activitats i llistes complexes"),
-        ModuloUFVisorAsistencia("M09", "Programació de serveis", "UF1 - Socols i serveis"),
-        ModuloUFVisorAsistencia("M09", "Programació de serveis", "UF2 - Seguretat i criptografia")
-
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        var ufModulo = agruparUfPorModulo(modulosUFVisorAsistenciaList)
+
         _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -76,7 +82,7 @@ class VisorAsistenciaFragment : Fragment() {
         }
         timer.start()
 
-        val adapter = VisorAsistenciaAdapter(ufList, moduloList)
+        val adapter = VisorAsistenciaAdapter(ufModulo)
         binding.RecyclerView.hasFixedSize()
         binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.RecyclerView.adapter = adapter
@@ -84,10 +90,46 @@ class VisorAsistenciaFragment : Fragment() {
         return root
     }
 
+    private fun agruparUfPorModulo(modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>?): List<UfConModulo> {
+        val ufsConModulo = mutableMapOf<String, MutableList<ModuloUFVisorAsistencia>>()
+
+        if (modulosUFVisorAsistenciaList != null){
+
+
+            for (uf in modulosUFVisorAsistenciaList){
+                val nombreModulo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    uf.siglas_uf + " - " + uf.nombre_modulo
+                } else {
+                    uf.siglas_uf + " - " + uf.nombre_modulo
+                }
+
+                if (nombreModulo in ufsConModulo) {
+                    ufsConModulo[nombreModulo]?.add(uf)
+                } else {
+                    ufsConModulo[nombreModulo] = mutableListOf(uf)
+                }
+            }
+        }
+        return ufsConModulo.entries.map { UfConModulo(it.key, it.value) }
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    private suspend fun globalFun(): List<ModuloUFVisorAsistencia>? {
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        return GlobalScope.async {
+            val call = userCepApi.getVisorAistencia(Login.alumno.idAlumno)
+            val response = call.execute()
+            response.body()
+        }.await()
+    }
+
 
 }
 

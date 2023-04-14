@@ -15,7 +15,7 @@ import com.example.menulateral.DataModel.Modulos
 import com.example.menulateral.R
 import com.example.menulateral.DataModel.Uf
 
-class VisorAsistenciaAdapter (private val ufList: MutableList<Uf>, private val moduloList : MutableList<Modulos>):
+class VisorAsistenciaAdapter (private val ufModulo : List):
     RecyclerView.Adapter<VisorAsistenciaAdapter.VisorAsistenciaHolder>(), View.OnClickListener {
     val adapter = UfPercentAdapter(ufList)
 
