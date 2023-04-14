@@ -57,6 +57,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textoNombreUsuario"
         style="@style/estiloTexto"
         android:layout_width="216dp"
         android:layout_height="89dp"

@@ -16,12 +16,14 @@ import com.example.menulateral.databinding.FragmentVisorAsistenciaBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import java.time.LocalDate
+
 
 class VisorAsistenciaFragment : Fragment() {
 
     private var _binding: FragmentVisorAsistenciaBinding? = null
     private var modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>? = null
+    private var nombreUsuario: String = ""
+    private var porcentajeAsistenciaModulo: Float = 0.0F
 
     init {
         main()
@@ -34,31 +36,41 @@ class VisorAsistenciaFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    val ufList = mutableListOf<Uf>(
-        Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
-        Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
-        Uf(3, 103, 125, "UF3 - Estructuras de datos y algoritmos", "10", "11"),
-        Uf(4, 101, 126, "UF4 - Bases de datos y SQL", "11", "12"),
-        Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
-        Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
-    )
-
-    val moduloList = mutableListOf<Modulos>(
-        Modulos(1, 101, "Introducción a la programación", "M01"),
-        Modulos(2, 102, "Introducción a la programación", "M02"),
-        Modulos(3, 103, "Introducción a la programación", "M03"),
-        Modulos(4, 101, "Introducción a la programación", "M04"),
-        Modulos(5, 102, "Introducción a la programación", "M05"),
-        Modulos(6, 103, "Introducción a la programación", "M06")
-    )
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
+
+
+        // Crea un HashMap para agrupar los elementos por módulo
+        val gruposPorModulo = HashMap<String, MutableList<ModuloUFVisorAsistencia>>()
+        // Agrupa los elementos de la lista por módulo
+        for (elemento in modulosUFVisorAsistenciaList!!) {
+            if (!gruposPorModulo.containsKey(elemento.siglas_uf)) {
+                gruposPorModulo[elemento.siglas_uf] = ArrayList()
+            }
+            gruposPorModulo[elemento.siglas_uf]?.add(elemento)
+        }
+        // Calcula el promedio del porcentaje de asistencia para cada grupo de elementos del mismo módulo
+        val porcentajePorModulo = ArrayList<Float>()
+        for ((_, elementos) in gruposPorModulo) {
+            val sumPorcentaje = elementos.sumOf { it.porcentaje_asistencia.toDouble() }
+            val promedioPorcentaje = (sumPorcentaje / elementos.size)
+            porcentajePorModulo.add(promedioPorcentaje.toFloat())
+        }
+
+
+
+
+
         var ufModulo = agruparUfPorModulo(modulosUFVisorAsistenciaList)
+
+
+
 
         _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -90,11 +102,12 @@ class VisorAsistenciaFragment : Fragment() {
         return root
     }
 
+
+
     private fun agruparUfPorModulo(modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>?): List<UfConModulo> {
         val ufsConModulo = mutableMapOf<String, MutableList<ModuloUFVisorAsistencia>>()
 
         if (modulosUFVisorAsistenciaList != null){
-
 
             for (uf in modulosUFVisorAsistenciaList){
                 val nombreModulo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -108,10 +121,14 @@ class VisorAsistenciaFragment : Fragment() {
                 } else {
                     ufsConModulo[nombreModulo] = mutableListOf(uf)
                 }
+
             }
         }
         return ufsConModulo.entries.map { UfConModulo(it.key, it.value) }
     }
+
+
+
 
 
     override fun onDestroyView() {
@@ -129,6 +146,9 @@ class VisorAsistenciaFragment : Fragment() {
             response.body()
         }.await()
     }
+
+
+
 
 
 }
