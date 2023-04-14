@@ -17,7 +17,6 @@ import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.DataModel.FaltasPorFecha
 import com.example.menulateral.DataModel.Uf
-import com.example.menulateral.Login
 import com.example.menulateral.databinding.FragmentJustificarFaltaBinding
 import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
 import kotlinx.coroutines.GlobalScope
@@ -39,27 +38,23 @@ class JustificarFaltaFragment : Fragment() {
     private var _binding: FragmentJustificarFaltaBinding? = null
     private var faltasToShowList: List<FaltaToShow>? = null
 
-    // LA CORRUTINA SE HA DE LLAMAR DESDE OTRA CORRUTINA
     init {
         main()
     }
+
     fun main() = runBlocking {
         faltasToShowList = globalFun()
     }
 
     private var date: Date = getCurrentDateTime()
-    private val binding get() = _binding!!
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-<<<<<<< HEAD
     private val binding get() = _binding!!
 
 
 
 
-=======
->>>>>>> origin/JoelBranch1
 
 
     override fun onCreateView(
@@ -67,6 +62,7 @@ class JustificarFaltaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         var faltasfecha = agruparFaltasPorFecha(faltasToShowList)
 
 
@@ -170,7 +166,7 @@ class JustificarFaltaFragment : Fragment() {
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
         return GlobalScope.async {
-            val call = userCepApi.getFaltasToShow(Login.alumno.idAlumno)
+            val call = userCepApi.getFaltasToShow()
             val response = call.execute()
             response.body()
         }.await()
