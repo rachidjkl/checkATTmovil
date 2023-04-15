@@ -36,17 +36,23 @@ class JustificarFaltaFragment : Fragment() {
     private var _binding: FragmentJustificarFaltaBinding? = null
     private var faltasToShowList: List<FaltaToShow>? = null
     private var updateExit: Boolean = true
-
+    private var idFaltaJustificada: Int = -1
 
 
     // LA CORRUTINA SE HA DE LLAMAR DESDE OTRA CORRUTINA
     init {
         main()
     }
+
+
     fun main() = runBlocking {
         faltasToShowList = globalFun()
     }
 
+    fun callCreateFaltaApi(faltaJustificada: FaltaJustificada) = runBlocking {
+
+        idFaltaJustificada = createFaltaJustificada(faltaJustificada)!!.toInt()
+    }
 
 
     private var date: Date = getCurrentDateTime()
@@ -102,11 +108,8 @@ class JustificarFaltaFragment : Fragment() {
                                                                         ,_binding!!.editComentario.text.toString(),0)
 
 
-            var idFaltaJustificada: Int = -1
-
-            //creamos la faltajustificada llamando a la corrutina para que se espere con el await
-            idFaltaJustificada = createFaltaJustificada(faltaJustificada)
-
+            //llamamos a la corrutina que llamará a la api
+            callCreateFaltaApi(faltaJustificada)
 
             UFCheckBoxAdapter.selectedFaltas.forEach {
                 updateApi(it.idFalta, idFaltaJustificada)
@@ -188,19 +191,16 @@ class JustificarFaltaFragment : Fragment() {
         }.await()
     }
 
-     private fun createFaltaJustificada(faltaJustificada: FaltaJustificada):Int{
+     private suspend fun createFaltaJustificada(faltaJustificada: FaltaJustificada):Int?{
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
-         var idFaltaJustificada: Int = 0
-         GlobalScope.launch() {
+         return GlobalScope.async {
             val call = userCepApi.createFaltaJustificada(faltaJustificada)
             val response = call.execute()
-             val localidFaltaJustificada = response.body()
+             response.body()
 
-             idFaltaJustificada = localidFaltaJustificada!!.toInt()
+        }.await()
 
-        }
-         return idFaltaJustificada
     }
 
 
