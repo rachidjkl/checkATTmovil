@@ -44,6 +44,8 @@ class VisorAsistenciaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
         asignarNombre()
 
@@ -75,8 +77,7 @@ class VisorAsistenciaFragment : Fragment() {
 
 
 
-        _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+
 
 
         val porcentajeAlumno = sumaTotal(porcentajePorModulo)
