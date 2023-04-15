@@ -17,7 +17,7 @@ import com.example.menulateral.DataModel.Uf
 
 class VisorAsistenciaAdapter (private val ufList: MutableList<Uf>, private val moduloList : MutableList<Modulos>):
     RecyclerView.Adapter<VisorAsistenciaAdapter.VisorAsistenciaHolder>(), View.OnClickListener {
-    val adapter = UfPercentAdapter()
+    //val adapter = UfPercentAdapter()
 
     private val layout = R.layout.module_item // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
@@ -76,7 +76,7 @@ class VisorAsistenciaAdapter (private val ufList: MutableList<Uf>, private val m
     fun bindPackage(holder: VisorAsistenciaHolder, modulo: Modulos) {
 
         holder.moduloName?.text = modulo.siglas
-        holder.recyclerViewRellenar?.adapter = adapter
+        //holder.recyclerViewRellenar?.adapter = adapter
         holder.recyclerViewRellenar.visibility = View.GONE
 
     }
