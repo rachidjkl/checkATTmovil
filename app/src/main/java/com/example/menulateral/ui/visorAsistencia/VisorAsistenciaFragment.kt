@@ -1,5 +1,6 @@
 package com.example.menulateral.ui.visorAsistencia
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -44,7 +45,7 @@ class VisorAsistenciaFragment : Fragment() {
     ): View {
 
 
-
+        asignarNombre()
 
         // Crea un HashMap para agrupar los elementos por módulo
         val gruposPorModulo = HashMap<String, MutableList<ModuloUFVisorAsistencia>>()
@@ -67,6 +68,8 @@ class VisorAsistenciaFragment : Fragment() {
 
 
 
+
+
         var ufModulo = agruparUfPorModulo(modulosUFVisorAsistenciaList)
 
 
@@ -75,7 +78,8 @@ class VisorAsistenciaFragment : Fragment() {
         _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val porcentajeAlumno = 84
+
+        val porcentajeAlumno = sumaTotal(porcentajePorModulo)
         binding.progressBar.max = 100;
         binding.progressBar.setProgress(0)
         var cont = 0;
@@ -104,7 +108,8 @@ class VisorAsistenciaFragment : Fragment() {
 
 
 
-    private fun agruparUfPorModulo(modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>?): List<UfConModulo> {
+    private fun agruparUfPorModulo(
+        modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>?): List<UfConModulo> {
         val ufsConModulo = mutableMapOf<String, MutableList<ModuloUFVisorAsistencia>>()
 
         if (modulosUFVisorAsistenciaList != null){
@@ -121,13 +126,27 @@ class VisorAsistenciaFragment : Fragment() {
                 } else {
                     ufsConModulo[nombreModulo] = mutableListOf(uf)
                 }
-
             }
         }
         return ufsConModulo.entries.map { UfConModulo(it.key, it.value) }
     }
 
 
+    private fun sumaTotal(porcentajePorModulo: ArrayList<Float>): Float {
+        if (porcentajePorModulo.isEmpty()) {
+            return 0f
+        }
+        var suma = 0f
+        for (valor in porcentajePorModulo) {
+            suma += valor.toInt()
+        }
+        return suma / porcentajePorModulo.size
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun asignarNombre (){
+        _binding?.textoNombreUsuario?.text = Login.alumno.nombreAlumno + " " + Login.alumno.apellido1Alumno
+    }
 
 
 

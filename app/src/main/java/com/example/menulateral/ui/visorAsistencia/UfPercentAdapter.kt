@@ -50,6 +50,10 @@
 
         }
 
+        private fun sumaPorcentajes(){
+
+        }
+
 
 
     }

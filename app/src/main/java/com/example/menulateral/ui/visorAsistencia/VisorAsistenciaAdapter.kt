@@ -16,8 +16,12 @@ import com.example.menulateral.R
 import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.DataModel.UfConModulo
 import com.example.menulateral.ui.justificarFalta.UFCheckBoxAdapter
+import org.w3c.dom.Text
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
-class VisorAsistenciaAdapter (private val ufModulo : List<UfConModulo>):
+class VisorAsistenciaAdapter(
+    private val ufModulo: List<UfConModulo>):
     RecyclerView.Adapter<VisorAsistenciaAdapter.VisorAsistenciaHolder>(), View.OnClickListener {
 
 
@@ -26,6 +30,7 @@ class VisorAsistenciaAdapter (private val ufModulo : List<UfConModulo>):
 
     class VisorAsistenciaHolder(view: View) : RecyclerView.ViewHolder(view) {
         var moduloName: TextView
+        var porcentaje: TextView
         var recyclerViewRellenar: RecyclerView
         var deployModule: ImageView
         var cardview: CardView
@@ -33,6 +38,7 @@ class VisorAsistenciaAdapter (private val ufModulo : List<UfConModulo>):
 
         init {
             moduloName = view.findViewById(R.id.moduleName)
+            porcentaje = view.findViewById(R.id.porcentaje)
             recyclerViewRellenar = view.findViewById(R.id.recyclerUf)
             recyclerViewRellenar.layoutManager = LinearLayoutManager(view.context)
             deployModule = view.findViewById(R.id.deployModule)
@@ -84,7 +90,35 @@ class VisorAsistenciaAdapter (private val ufModulo : List<UfConModulo>):
         holder.recyclerViewRellenar?.adapter = adapter
         holder.recyclerViewRellenar.visibility = View.GONE
 
+        var sumaPorcentajes = 0
+        var contador = 0
+        uf.ufs.forEach { item ->
+            sumaPorcentajes += item.porcentaje_asistencia.toInt()
+            contador++
+        }
+
+
+        var porcentajeTotalModulo = if (sumaPorcentajes > contador) {
+            // Si la suma de porcentajes es mayor que el contador, asumimos que son porcentajes
+            (sumaPorcentajes / (contador.toFloat()*100)) * 100
+        } else {
+            // Si la suma de porcentajes es menor o igual al contador, asumimos que son números decimales
+            (sumaPorcentajes / contador) * 100
+        }
+
+        val decimalFormat = DecimalFormat("#.#")
+        decimalFormat.roundingMode = RoundingMode.HALF_UP
+        val porcentajeTruncado = decimalFormat.format(porcentajeTotalModulo).toFloat()
+
+
+
+
+        holder.porcentaje?.text = porcentajeTruncado.toString() + "%"
+
+
     }
+
+
 
     override fun onClick(view: View?) {
         clickListener?.onClick(view)
