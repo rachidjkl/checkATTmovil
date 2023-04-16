@@ -58,24 +58,6 @@ class FaltasJustificadasFragment : Fragment() {
         //------------------------------------------------------------------------------------------------------------//
     }
 
-
-    val faltasList = mutableListOf<Faltas>(
-        Faltas(1, 101, 1, "09:00"),
-        Faltas(2, 102, 1, "11:00"),
-        Faltas(3, 103, 1, "12:00"),
-        Faltas(4, 101, 2, "13:00"),
-        Faltas(5, 102, 2, "14:00"),
-        Faltas(6, 103, 2, "08:00")
-    )
-
-    val faltaJustificadaList2 = mutableListOf<FaltaJustificada>(
-        FaltaJustificada(1, "Medico", "123", "UF1 - Introducción a la programación", 8),
-        FaltaJustificada(2, "Pedo", "124", "UF2 - Programación orientada a objetos", 9),
-        FaltaJustificada(3, "Examen Conducir", "125", "UF3 - Estructuras de datos y algoritmos", 10),
-        FaltaJustificada(4, "Sida", "126", "UF4 - Bases de datos y SQL", 11)
-    )
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -102,7 +84,7 @@ class FaltasJustificadasFragment : Fragment() {
 
         if(faltaJustificadaListPendiente != null){
             binding.RecyclerView.visibility = View.VISIBLE
-            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListPendiente, 0)
+            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment, faltaJustificadaListPendiente, 0)
             binding.RecyclerView.hasFixedSize()
             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
             binding.RecyclerView.adapter = adapter
@@ -145,7 +127,7 @@ class FaltasJustificadasFragment : Fragment() {
                     0 -> {
                         if(faltaJustificadaListPendiente != null){
                             binding.RecyclerView.visibility = View.VISIBLE
-                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListPendiente, 0)
+                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment, faltaJustificadaListPendiente, 0)
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter
@@ -157,7 +139,7 @@ class FaltasJustificadasFragment : Fragment() {
                     1 -> {
                         if(faltaJustificadaListValidada != null){
                             binding.RecyclerView.visibility = View.VISIBLE
-                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListValidada, 1)
+                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment, faltaJustificadaListValidada, 1)
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter
@@ -168,7 +150,7 @@ class FaltasJustificadasFragment : Fragment() {
                     2 -> {
                         if(faltaJustificadaListRechazada != null){
                             binding.RecyclerView.visibility = View.VISIBLE
-                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, faltaJustificadaListRechazada, -1)
+                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment, faltaJustificadaListRechazada, -1)
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter

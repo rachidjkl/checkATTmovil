@@ -26,19 +26,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
-class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment,
-                                FaltasList: MutableList<Faltas>, private val justificarFaltasList: MutableList<FaltaJustificada>?, private val estado: Int):
+class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment, private val justificarFaltasList: MutableList<FaltaJustificada>?, private val estado: Int):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
 
     private var faltasToShowList: List<FaltaToShow>? = null
-    init {
-        main()
-    }
-    fun main() = runBlocking {
-        faltasToShowList = globalFun()
-    }
 
-    val adapter = UfColorRectangleAdapter(faltasToShowList as MutableList<FaltaToShow>)
+    fun main(justificarFalta: FaltaJustificada) = runBlocking {
+        faltasToShowList = globalFun(justificarFalta)
+    }
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
@@ -116,7 +111,8 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
 
         holder.alumnName.text = justificarFalta.motivoFalta
         //val FaltasList: MutableList<Faltas> = cargarListaHoras();
-        holder.recyclerViewRellenar.adapter= adapter //UfColorRectangleAdapter(FaltasList)
+        main(justificarFalta)
+        holder.recyclerViewRellenar.adapter= UfColorRectangleAdapter(faltasToShowList as MutableList<FaltaToShow>)
         holder.recyclerViewRellenar.visibility = View.GONE
         holder.buttonVer.visibility = View.GONE
 
@@ -148,16 +144,18 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
         clickListener = listener
     }
 
-    private suspend fun globalFun(): List<FaltaToShow>? {
+    private suspend fun globalFun(justificarFalta: FaltaJustificada): List<FaltaToShow>? {
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
         return GlobalScope.async {
-            val call = userCepApi.getFaltasToShow(Login.alumno.idAlumno)
+            val call = userCepApi.getFaltasToShow2(Login.alumno.idAlumno, justificarFalta.idJustificarFaltas)
             val response = call.execute()
             response.body()
         }.await()
     }
+
+
 
 
 
