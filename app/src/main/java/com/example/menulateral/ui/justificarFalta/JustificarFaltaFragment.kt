@@ -1,32 +1,32 @@
 package com.example.menulateral.ui.justificarFalta
 
-import android.R
 import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
-import com.example.menulateral.DataModel.*
+import com.example.menulateral.DataModel.FaltaJustificada
+import com.example.menulateral.DataModel.FaltaToShow
+import com.example.menulateral.DataModel.FaltasPorFecha
 import com.example.menulateral.Login
+import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentJustificarFaltaBinding
+import com.example.menulateral.extension.extensionFaltasJustificadas
+import com.example.menulateral.ui.visorAsistencia.VisorAsistenciaFragment
 import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -60,6 +60,7 @@ class JustificarFaltaFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+
 
 
     override fun onCreateView(
@@ -118,8 +119,18 @@ class JustificarFaltaFragment : Fragment() {
                 Toast.makeText(requireActivity(), "Error al hacer Update", Toast.LENGTH_SHORT).show()
                 updateExit == true
             }else{
-                Toast.makeText(requireActivity(), "Update hecho con exito", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Falta Justificada Enviada", Toast.LENGTH_SHORT).show()
+                UFCheckBoxAdapter.selectedFaltas.clear()
+
             }
+
+            val fragment = VisorAsistenciaFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            // Agregar el fragmento actual a la pila de fragmentos
+            // Reemplazar el fragmento actual con el FragmentNuevo
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment)
+            fragmentTransaction.commit()
 
 
         }
