@@ -50,9 +50,9 @@ class FaltasJustificadasFragment : Fragment() {
 
     val justificarFaltasList = mutableListOf<JustificarFalta>(
         JustificarFalta(1, "Medico", "123", "UF1 - Introducción a la programación", "08"),
-        JustificarFalta(2, "Pedo", "124", "UF2 - Programación orientada a objetos", "09"),
+        JustificarFalta(2, "Gripe", "124", "UF2 - Programación orientada a objetos", "09"),
         JustificarFalta(3, "Examen Conducir", "125", "UF3 - Estructuras de datos y algoritmos", "10"),
-        JustificarFalta(4, "Sida", "126", "UF4 - Bases de datos y SQL", "11")
+        JustificarFalta(4, "Vaga de Tren", "126", "UF4 - Bases de datos y SQL", "11")
     )
 
 
