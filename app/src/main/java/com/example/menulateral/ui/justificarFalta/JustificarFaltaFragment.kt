@@ -1,35 +1,32 @@
 package com.example.menulateral.ui.justificarFalta
 
-import android.R
 import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
+import com.example.menulateral.DataModel.FaltaJustificada
 import com.example.menulateral.DataModel.FaltaToShow
-import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.DataModel.FaltasPorFecha
-import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.Login
+import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentJustificarFaltaBinding
+import com.example.menulateral.extension.extensionFaltasJustificadas
+import com.example.menulateral.ui.visorAsistencia.VisorAsistenciaFragment
 import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -38,14 +35,25 @@ class JustificarFaltaFragment : Fragment() {
     companion object var selectedFaltas = mutableListOf<FaltaToShow>()
     private var _binding: FragmentJustificarFaltaBinding? = null
     private var faltasToShowList: List<FaltaToShow>? = null
+    private var updateExit: Boolean = true
+    private var idFaltaJustificada: Int = -1
+
 
     // LA CORRUTINA SE HA DE LLAMAR DESDE OTRA CORRUTINA
     init {
         main()
     }
+
+
     fun main() = runBlocking {
         faltasToShowList = globalFun()
     }
+
+    fun callCreateFaltaApi(faltaJustificada: FaltaJustificada) = runBlocking {
+
+        idFaltaJustificada = createFaltaJustificada(faltaJustificada)!!.toInt()
+    }
+
 
     private var date: Date = getCurrentDateTime()
     private val binding get() = _binding!!
@@ -53,6 +61,7 @@ class JustificarFaltaFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+
 
 
     override fun onCreateView(
@@ -95,9 +104,34 @@ class JustificarFaltaFragment : Fragment() {
         binding.datePickerButton.text = "${dayOfMonth}/${month + 1}/${year}"
 
         binding.btnEnviar.setOnClickListener(){
+            _binding!!.editReason.text.toString()
+
+            var faltaJustificada: FaltaJustificada = FaltaJustificada(_binding!!.editReason.text.toString(),_binding!!.editAdjuntarDocumento.text.toString()
+                                                                        ,_binding!!.editComentario.text.toString(),0)
 
 
-            UFCheckBoxAdapter.selectedFaltas
+            //llamamos a la corrutina que llamará a la api
+            callCreateFaltaApi(faltaJustificada)
+
+            UFCheckBoxAdapter.selectedFaltas.forEach {
+                updateApi(it.idFalta, idFaltaJustificada)
+            }
+            if (!updateExit){
+                Toast.makeText(requireActivity(), "Error al hacer Update", Toast.LENGTH_SHORT).show()
+                updateExit == true
+            }else{
+                Toast.makeText(requireActivity(), "Falta Justificada Enviada", Toast.LENGTH_SHORT).show()
+                UFCheckBoxAdapter.selectedFaltas.clear()
+
+            }
+
+            val fragment = VisorAsistenciaFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            // Agregar el fragmento actual a la pila de fragmentos
+            // Reemplazar el fragmento actual con el FragmentNuevo
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment)
+            fragmentTransaction.commit()
 
 
         }
@@ -168,6 +202,35 @@ class JustificarFaltaFragment : Fragment() {
             response.body()
         }.await()
     }
+
+     private suspend fun createFaltaJustificada(faltaJustificada: FaltaJustificada):Int?{
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+         return GlobalScope.async {
+            val call = userCepApi.createFaltaJustificada(faltaJustificada)
+            val response = call.execute()
+             response.body()
+
+        }.await()
+
+    }
+
+
+     fun updateApi(idFalta: Int, idFaltaJustificada: Int) {
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        GlobalScope.launch() {
+            val call = userCepApi.updateFaltas(idFalta, idFaltaJustificada)
+            val response = call.execute()
+
+            if (response.code() != 204){
+                updateExit = false
+            }else{
+
+            }
+        }
+     }
 
 
     fun getCurrentDateTime(): Date {
