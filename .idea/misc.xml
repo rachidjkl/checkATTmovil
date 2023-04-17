@@ -3,10 +3,58 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/drawable/btn_secundario.xml" value="0.231" />
         <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/drawable/estilo_desplegabel.xml" value="0.231" />
         <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/dropdown_item.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_faltas_justificadas.xml" value="0.17831813576494426" />
+=======
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/drawable/estilo_desplegabel.xml" value="0.251" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/drawable/fondo_validar_justificantes.xml" value="0.251" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/drawable/side_nav_bar.xml" value="0.251" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/activity_login.xml" value="0.20652173913043478" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/activity_main2.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/adapter_item_color.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/app_bar_main2.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/card_view_extension_falta_judtificada.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/content_main2.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_extension_faltas_justificadas.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_faltas_justificadas.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_gallery.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_home.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_justificar_falta.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_slideshow.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_visor_asistencia.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/item_uf_color.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/layout/nav_header_main2.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/menu/activity_main2_drawer.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/menu/activity_main_drawer2.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/menu/main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Usuari/Documents/GitHub/checkATTmovil/app/src/main/res/menu/main_activity2.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/drawable-v24/circular_progress.xml" value="0.332" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/drawable-v24/expand_more.xml" value="0.332" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/drawable/expand_less.xml" value="0.3325" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/adapter_item_color.xml" value="0.33" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/adapter_visor_asistencia.xml" value="0.365625" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/attendance_item_checkbox.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/dropdown_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_extension_faltas_justificadas.xml" value="0.33" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_faltas_justificadas.xml" value="0.25" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_justificar_falta.xml" value="0.21067415730337077" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_ver_faltas.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/fragment_visor_asistencia.xml" value="0.33" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/item_uf_checkbox.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/item_uf_color.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/item_uf_percent.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/module_item.xml" value="0.5" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/layout/nav_header_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/menu/activity_main_drawer.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/cep.CEPNET0.000/Documents/GitHub/checkATTmovil/app/src/main/res/menu/main.xml" value="0.36666666666666664" />
+>>>>>>> origin/JoelBranch1
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/drawable/btn_principal.xml" value="0.1085" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/drawable/btn_secundario.xml" value="0.1085" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/55/checkATTmovil/app/src/main/res/drawable/estilo_desplegabel.xml" value="0.206" />
@@ -45,10 +93,32 @@
         <entry key="..\:/Users/cep.CEPNET0/Desktop/MenuLateral/app/src/main/res/layout/spinner_options.xml" value="0.365625" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/MenuLateral/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/cep.CEPNET0/Desktop/MenuLateral/app/src/main/res/menu/main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/drawable-v24/circular_progress.xml" value="0.151" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/drawable-v24/progress_marvel.xml" value="0.151" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/drawable/circular_progress.xml" value="0.1" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/drawable/progress_circ.xml" value="0.1" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/layout/a.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/layout/activity_login.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/layout/activity_main.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/layout/app_bar_main.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/layout/fragment_home.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/layout/fragment_ver_faltas.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/layout/fragment_visor_asistencia.xml" value="0.25" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/layout/fy.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/cep.CEPNET0/Desktop/Rachid Ghenem/M13 - Proyecto/checkATTmovil/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
+<<<<<<< HEAD
+        <entry key="..\:/Users/joelm/OneDrive/Documentos/GitHub/checkATTmovil/app/src/main/res/layout/activity_login.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/joelm/OneDrive/Documentos/GitHub/checkATTmovil/app/src/main/res/layout/content_main.xml" value="0.18819655521783182" />
+        <entry key="..\:/Users/joelm/OneDrive/Documentos/GitHub/checkATTmovil/app/src/main/res/layout/fragment_faltas_justificadas.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/joelm/OneDrive/Documentos/GitHub/checkATTmovil/app/src/main/res/layout/fragment_justificar_falta.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/joelm/OneDrive/Documentos/GitHub/checkATTmovil/app/src/main/res/layout/module_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/joelm/OneDrive/Documentos/GitHub/checkATTmovil/app/src/main/res/layout/nav_header_main.xml" value="0.38697916666666665" />
+=======
+>>>>>>> RachidBranch
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

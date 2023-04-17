@@ -9,8 +9,7 @@
         android:id="@+id/nav_visor_asistencia"
         android:name="com.example.menulateral.ui.visorAsistencia.VisorAsistenciaFragment"
         android:label="@string/menu_visor_asistencia"
-        tools:layout="@layout/fragment_visor_asistencia" >
-    </fragment>
+        tools:layout="@layout/fragment_visor_asistencia" />
 
     <fragment
         android:id="@+id/nav_justificar_faltas"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,6 +28,7 @@
         style="@style/estiloTexto"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="12dp"
         android:text="@string/txt_motivo"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/edit_reason"
@@ -46,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.142" />
+        app:layout_constraintVertical_bias="0.124" />
 
     <TextView
         android:id="@+id/text_comentario"
@@ -61,7 +63,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.972" />
 
     <EditText
         android:id="@+id/edit_comentario"
@@ -77,6 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_reason"
         app:layout_constraintVertical_bias="0.011" />
 
+
     <TextView
         android:id="@+id/text_adjuntar_documento"
         style="@style/estiloTexto"
@@ -90,8 +93,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
+        app:layout_constraintVertical_bias="0.967" />
 
     <EditText
         android:id="@+id/edit_adjuntar_documento"
@@ -116,15 +118,15 @@
         android:layout_marginBottom="4dp"
         android:text="@string/txt_seleccionar_fecha"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/date_picker_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.979" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/date_picker_button"
         style="@style/estiloBoton2"
         android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
@@ -135,7 +137,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_adjuntar_documento"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.015" />
 
     <ImageView
         android:id="@+id/imageViewPapelera"
@@ -146,8 +148,10 @@
         android:src="@drawable/papelera"
         app:layout_constraintBottom_toBottomOf="@+id/edit_adjuntar_documento"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toEndOf="@+id/edit_adjuntar_documento"
         app:layout_constraintTop_toBottomOf="@+id/edit_comentario"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -164,16 +168,25 @@
         android:id="@+id/constraint"
         android:layout_width="match_parent"
         android:layout_height="350dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ListView
-            android:id="@+id/recyclerView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerViewJustificarFalta"
+            android:layout_marginLeft="20dp"
+            android:layout_width="369dp"
+            android:layout_height="352dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.38"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.957"/>
 
     </LinearLayout>
 
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

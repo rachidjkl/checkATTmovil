@@ -1,58 +1,239 @@
 package com.example.menulateral.ui.justificarFalta
 
+import android.app.DatePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.menulateral.ApiAcces.ApiGets
+import com.example.menulateral.ApiAcces.RetrofitClient
+import com.example.menulateral.DataModel.FaltaJustificada
+import com.example.menulateral.DataModel.FaltaToShow
+import com.example.menulateral.DataModel.FaltasPorFecha
+import com.example.menulateral.Login
+import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentJustificarFaltaBinding
+import com.example.menulateral.extension.extensionFaltasJustificadas
+import com.example.menulateral.ui.visorAsistencia.VisorAsistenciaFragment
+import com.example.menulateral.ui.visorAsistencia.justificarFaltaAdapter
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.time.LocalDate
+import java.util.*
+
 
 class JustificarFaltaFragment : Fragment() {
 
+    companion object var selectedFaltas = mutableListOf<FaltaToShow>()
     private var _binding: FragmentJustificarFaltaBinding? = null
+    private var faltasToShowList: List<FaltaToShow>? = null
+    private var updateExit: Boolean = true
+    private var idFaltaJustificada: Int = -1
+
+
+    // LA CORRUTINA SE HA DE LLAMAR DESDE OTRA CORRUTINA
+    init {
+        main()
+    }
+
+
+    fun main() = runBlocking {
+        faltasToShowList = globalFun()
+    }
+
+    fun callCreateFaltaApi(faltaJustificada: FaltaJustificada) = runBlocking {
+
+        idFaltaJustificada = createFaltaJustificada(faltaJustificada)!!.toInt()
+    }
+
+
+    private var date: Date = getCurrentDateTime()
+    private val binding get() = _binding!!
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        var faltasfecha = agruparFaltasPorFecha(faltasToShowList)
+
+
+
         val galleryViewModel =
             ViewModelProvider(this).get(JustificarFaltaViewModel::class.java)
 
         _binding = FragmentJustificarFaltaBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val stringList = listOf(
-            "Lorem ipsum dolor sit amet",
-            "Consectetur adipiscing elit",
-            "Sed do eiusmod tempor incididunt",
-            "Ut labore et dolore magna aliqua",
-            "Ut enim ad minim veniam",
-            "Quis nostrud exercitation ullamco",
-            "Laboris nisi ut aliquip ex ea commodo consequat",
-            "Duis aute irure dolor in reprehenderit in voluptate velit",
-            "Esse cillum dolore eu fugiat nulla pariatur",
-            "Excepteur sint occaecat cupidatat non proident",
-            "Sunt in culpa qui officia deserunt mollit anim id est laborum",
-            "Nemo enim ipsam voluptatem quia voluptas sit aspernatur",
-            "Aut odit aut fugit",
-            "Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt",
-            "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet",
-            "Consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt"
-        )
 
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, stringList)
-        binding.recyclerView2.adapter = adapter
+        val adapter = justificarFaltaAdapter(faltasfecha)
+        binding.RecyclerViewJustificarFalta.hasFixedSize()
+        binding.RecyclerViewJustificarFalta.layoutManager = LinearLayoutManager(this.context)
+        binding.RecyclerViewJustificarFalta.adapter = adapter
 
         val textView: TextView = binding.textReason
+
+        val cal = Calendar.getInstance()
+
+            // Obtiene la fecha actual
+        val year = cal.get(Calendar.YEAR)
+        val month = cal.get(Calendar.MONTH)
+        val dayOfMonth = cal.get(Calendar.DAY_OF_MONTH)
+
+        // Crea un objeto Calendar para la fecha actual
+        val currentCalendar = Calendar.getInstance()
+        currentCalendar.set(year, month, dayOfMonth)
+
+        // Obtiene el nombre del día de la semana correspondiente a la fecha actual
+        val currentDayOfWeek = currentCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+
+        binding.datePickerButton.text = "${dayOfMonth}/${month + 1}/${year}"
+
+        binding.btnEnviar.setOnClickListener(){
+            _binding!!.editReason.text.toString()
+
+            var faltaJustificada: FaltaJustificada = FaltaJustificada(_binding!!.editReason.text.toString(),_binding!!.editAdjuntarDocumento.text.toString()
+                                                                        ,_binding!!.editComentario.text.toString(),0)
+
+
+            //llamamos a la corrutina que llamará a la api
+            callCreateFaltaApi(faltaJustificada)
+
+            UFCheckBoxAdapter.selectedFaltas.forEach {
+                updateApi(it.idFalta, idFaltaJustificada)
+            }
+            if (!updateExit){
+                Toast.makeText(requireActivity(), "Error al hacer Update", Toast.LENGTH_SHORT).show()
+                updateExit == true
+            }else{
+                Toast.makeText(requireActivity(), "Falta Justificada Enviada", Toast.LENGTH_SHORT).show()
+                UFCheckBoxAdapter.selectedFaltas.clear()
+
+            }
+
+            val fragment = VisorAsistenciaFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            // Agregar el fragmento actual a la pila de fragmentos
+            // Reemplazar el fragmento actual con el FragmentNuevo
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment)
+            fragmentTransaction.commit()
+
+
+        }
+
+        binding.datePickerButton.setOnClickListener {
+
+            val datePicker = DatePickerDialog(
+                requireContext(),
+                { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                    // Aquí se ejecutará el código cuando el usuario seleccione una fecha
+                    val selectedDate = "${selectedDayOfMonth}/${selectedMonth + 1}/${selectedYear}"
+
+                    // Crea un objeto Calendar para la fecha seleccionada
+                    val selectedCalendar = Calendar.getInstance()
+                    selectedCalendar.set(selectedYear, selectedMonth, selectedDayOfMonth)
+
+                    // Obtiene el nombre del día de la semana correspondiente a la fecha seleccionada
+                    val selectedDayOfWeek = selectedCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+
+                    binding.datePickerButton.text = selectedDate
+
+                },
+                year, month, dayOfMonth
+            )
+
+            datePicker.show()
+        }
         return root
+    }
+
+
+    fun agruparFaltasPorFecha(faltasToShowList: List<FaltaToShow>?): List<FaltasPorFecha> {
+        val faltasPorFecha = mutableMapOf<LocalDate, MutableList<FaltaToShow>>()
+
+        if (faltasToShowList != null) {
+
+            for (falta in faltasToShowList) {
+                val fecha = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    LocalDate.parse(falta.id_datetime.substringBefore("T"))
+                } else {
+                    val dateParts = falta.id_datetime.substringBefore("T").split("-")
+                    LocalDate.of(dateParts[0].toInt(), dateParts[1].toInt(), dateParts[2].toInt())
+                }
+
+                if (fecha in faltasPorFecha) {
+                    faltasPorFecha[fecha]?.add(falta)
+                } else {
+                    faltasPorFecha[fecha] = mutableListOf(falta)
+                }
+            }
+        }
+
+        return faltasPorFecha.entries.map { FaltasPorFecha(it.key, it.value) }
+    }
+
+
+
+
+
+
+    private suspend fun globalFun(): List<FaltaToShow>? {
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        return GlobalScope.async {
+            val call = userCepApi.getFaltasToShow(Login.alumno.idAlumno)
+            val response = call.execute()
+            response.body()
+        }.await()
+    }
+
+     private suspend fun createFaltaJustificada(faltaJustificada: FaltaJustificada):Int?{
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+         return GlobalScope.async {
+            val call = userCepApi.createFaltaJustificada(faltaJustificada)
+            val response = call.execute()
+             response.body()
+
+        }.await()
+
+    }
+
+
+     fun updateApi(idFalta: Int, idFaltaJustificada: Int) {
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        GlobalScope.launch() {
+            val call = userCepApi.updateFaltas(idFalta, idFaltaJustificada)
+            val response = call.execute()
+
+            if (response.code() != 204){
+                updateExit = false
+            }else{
+
+            }
+        }
+     }
+
+
+    fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
     }
 
     override fun onDestroyView() {
