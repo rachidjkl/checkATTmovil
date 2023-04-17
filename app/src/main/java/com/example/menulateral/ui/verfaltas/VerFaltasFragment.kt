@@ -105,7 +105,7 @@ class VerFaltasFragment : Fragment() {
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
         return GlobalScope.async {
-            val call = userCepApi.getFaltasToShow(Login.alumno.idAlumno)
+            val call = userCepApi.getFaltasToShowTotales(Login.alumno.idAlumno)
             val response = call.execute()
             response.body()
         }.await()
