@@ -68,6 +68,9 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
         val btn = holder.itemView.findViewById<Button>(R.id.botonVer)
         btn.setOnClickListener {
             if (justificarFaltasList != null) {
+                if (justificarFalta != null) {
+                    main(justificarFalta)
+                }
                 listener.onItemClick(position, faltasToShowList as MutableList<FaltaToShow>, justificarFaltasList)
             } //, motivo)
         }

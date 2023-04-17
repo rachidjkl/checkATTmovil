@@ -30,7 +30,7 @@ interface ApiGets {
     @GET("api/Faltas/FaltasToShow/idAlumno/{idAlumno}")
     fun getFaltasToShow(@Path("idAlumno") idAlumno: Int): Call<List<FaltaToShow>>
 
-    @GET("api/Faltas/FaltasToShow/idAlumno/{idAlumno}/idJustificarFalta/{idJustificarFalta}")
+    @GET("api/Faltas/FaltasToShow2/idAlumno/{idAlumno}/idJustificarFalta/{idJustificarFalta}")
     fun getFaltasToShow2(@Path("idAlumno") idAlumno: Int, @Path("idJustificarFalta") idJustificarFalta: Int): Call<List<FaltaToShow>>
 
     @POST("api/Faltas/SetFalta/idFalta/{idFalta}/idFaltaJustificada/{idFaltaJustificada}")
