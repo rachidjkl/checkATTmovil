@@ -13,7 +13,7 @@ import com.example.menulateral.ui.visorAsistencia.AdapterExtensionFaltasJustific
 import java.time.LocalDate
 
 
-class extensionFaltasJustificadas(val faltasToShowList: MutableList<FaltaToShow>, val justificantes: FaltaJustificada) : Fragment() {
+class extensionFaltasJustificadas(val faltasToShowList: MutableList<FaltaToShow>, val justificantes: FaltaJustificada2) : Fragment() {
 
     private var _binding: FragmentExtensionFaltasJustificadasBinding? = null
 

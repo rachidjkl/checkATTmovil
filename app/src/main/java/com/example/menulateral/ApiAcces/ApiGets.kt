@@ -21,7 +21,7 @@ interface ApiGets {
 
 
     @GET("api/Justificar_faltas/Validada/idAlumno/{idAlumno}/estadoFalta/{estadoFalta}")
-    fun getFaltaJustificada(@Path("idAlumno") alumno: Int, @Path("estadoFalta") estadoFalta: Int): Call<MutableList<FaltaJustificada>>
+    fun getFaltaJustificada(@Path("idAlumno") alumno: Int, @Path("estadoFalta") estadoFalta: Int): Call<MutableList<FaltaJustificada2>>
     
     @GET("api/Alumnoes/idUserCep/{idUserCep}")
     fun getAlumno(@Path("idUserCep") idUserCep: Int): Call<Alumno>
@@ -37,4 +37,10 @@ interface ApiGets {
 
     @POST("api/Justificar_faltas/{Justificar_faltas}")
     fun createFaltaJustificada(@Body Justificar_faltas: FaltaJustificada): Call<Int>
+
+    @GET("api/Faltas/FaltasToShowTotales/idAlumno/{idAlumno}")
+    fun getFaltasToShowTotales(@Path("idAlumno") idAlumno: Int): Call<List<FaltaToShow>>
+
+    @GET("api/Modulos/ModuloUf/idAlumno/{idAlumno}")
+    fun getVisorAistencia(@Path("idAlumno") idAlumno: Int): Call<List<ModuloUFVisorAsistencia>>
 }

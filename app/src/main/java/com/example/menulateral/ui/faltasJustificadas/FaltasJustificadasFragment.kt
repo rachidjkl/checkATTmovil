@@ -13,6 +13,7 @@ import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.DataModel.FaltaJustificada
+import com.example.menulateral.DataModel.FaltaJustificada2
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.Login
 import com.example.menulateral.R
@@ -26,9 +27,9 @@ import kotlinx.coroutines.runBlocking
 class FaltasJustificadasFragment : Fragment() {
 
     private var _binding: FragmentFaltasJustificadasBinding? = null
-    private var faltaJustificadaListValidada: MutableList<FaltaJustificada>? = null
-    private var faltaJustificadaListPendiente: MutableList<FaltaJustificada>? = null
-    private var faltaJustificadaListRechazada: MutableList<FaltaJustificada>? = null
+    private var faltaJustificadaListValidada: MutableList<FaltaJustificada2>? = null
+    private var faltaJustificadaListPendiente: MutableList<FaltaJustificada2>? = null
+    private var faltaJustificadaListRechazada: MutableList<FaltaJustificada2>? = null
 
     init {
         main()
@@ -45,7 +46,7 @@ class FaltasJustificadasFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    fun onItemClick(position: Int, infoFalta: MutableList<FaltaToShow>, infoJustificante: MutableList<FaltaJustificada>) {
+    fun onItemClick(position: Int, infoFalta: MutableList<FaltaToShow>, infoJustificante: MutableList<FaltaJustificada2>) {
         //-------------------------------------------------Cambiar fragment-------------------------------------------//
         val fragmentoPasarLista = extensionFaltasJustificadas(infoFalta, infoJustificante.get(position))
         val fragmentManager = requireActivity().supportFragmentManager
@@ -170,7 +171,7 @@ class FaltasJustificadasFragment : Fragment() {
     }
 
 
-    suspend fun cargarListFaltaJustificada(alumno : Int, estado : Int):MutableList<FaltaJustificada>?{
+    suspend fun cargarListFaltaJustificada(alumno : Int, estado : Int):MutableList<FaltaJustificada2>?{
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 

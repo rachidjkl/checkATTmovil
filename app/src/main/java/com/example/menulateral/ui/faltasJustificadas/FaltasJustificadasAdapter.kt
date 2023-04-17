@@ -19,6 +19,7 @@ import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.Faltas
 import com.example.menulateral.DataModel.FaltaJustificada
+import com.example.menulateral.DataModel.FaltaJustificada2
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.Login
 import com.example.menulateral.R
@@ -26,12 +27,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
-class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment, private val justificarFaltasList: MutableList<FaltaJustificada>?, private val estado: Int):
+class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment, private val justificarFaltasList: MutableList<FaltaJustificada2>?, private val estado: Int):
     RecyclerView.Adapter<FaltasJustificadasAdapter.FaltasJustificadasHolder>(), View.OnClickListener{
 
     private var faltasToShowList: List<FaltaToShow>? = null
 
-    fun main(justificarFalta: FaltaJustificada) = runBlocking {
+    fun main(justificarFalta: FaltaJustificada2) = runBlocking {
         faltasToShowList = globalFun(justificarFalta)
     }
 
@@ -110,7 +111,7 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
         return justificarFaltasList!!.size
     }
 
-    fun bindPackage(holder: FaltasJustificadasHolder, justificarFalta: FaltaJustificada){
+    fun bindPackage(holder: FaltasJustificadasHolder, justificarFalta: FaltaJustificada2){
 
         holder.alumnName.text = justificarFalta.motivoFalta
         //val FaltasList: MutableList<Faltas> = cargarListaHoras();
@@ -147,7 +148,7 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
         clickListener = listener
     }
 
-    private suspend fun globalFun(justificarFalta: FaltaJustificada): List<FaltaToShow>? {
+    private suspend fun globalFun(justificarFalta: FaltaJustificada2): List<FaltaToShow>? {
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 

@@ -1,5 +1,7 @@
 package com.example.menulateral.ui.visorAsistencia
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -7,43 +9,78 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.menulateral.DataModel.Modulos
-import com.example.menulateral.DataModel.Uf
+import com.example.menulateral.ApiAcces.ApiGets
+import com.example.menulateral.ApiAcces.RetrofitClient
+import com.example.menulateral.DataModel.*
+import com.example.menulateral.Login
 import com.example.menulateral.databinding.FragmentVisorAsistenciaBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+
 
 class VisorAsistenciaFragment : Fragment() {
 
     private var _binding: FragmentVisorAsistenciaBinding? = null
+    private var modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>? = null
+    private var nombreUsuario: String = ""
+    private var porcentajeAsistenciaModulo: Float = 0.0F
+
+    init {
+        main()
+    }
+    fun main() = runBlocking {
+        modulosUFVisorAsistenciaList = globalFun()
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    val ufList = mutableListOf<Uf>(
-        Uf(1, 101, 123, "UF1 - Introducción a la programación", "08", "09"),
-        Uf(2, 102, 124, "UF2 - Programación orientada a objetos", "09", "10"),
-        Uf(3, 103, 125, "UF3 - Estructuras de datos y algoritmos", "10", "11"),
-        Uf(4, 101, 126, "UF4 - Bases de datos y SQL", "11", "12"),
-        Uf(5, 102, 127, "UF5 - Desarrollo web con JavaScript", "12", "13"),
-        Uf(6, 103, 128, "UF6 - Desarrollo móvil con Kotlin", "13", "14")
-    )
-    val moduloList = mutableListOf<Modulos>(
-        Modulos(1, 101, "Introducción a la programación", "M01"),
-        Modulos(2, 102, "Introducción a la programación", "M02"),
-        Modulos(3, 103, "Introducción a la programación", "M03"),
-        Modulos(4, 101, "Introducción a la programación", "M04"),
-        Modulos(5, 102, "Introducción a la programación", "M05"),
-        Modulos(6, 103, "Introducción a la programación", "M06")
-    )
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val porcentajeAlumno = 84
+        asignarNombre()
+
+        // Crea un HashMap para agrupar los elementos por módulo
+        val gruposPorModulo = HashMap<String, MutableList<ModuloUFVisorAsistencia>>()
+        // Agrupa los elementos de la lista por módulo
+        for (elemento in modulosUFVisorAsistenciaList!!) {
+            if (!gruposPorModulo.containsKey(elemento.siglas_uf)) {
+                gruposPorModulo[elemento.siglas_uf] = ArrayList()
+            }
+            gruposPorModulo[elemento.siglas_uf]?.add(elemento)
+        }
+        // Calcula el promedio del porcentaje de asistencia para cada grupo de elementos del mismo módulo
+        val porcentajePorModulo = ArrayList<Float>()
+        for ((_, elementos) in gruposPorModulo) {
+            val sumPorcentaje = elementos.sumOf { it.porcentaje_asistencia.toDouble() }
+            val promedioPorcentaje = (sumPorcentaje / elementos.size)
+            porcentajePorModulo.add(promedioPorcentaje.toFloat())
+        }
+
+
+
+
+
+
+
+        var ufModulo = agruparUfPorModulo(modulosUFVisorAsistenciaList)
+
+
+
+
+
+
+
+        val porcentajeAlumno = sumaTotal(porcentajePorModulo)
         binding.progressBar.max = 100;
         binding.progressBar.setProgress(0)
         var cont = 0;
@@ -62,7 +99,7 @@ class VisorAsistenciaFragment : Fragment() {
         }
         timer.start()
 
-        val adapter = VisorAsistenciaAdapter(ufList, moduloList)
+        val adapter = VisorAsistenciaAdapter(ufModulo)
         binding.RecyclerView.hasFixedSize()
         binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.RecyclerView.adapter = adapter
@@ -70,10 +107,69 @@ class VisorAsistenciaFragment : Fragment() {
         return root
     }
 
+
+
+    private fun agruparUfPorModulo(
+        modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>?): List<UfConModulo> {
+        val ufsConModulo = mutableMapOf<String, MutableList<ModuloUFVisorAsistencia>>()
+
+        if (modulosUFVisorAsistenciaList != null){
+
+            for (uf in modulosUFVisorAsistenciaList){
+                val nombreModulo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    uf.siglas_uf + " - " + uf.nombre_modulo
+                } else {
+                    uf.siglas_uf + " - " + uf.nombre_modulo
+                }
+
+                if (nombreModulo in ufsConModulo) {
+                    ufsConModulo[nombreModulo]?.add(uf)
+                } else {
+                    ufsConModulo[nombreModulo] = mutableListOf(uf)
+                }
+            }
+        }
+        return ufsConModulo.entries.map { UfConModulo(it.key, it.value) }
+    }
+
+
+    private fun sumaTotal(porcentajePorModulo: ArrayList<Float>): Float {
+        if (porcentajePorModulo.isEmpty()) {
+            return 0f
+        }
+        var suma = 0f
+        for (valor in porcentajePorModulo) {
+            suma += valor.toInt()
+        }
+        return suma / porcentajePorModulo.size
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun asignarNombre (){
+        _binding?.textoNombreUsuario?.text = Login.alumno.nombreAlumno + " " + Login.alumno.apellido1Alumno
+    }
+
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    private suspend fun globalFun(): List<ModuloUFVisorAsistencia>? {
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        return GlobalScope.async {
+            val call = userCepApi.getVisorAistencia(Login.alumno.idAlumno)
+            val response = call.execute()
+            response.body()
+        }.await()
+    }
+
+
+
+
 
 }
 
