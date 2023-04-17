@@ -152,7 +152,7 @@ class FaltasJustificadasAdapter(private val listener: FaltasJustificadasFragment
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
         return GlobalScope.async {
-            val call = userCepApi.getFaltasToShow2(Login.alumno.idAlumno, justificarFalta.idJustificarFaltas)
+            val call = userCepApi.getFaltasToShow2(Login.alumno.idAlumno, justificarFalta.idJustificarFalta)
             val response = call.execute()
             response.body()
         }.await()
