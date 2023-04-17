@@ -14,16 +14,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.DataModel.Modulos
 import com.example.menulateral.R
 import com.example.menulateral.DataModel.Uf
+import com.example.menulateral.DataModel.UfConModulo
+import com.example.menulateral.ui.justificarFalta.UFCheckBoxAdapter
+import org.w3c.dom.Text
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
-class VisorAsistenciaAdapter (private val ufList: MutableList<Uf>, private val moduloList : MutableList<Modulos>):
+class VisorAsistenciaAdapter(
+    private val ufModulo: List<UfConModulo>):
     RecyclerView.Adapter<VisorAsistenciaAdapter.VisorAsistenciaHolder>(), View.OnClickListener {
     //val adapter = UfPercentAdapter()
+
 
     private val layout = R.layout.module_item // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
 
     class VisorAsistenciaHolder(view: View) : RecyclerView.ViewHolder(view) {
         var moduloName: TextView
+        var porcentaje: TextView
         var recyclerViewRellenar: RecyclerView
         var deployModule: ImageView
         var cardview: CardView
@@ -31,6 +39,7 @@ class VisorAsistenciaAdapter (private val ufList: MutableList<Uf>, private val m
 
         init {
             moduloName = view.findViewById(R.id.moduleName)
+            porcentaje = view.findViewById(R.id.porcentaje)
             recyclerViewRellenar = view.findViewById(R.id.recyclerUf)
             recyclerViewRellenar.layoutManager = LinearLayoutManager(view.context)
             deployModule = view.findViewById(R.id.deployModule)
@@ -39,7 +48,8 @@ class VisorAsistenciaAdapter (private val ufList: MutableList<Uf>, private val m
     }
 
     override fun onBindViewHolder(holder: VisorAsistenciaHolder, position: Int) {
-        val modulo = moduloList[position]
+        val uf = ufModulo[position]
+
         holder.cardview.setOnClickListener() {
             if (holder.recyclerViewRellenar.visibility == View.GONE) {
                 // Creamos un objeto Transition que afecte a los cambios en las vistas
@@ -60,7 +70,7 @@ class VisorAsistenciaAdapter (private val ufList: MutableList<Uf>, private val m
                 holder.deployModule.setImageResource(R.drawable.expand_more)
             }
         }
-        bindPackage(holder, modulo)
+        bindPackage(holder, uf)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VisorAsistenciaHolder {
@@ -70,16 +80,46 @@ class VisorAsistenciaAdapter (private val ufList: MutableList<Uf>, private val m
     }
 
     override fun getItemCount(): Int {
-        return moduloList.size
+        return ufModulo.size
     }
 
-    fun bindPackage(holder: VisorAsistenciaHolder, modulo: Modulos) {
+    fun bindPackage(holder: VisorAsistenciaHolder, uf: UfConModulo) {
 
-        holder.moduloName?.text = modulo.siglas
-        //holder.recyclerViewRellenar?.adapter = adapter
+        val adapter = UfPercentAdapter(uf.ufs) //ADAPTER INTERNO DEL CARDVIEW
+
+        holder.moduloName?.text = uf.nombreModulo
+        holder.recyclerViewRellenar?.adapter = adapter
         holder.recyclerViewRellenar.visibility = View.GONE
 
+        var sumaPorcentajes = 0
+        var contador = 0
+        uf.ufs.forEach { item ->
+            sumaPorcentajes += item.porcentaje_asistencia.toInt()
+            contador++
+        }
+
+
+        var porcentajeTotalModulo = if (sumaPorcentajes > contador) {
+            // Si la suma de porcentajes es mayor que el contador, asumimos que son porcentajes
+            (sumaPorcentajes / (contador.toFloat()*100)) * 100
+        } else {
+            // Si la suma de porcentajes es menor o igual al contador, asumimos que son números decimales
+            (sumaPorcentajes / contador) * 100
+        }
+
+        val decimalFormat = DecimalFormat("#.#")
+        decimalFormat.roundingMode = RoundingMode.HALF_UP
+        val porcentajeTruncado = decimalFormat.format(porcentajeTotalModulo).toFloat()
+
+
+
+
+        holder.porcentaje?.text = porcentajeTruncado.toString() + "%"
+
+
     }
+
+
 
     override fun onClick(view: View?) {
         clickListener?.onClick(view)
