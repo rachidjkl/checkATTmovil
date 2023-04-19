@@ -8,6 +8,8 @@
 
     <TextView
         android:id="@+id/text_slideshow"
+        android:text="Faltas pendientes de validar"
+        android:textColor="@color/black"
         android:layout_width="176dp"
         android:layout_height="51dp"
         android:layout_marginStart="8dp"

@@ -6,6 +6,7 @@
     import android.widget.TextView
     import androidx.recyclerview.widget.RecyclerView
     import com.example.menulateral.DataModel.FaltaToShow
+<<<<<<< HEAD
     import com.example.menulateral.DataModel.ModuloUFVisorAsistencia
     import com.example.menulateral.R
     import com.example.menulateral.DataModel.Uf
@@ -18,16 +19,27 @@
         }
 
         private val layout = R.layout.item_uf_percent
+=======
+    import com.example.menulateral.R
+    import com.example.menulateral.DataModel.Uf
+
+    class UfPercentAdapter( private val faltas: List<FaltaToShow>):
+        RecyclerView.Adapter <UfPercentAdapter.UfViewHolder> (){
+
+        private val layout = R.layout.item_uf_color
+>>>>>>> definitivoo
         private var clickListener: View.OnClickListener? = null
 
         class UfViewHolder (val view: View): RecyclerView.ViewHolder(view){
-            var ufName: TextView
-            var ufPercentage: TextView
+            var hourAbsence: TextView
+            var moduleNameAbsence: TextView
+            var ufNameColorRectangle: TextView
 
 
             init {
-                ufName = view.findViewById(R.id.ufName)
-                ufPercentage = view.findViewById(R.id.ufPercentage)
+                hourAbsence = view.findViewById(R.id.hourAbsenceColorRectangle)
+                moduleNameAbsence = view.findViewById(R.id.moduleColorRectangle)
+                ufNameColorRectangle = view.findViewById(R.id.ufNameColorRectangle)
             }
         }
 
@@ -36,14 +48,15 @@
             return UfViewHolder(view)
         }
         override fun onBindViewHolder(holder: UfViewHolder, position: Int) {
-            val uf = ufList [position]
+            val uf = faltas [position]
             bindPackage(holder, uf)
         }
 
         override fun getItemCount(): Int {
-            return ufList.size
+            return faltas.size
         }
 
+<<<<<<< HEAD
         fun bindPackage(holder: UfViewHolder, uf: ModuloUFVisorAsistencia){
             holder.ufName?.text = uf.nombre_uf
             holder.ufPercentage?.text = (uf.porcentaje_asistencia.toString()) + "%"
@@ -51,6 +64,16 @@
         }
 
         private fun sumaPorcentajes(){
+=======
+        fun bindPackage(holder: UfViewHolder, falta: FaltaToShow){
+
+            val horaInicio = if (falta.hora_inicio.length > 5) falta.hora_inicio.substring(0, 5) else falta.hora_inicio
+            val horaFin = if (falta.hora_fin.length > 5) falta.hora_fin.substring(0, 5) else falta.hora_fin
+
+            holder.hourAbsence?.text = horaInicio + "-" + horaFin
+            holder.moduleNameAbsence?.text = falta.siglas_uf
+            holder.ufNameColorRectangle?.text = falta.nombreUf
+>>>>>>> definitivoo
 
         }
 

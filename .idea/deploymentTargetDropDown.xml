@@ -7,11 +7,19 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
+<<<<<<< HEAD
             <value value="C:\Users\Marc\.android\avd\Pixel_5_API_33.avd" />
+=======
+            <value value="C:\Users\joelm\.android\avd\Pixel_5_API_30.avd" />
+>>>>>>> definitivoo
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
+<<<<<<< HEAD
     <timeTargetWasSelectedWithDropDown value="2023-04-14T13:02:39.649768Z" />
+=======
+    <timeTargetWasSelectedWithDropDown value="2023-04-14T18:41:09.779916300Z" />
+>>>>>>> definitivoo
   </component>
 </project>

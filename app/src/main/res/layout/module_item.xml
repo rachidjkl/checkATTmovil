@@ -34,15 +34,17 @@
 
                 <TextView
                     android:id="@+id/moduleName"
-                    android:layout_width="0dp"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="MO3- Base de datos"
+                    android:layout_marginStart="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="MO3- Base de datos muy larga que se va a truncar con puntos suspensivos"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/porcentaje"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

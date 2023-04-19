@@ -17,6 +17,8 @@
             android:layout_marginLeft="4dp"
             android:layout_weight="0.90"
             android:text="UF1 Base de datos"
+            android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="13sp" />
 

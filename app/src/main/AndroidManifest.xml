@@ -36,7 +36,7 @@
 
             android:exported="false"
             android:label="@string/app_name"
-            android:theme="@style/Theme.MenuLateral.NoActionBar"></activity>
+            android:theme="@style/Theme.MenuLateral.NoActionBar" />
     </application>
 
 </manifest>

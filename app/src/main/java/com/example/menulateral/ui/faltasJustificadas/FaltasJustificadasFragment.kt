@@ -9,25 +9,46 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.menulateral.ApiAcces.ApiGets
+import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.Faltas
-import com.example.menulateral.DataModel.JustificarFalta
+import com.example.menulateral.DataModel.FaltaJustificada
+import com.example.menulateral.DataModel.FaltaJustificada2
+import com.example.menulateral.DataModel.FaltaToShow
+import com.example.menulateral.Login
 import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentFaltasJustificadasBinding
 import com.example.menulateral.extension.extensionFaltasJustificadas
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 
 class FaltasJustificadasFragment : Fragment() {
 
     private var _binding: FragmentFaltasJustificadasBinding? = null
+    private var faltaJustificadaListValidada: MutableList<FaltaJustificada2>? = null
+    private var faltaJustificadaListPendiente: MutableList<FaltaJustificada2>? = null
+    private var faltaJustificadaListRechazada: MutableList<FaltaJustificada2>? = null
+
+    init {
+        main()
+    }
+
+    fun main() = runBlocking {
+        faltaJustificadaListValidada = cargarListFaltaJustificada(Login.alumno.idAlumno, 1)
+        faltaJustificadaListPendiente = cargarListFaltaJustificada(Login.alumno.idAlumno, 0)
+        faltaJustificadaListRechazada = cargarListFaltaJustificada(Login.alumno.idAlumno, -1)
+    }
 
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    fun onItemClick(position: Int) {
+    fun onItemClick(position: Int, infoFalta: MutableList<FaltaToShow>, infoJustificante: MutableList<FaltaJustificada2>) {
         //-------------------------------------------------Cambiar fragment-------------------------------------------//
-        val fragmentoPasarLista = extensionFaltasJustificadas()
+        val fragmentoPasarLista = extensionFaltasJustificadas(infoFalta, infoJustificante.get(position))
         val fragmentManager = requireActivity().supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         // Agregar el fragmento actual a la pila de fragmentos
@@ -37,24 +58,6 @@ class FaltasJustificadasFragment : Fragment() {
 
         //------------------------------------------------------------------------------------------------------------//
     }
-
-
-    val faltasList = mutableListOf<Faltas>(
-        Faltas(1, 101, 1, "09:00"),
-        Faltas(2, 102, 1, "11:00"),
-        Faltas(3, 103, 1, "12:00"),
-        Faltas(4, 101, 2, "13:00"),
-        Faltas(5, 102, 2, "14:00"),
-        Faltas(6, 103, 2, "08:00")
-    )
-
-    val justificarFaltasList = mutableListOf<JustificarFalta>(
-        JustificarFalta(1, "Medico", "123", "UF1 - Introducción a la programación", "08"),
-        JustificarFalta(2, "Pedo", "124", "UF2 - Programación orientada a objetos", "09"),
-        JustificarFalta(3, "Examen Conducir", "125", "UF3 - Estructuras de datos y algoritmos", "10"),
-        JustificarFalta(4, "Sida", "126", "UF4 - Bases de datos y SQL", "11")
-    )
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,11 +81,17 @@ class FaltasJustificadasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = FaltasJustificadasAdapter(this,faltasList, justificarFaltasList, 0)
-        binding.RecyclerView.hasFixedSize()
-        binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
-        binding.RecyclerView.adapter = adapter
-        adapter
+
+
+        if(faltaJustificadaListPendiente != null){
+            binding.RecyclerView.visibility = View.VISIBLE
+            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment, faltaJustificadaListPendiente, 0)
+            binding.RecyclerView.hasFixedSize()
+            binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+            binding.RecyclerView.adapter = adapter
+        }else{
+            binding.RecyclerView.visibility = View.GONE
+        }
 
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.alumno_ideal) // Cargar imagen desde drawable
         val diameter = 200 // Diámetro del círculo
@@ -112,51 +121,43 @@ class FaltasJustificadasFragment : Fragment() {
         val defaultTab = binding.tabs.getTabAt(0)
         defaultTab?.select()
 
-        defaultTab?.let {
-            val position = it.position
-            when (position) {
-                0 -> {
-                    val adapter = FaltasJustificadasAdapter(this,faltasList, justificarFaltasList, 0)
-                    binding.RecyclerView.hasFixedSize()
-                    binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
-                    binding.RecyclerView.adapter = adapter
-                }
-                1 -> {
-                    val adapter = FaltasJustificadasAdapter(this,faltasList, justificarFaltasList, 1)
-                    binding.RecyclerView.hasFixedSize()
-                    binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
-                    binding.RecyclerView.adapter = adapter
-                }
-                2 -> {
-                    val adapter = FaltasJustificadasAdapter(this,faltasList, justificarFaltasList, -1)
-                    binding.RecyclerView.hasFixedSize()
-                    binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
-                    binding.RecyclerView.adapter = adapter
-                }
-            }
-        }
-
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 val position = tab.position
                 when (position) {
                     0 -> {
-                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, justificarFaltasList, 0)
-                        binding.RecyclerView.hasFixedSize()
-                        binding.RecyclerView.layoutManager = LinearLayoutManager(context)
-                        binding.RecyclerView.adapter = adapter
+                        if(faltaJustificadaListPendiente != null){
+                            binding.RecyclerView.visibility = View.VISIBLE
+                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment, faltaJustificadaListPendiente, 0)
+                            binding.RecyclerView.hasFixedSize()
+                            binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+                            binding.RecyclerView.adapter = adapter
+                        }else{
+                            binding.RecyclerView.visibility = View.GONE
+                        }
+
                     }
                     1 -> {
-                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, justificarFaltasList, 1)
-                        binding.RecyclerView.hasFixedSize()
-                        binding.RecyclerView.layoutManager = LinearLayoutManager(context)
-                        binding.RecyclerView.adapter = adapter
+                        if(faltaJustificadaListValidada != null){
+                            binding.RecyclerView.visibility = View.VISIBLE
+                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment, faltaJustificadaListValidada, 1)
+                            binding.RecyclerView.hasFixedSize()
+                            binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+                            binding.RecyclerView.adapter = adapter
+                        }else{
+                            binding.RecyclerView.visibility = View.GONE
+                        }
                     }
                     2 -> {
-                        val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment,faltasList, justificarFaltasList, -1)
-                        binding.RecyclerView.hasFixedSize()
-                        binding.RecyclerView.layoutManager = LinearLayoutManager(context)
-                        binding.RecyclerView.adapter = adapter
+                        if(faltaJustificadaListRechazada != null){
+                            binding.RecyclerView.visibility = View.VISIBLE
+                            val adapter = FaltasJustificadasAdapter(this@FaltasJustificadasFragment, faltaJustificadaListRechazada, -1)
+                            binding.RecyclerView.hasFixedSize()
+                            binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+                            binding.RecyclerView.adapter = adapter
+                        }else{
+                            binding.RecyclerView.visibility = View.GONE
+                        }
                     }
                 }
             }
@@ -170,16 +171,16 @@ class FaltasJustificadasFragment : Fragment() {
     }
 
 
-    fun cargarListFaltasJustificada(){
-        /*SELECT jf.motivo_falta
-        FROM Justificar_faltas jf
-        INNER JOIN Falta f ON jf.id_justificar_falta = f.id_justificar_falta
-        INNER JOIN Pasar_lista pl ON f.id_pasar_lista = pl.id_pasar_lista
-        INNER JOIN Alumno a ON pl.id_alumno = a.id_alumno
-        WHERE a.id_alumno = 20001;*/
+    suspend fun cargarListFaltaJustificada(alumno : Int, estado : Int):MutableList<FaltaJustificada2>?{
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        return GlobalScope.async {
+            val call = userCepApi.getFaltaJustificada(alumno,estado)
+            val response = call.execute()
+            response.body()
+        }.await()
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

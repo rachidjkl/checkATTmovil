@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="joel@politecnics_barcelona"
+            android:text="rg@politecnics.barcelona"
             android:inputType="textEmailAddress">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -67,7 +67,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="12345678B"
+            android:text="19916794J"
             android:inputType="textPassword">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -101,16 +101,5 @@
         app:layout_constraintVertical_bias="0.879">
 
     </TextView>
-
-    <!--    <ListView-->
-<!--        android:id="@+id/listUsers"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="3"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.943"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
