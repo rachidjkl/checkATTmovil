@@ -84,13 +84,9 @@ class VisorAsistenciaAdapter(
 
     fun bindPackage(holder: VisorAsistenciaHolder, uf: UfConModulo) {
 
-<<<<<<< HEAD
-        val adapter = UfPercentAdapter(uf.ufs) //ADAPTER INTERNO DEL CARDVIEW
-=======
 
 
         val adapter = AdapterAux(uf.ufs) //ADAPTER INTERNO DEL CARDVIEW
->>>>>>> definitivoo
 
         holder.moduloName?.text = uf.nombreModulo
         holder.recyclerViewRellenar?.adapter = adapter
