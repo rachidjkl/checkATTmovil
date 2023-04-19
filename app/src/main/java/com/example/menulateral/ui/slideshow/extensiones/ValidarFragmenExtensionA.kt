@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.menulateral.DataModel.Alumno
 import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentSlideshowBinding
 import com.example.menulateral.databinding.FragmentValidarFragmenExtensionABinding
@@ -16,7 +17,7 @@ import com.example.menulateral.ui.slideshow.SlideshowViewModel
 import com.google.android.material.tabs.TabLayout
 
 
-class ValidarFragmenExtensionA : Fragment() {
+class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
 
     private var _binding: FragmentValidarFragmenExtensionABinding? = null
     private val binding get() = _binding!!
@@ -34,6 +35,8 @@ class ValidarFragmenExtensionA : Fragment() {
 
         _binding = FragmentValidarFragmenExtensionABinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.nombreTutor.text = alumno.nombreAlumno+" "+alumno.apellido1Alumno 
 
         return root
     }

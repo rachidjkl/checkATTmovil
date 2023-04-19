@@ -70,7 +70,7 @@ class Login : AppCompatActivity() {
 
 
             if (validar()) {
-                if (userLogin!!.tipoUser == 2){
+                if (userLogin!!.tipoUser == 1){
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
