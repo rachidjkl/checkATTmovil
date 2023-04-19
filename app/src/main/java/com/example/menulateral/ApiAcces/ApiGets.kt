@@ -4,7 +4,6 @@ package com.example.menulateral.ApiAcces
 import com.example.menulateral.DataModel.FaltaJustificada
 import com.example.menulateral.DataModel.Alumno
 import com.example.menulateral.DataModel.FaltaToShow
-import com.example.menulateral.DataModel.ModuloUFVisorAsistencia
 import com.example.menulateral.DataModel.UserCep
 import com.example.menulateral.DataModel.*
 import retrofit2.Call
@@ -23,24 +22,13 @@ interface ApiGets {
 
     @GET("api/Justificar_faltas/Validada/idAlumno/{idAlumno}/estadoFalta/{estadoFalta}")
     fun getFaltaJustificada(@Path("idAlumno") alumno: Int, @Path("estadoFalta") estadoFalta: Int): Call<MutableList<FaltaJustificada2>>
-    
+
     @GET("api/Alumnoes/idUserCep/{idUserCep}")
     fun getAlumno(@Path("idUserCep") idUserCep: Int): Call<Alumno>
 
     @GET("api/Faltas/FaltasToShow/idAlumno/{idAlumno}")
     fun getFaltasToShow(@Path("idAlumno") idAlumno: Int): Call<List<FaltaToShow>>
 
-<<<<<<< HEAD
-    @GET("api/Faltas/FaltasToShowTotales/idAlumno/{idAlumno}")
-    fun getFaltasToShowTotales(@Path("idAlumno") idAlumno: Int): Call<List<FaltaToShow>>
-
-    @POST("api/Faltas/SetFalta/idFalta/{idFalta}/idFaltaJustificada/{idFaltaJustificada}")
-    fun updaateFaltas(@Path("idFalta") idFalta: Int, @Path("idFaltaJustificada") idFaltaJustificada: Int): Call<Void>
-
-    @GET("api/Modulos/ModuloUf/idAlumno/{idAlumno}")
-    fun getVisorAistencia(@Path("idAlumno") idAlumno: Int): Call<List<ModuloUFVisorAsistencia>>
-
-=======
     @GET("api/Faltas/FaltasToShow2/idAlumno/{idAlumno}/idJustificarFalta/{idJustificarFalta}")
     fun getFaltasToShow2(@Path("idAlumno") idAlumno: Int, @Path("idJustificarFalta") idJustificarFalta: Int): Call<List<FaltaToShow>>
 
@@ -55,5 +43,4 @@ interface ApiGets {
 
     @GET("api/Modulos/ModuloUf/idAlumno/{idAlumno}")
     fun getVisorAistencia(@Path("idAlumno") idAlumno: Int): Call<List<ModuloUFVisorAsistencia>>
->>>>>>> definitivoo
 }
