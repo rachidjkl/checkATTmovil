@@ -13,12 +13,15 @@ import com.example.menulateral.DataModel.Uf
 class AdapterAux( private val ufList: List<ModuloUFVisorAsistencia>):
     RecyclerView.Adapter <AdapterAux.UfViewHolder> (){
 
+
     companion object{
         var selectedUF = mutableListOf<ModuloUFVisorAsistencia>()
     }
 
     private val layout = R.layout.item_uf_percent
     private var clickListener: View.OnClickListener? = null
+    private val sortedList = ufList.sortedBy { it.nombre_uf }
+
 
     class UfViewHolder (val view: View): RecyclerView.ViewHolder(view){
         var ufName: TextView
@@ -36,23 +39,22 @@ class AdapterAux( private val ufList: List<ModuloUFVisorAsistencia>):
         return UfViewHolder(view)
     }
     override fun onBindViewHolder(holder: UfViewHolder, position: Int) {
-        val uf = ufList [position]
+
+        val uf = sortedList [position]
         bindPackage(holder, uf)
     }
 
     override fun getItemCount(): Int {
-        return ufList.size
+        return sortedList.size
     }
 
     fun bindPackage(holder: UfViewHolder, uf: ModuloUFVisorAsistencia){
+
         holder.ufName?.text = uf.nombre_uf
         holder.ufPercentage?.text = (uf.porcentaje_asistencia.toString()) + "%"
 
     }
 
-    private fun sumaPorcentajes(){
-
-    }
 
 
 

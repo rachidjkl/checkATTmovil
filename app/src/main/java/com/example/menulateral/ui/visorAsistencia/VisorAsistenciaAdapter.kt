@@ -84,6 +84,8 @@ class VisorAsistenciaAdapter(
 
     fun bindPackage(holder: VisorAsistenciaHolder, uf: UfConModulo) {
 
+
+
         val adapter = AdapterAux(uf.ufs) //ADAPTER INTERNO DEL CARDVIEW
 
         holder.moduloName?.text = uf.nombreModulo
