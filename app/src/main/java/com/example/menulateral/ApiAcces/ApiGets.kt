@@ -22,7 +22,7 @@ interface ApiGets {
 
     @GET("api/Justificar_faltas/Validada/idAlumno/{idAlumno}/estadoFalta/{estadoFalta}")
     fun getFaltaJustificada(@Path("idAlumno") alumno: Int, @Path("estadoFalta") estadoFalta: Int): Call<MutableList<FaltaJustificada2>>
-
+    
     @GET("api/Alumnoes/idUserCep/{idUserCep}")
     fun getAlumno(@Path("idUserCep") idUserCep: Int): Call<Alumno>
 

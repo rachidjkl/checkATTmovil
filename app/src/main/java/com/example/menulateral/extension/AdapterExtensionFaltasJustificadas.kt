@@ -20,10 +20,6 @@ import com.example.menulateral.ui.justificarFalta.UFCheckBoxAdapter
 
 class AdapterExtensionFaltasJustificadas (private val faltasfecha: MutableList<FaltasPorFecha>):
     RecyclerView.Adapter<AdapterExtensionFaltasJustificadas.AdapterExtensionFaltasJustificadasHolder>(), View.OnClickListener {
-<<<<<<< HEAD
-    //val adapter = UfPercentAdapter(ufList)
-=======
->>>>>>> definitivoo
 
     private val layout = R.layout.card_view_extension_falta_judtificada // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
@@ -81,15 +77,10 @@ class AdapterExtensionFaltasJustificadas (private val faltasfecha: MutableList<F
 
     fun bindPackage(holder: AdapterExtensionFaltasJustificadasHolder, faltafecha: FaltasPorFecha) {
 
-<<<<<<< HEAD
-        holder.moduloName?.text = modulo.siglas
-        //holder.recyclerViewRellenar?.adapter = adapter
-=======
         val adapter = UfPercentAdapter(faltafecha.faltas)
 
         holder.moduloName?.text = faltafecha.fecha.toString()
         holder.recyclerViewRellenar?.adapter = adapter
->>>>>>> definitivoo
         holder.recyclerViewRellenar.visibility = View.GONE
 
     }
