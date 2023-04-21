@@ -29,7 +29,7 @@ class AdapterExtensionFaltasJustificadas (private val faltasfecha: MutableList<F
 
         init {
             moduloName = view.findViewById(R.id.alumnName)
-            recyclerViewRellenar = view.findViewById(R.id.recyclerUf)
+            recyclerViewRellenar = view.findViewById(R.id.recyclerUfColorRectangle)
             recyclerViewRellenar.layoutManager = LinearLayoutManager(view.context)
             deployModule = view.findViewById(R.id.deployModuleColorRectangle)
             cardview = view.findViewById(R.id.cardView1)

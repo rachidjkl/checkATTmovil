@@ -16,7 +16,7 @@ class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChe
     }
 
 
-    private val layout = R.layout.item_uf_checkbox // especificamos en layout
+    private val layout = R.layout.item_uf_checkbox2 // especificamos en layout
     private var clickListener: View.OnClickListener? = null
 
     class UfViewHolder (val view: View): RecyclerView.ViewHolder(view){

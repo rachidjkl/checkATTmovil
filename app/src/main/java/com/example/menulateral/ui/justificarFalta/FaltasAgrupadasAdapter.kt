@@ -3,12 +3,15 @@ package com.example.menulateral.ui.justificarFalta
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.R
+import com.example.menulateral.DataModel.Uf
 
-class FaltasAgrupadasAdapter(private val faltas: List<FaltaToShow>, private val isChecked: Boolean):
+class FaltasAgrupadasAdapter
+    (private val faltas: List<FaltaToShow>, private val isChecked: Boolean):
     RecyclerView.Adapter<FaltasAgrupadasAdapter.UfViewHolder>(){
 
     companion object{
@@ -23,13 +26,13 @@ class FaltasAgrupadasAdapter(private val faltas: List<FaltaToShow>, private val 
         var hourAbsence: TextView
         var moduleNameAbsence: TextView
         var ufNameCheckBox: TextView
-
+        var checkBoxHourAbsence: CheckBox
 
         init {
             hourAbsence = view.findViewById(R.id.hourAbsence)
             moduleNameAbsence = view.findViewById(R.id.moduleNameAbsence)
             ufNameCheckBox = view.findViewById(R.id.ufNameCheckBox)
-
+            checkBoxHourAbsence = view.findViewById(R.id.checkBoxHourAbsence)
         }
     }
 
@@ -43,7 +46,18 @@ class FaltasAgrupadasAdapter(private val faltas: List<FaltaToShow>, private val 
 
         bindPackage(holder, falta)
 
-
+        // Marca el checkbox al hacer clic en un elemento de la lista
+        holder.itemView.setOnClickListener {
+            holder.checkBoxHourAbsence.isChecked = !holder.checkBoxHourAbsence.isChecked
+        }
+        // Agrega o quita el objeto seleccionado de la lista según el estado del CheckBox
+        holder.checkBoxHourAbsence.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                selectedFaltas.add(falta)
+            } else {
+                selectedFaltas.remove(falta)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -58,7 +72,7 @@ class FaltasAgrupadasAdapter(private val faltas: List<FaltaToShow>, private val 
         holder.hourAbsence?.text = horaInicio + "-" + horaFin
         holder.moduleNameAbsence?.text = falta.siglas_uf
         holder.ufNameCheckBox?.text = falta.nombreUf
-
+        holder.checkBoxHourAbsence.isChecked = isChecked
     }
 
 }

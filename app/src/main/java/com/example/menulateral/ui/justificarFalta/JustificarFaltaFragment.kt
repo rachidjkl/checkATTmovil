@@ -113,7 +113,7 @@ class JustificarFaltaFragment : Fragment() {
             //llamamos a la corrutina que llamará a la api
             callCreateFaltaApi(faltaJustificada)
 
-            UFCheckBoxAdapter.selectedFaltas.forEach {
+            FaltasAgrupadasAdapter.selectedFaltas.forEach {
                 updateApi(it.idFalta, idFaltaJustificada)
             }
             if (!updateExit){
@@ -121,7 +121,7 @@ class JustificarFaltaFragment : Fragment() {
                 updateExit == true
             }else{
                 Toast.makeText(requireActivity(), "Falta Justificada Enviada", Toast.LENGTH_SHORT).show()
-                UFCheckBoxAdapter.selectedFaltas.clear()
+                FaltasAgrupadasAdapter.selectedFaltas.clear()
 
             }
 
