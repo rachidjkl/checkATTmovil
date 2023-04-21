@@ -16,7 +16,7 @@ interface ApiGets {
         val BASE_URL = "http://abp-politecnics.com/2023/dam01/"
     }
 
-    @POST("api/Usuarios_CEP/email/{email}")
+    @POST("api/Usuarios_CEP/email")
     fun getUsuarioCep(@Body email: String): Call<UserCep>
 
 
