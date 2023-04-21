@@ -19,7 +19,6 @@ interface ApiGets {
     @POST("api/Usuarios_CEP/email")
     fun getUsuarioCep(@Body email: String): Call<UserCep>
 
-
     @GET("api/Justificar_faltas/Validada/idAlumno/{idAlumno}/estadoFalta/{estadoFalta}")
     fun getFaltaJustificada(@Path("idAlumno") alumno: Int, @Path("estadoFalta") estadoFalta: Int): Call<MutableList<FaltaJustificada2>>
     
