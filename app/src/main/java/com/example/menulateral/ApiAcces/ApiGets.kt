@@ -16,7 +16,7 @@ interface ApiGets {
         val BASE_URL = "http://abp-politecnics.com/2023/dam01/"
     }
 
-    @POST("api/Usuarios_CEP/email/{email}")
+    @POST("api/Usuarios_CEP/email")
     fun getUsuarioCep(@Body email: String): Call<UserCep>
 
 
@@ -43,4 +43,14 @@ interface ApiGets {
 
     @GET("api/Modulos/ModuloUf/idAlumno/{idAlumno}")
     fun getVisorAistencia(@Path("idAlumno") idAlumno: Int): Call<List<ModuloUFVisorAsistencia>>
+
+    @GET("api/ClasesPers")
+    fun getAllClasses(): Call<List<ClasePers>>
+
+    @GET("api/Modulos/ModuloClase/idClase/{idClase}")
+    fun getModulosClase(@Path("idClase") idClase: Int): Call<List<ModuloClase>>
+
+    @GET("api/UFs/UfModulo/idModulo/{idModulo}")
+    fun getUfModulo(@Path("idModulo") idModulo: Int): Call<List<UFModuloClase>>
+
 }

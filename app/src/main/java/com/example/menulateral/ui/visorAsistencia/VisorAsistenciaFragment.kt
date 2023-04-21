@@ -23,8 +23,6 @@ class VisorAsistenciaFragment : Fragment() {
 
     private var _binding: FragmentVisorAsistenciaBinding? = null
     private var modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>? = null
-    private var nombreUsuario: String = ""
-    private var porcentajeAsistenciaModulo: Float = 0.0F
 
     init {
         main()
