@@ -36,7 +36,7 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
         _binding = FragmentValidarFragmenExtensionABinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.nombreTutor.text = alumno.nombreAlumno+" "+alumno.apellido1Alumno 
+        binding.nombreTutor.text = alumno.nombreAlumno+" "+alumno.apellido1Alumno
 
         return root
     }
