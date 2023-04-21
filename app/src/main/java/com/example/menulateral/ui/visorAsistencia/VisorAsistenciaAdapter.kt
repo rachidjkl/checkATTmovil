@@ -11,12 +11,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.menulateral.DataModel.Modulos
 import com.example.menulateral.R
-import com.example.menulateral.DataModel.Uf
 import com.example.menulateral.DataModel.UfConModulo
-import com.example.menulateral.ui.justificarFalta.UFCheckBoxAdapter
-import org.w3c.dom.Text
 import java.math.RoundingMode
 import java.text.DecimalFormat
 

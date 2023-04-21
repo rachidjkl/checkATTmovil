@@ -17,8 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
-import com.example.menulateral.DataModel.Faltas
-import com.example.menulateral.DataModel.FaltaJustificada
 import com.example.menulateral.DataModel.FaltaJustificada2
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.Login

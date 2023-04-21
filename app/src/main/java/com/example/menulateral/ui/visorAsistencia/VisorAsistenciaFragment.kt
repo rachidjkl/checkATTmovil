@@ -80,7 +80,7 @@ class VisorAsistenciaFragment : Fragment() {
 
 
 
-        val porcentajeAlumno = sumaTotal(porcentajePorModulo)
+        val porcentajeAlumno = 85//sumaTotal(porcentajePorModulo)
         binding.progressBar.max = 100;
         binding.progressBar.setProgress(0)
         var cont = 0;

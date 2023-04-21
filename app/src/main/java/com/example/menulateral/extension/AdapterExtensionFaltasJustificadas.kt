@@ -11,12 +11,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.menulateral.DataModel.FaltaJustificada
 import com.example.menulateral.DataModel.FaltasPorFecha
-import com.example.menulateral.DataModel.Modulos
 import com.example.menulateral.R
-import com.example.menulateral.DataModel.Uf
-import com.example.menulateral.ui.justificarFalta.UFCheckBoxAdapter
 
 class AdapterExtensionFaltasJustificadas (private val faltasfecha: MutableList<FaltasPorFecha>):
     RecyclerView.Adapter<AdapterExtensionFaltasJustificadas.AdapterExtensionFaltasJustificadasHolder>(), View.OnClickListener {
