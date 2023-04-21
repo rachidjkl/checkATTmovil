@@ -11,7 +11,9 @@ import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.UserCep
 import com.example.menulateral.databinding.ActivityLoginBinding
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -22,26 +24,53 @@ class Login : AppCompatActivity() {
     }
 
 
+
+    fun callApiUserCep(email:String) = runBlocking {
+        var userLogged = globalFun1(email)
+        if (userLogged == null){
+            userLogin = UserCep(40001, "ERROR", "1",1)
+            Toast.makeText(this@Login, "Error al consultar la Usercep", Toast.LENGTH_SHORT).show()
+        }else{
+            userLogin = userLogged
+        }
+
+    }
+
+    fun callApiAlumno(idUserCep: Int) = runBlocking {
+        var alumnoLogged = globalFun2(idUserCep)
+        if (alumnoLogged == null){
+            alumno = Alumno(20021,"12345A", "ERROR","");
+            Toast.makeText(this@Login, "Error al consultar el Alumno", Toast.LENGTH_SHORT).show()
+        }else{
+            alumno = alumnoLogged
+        }
+
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        globalFun1(binding.email.editText?.text.toString())
 
-        userLogin = UserCep(40001, "prueba", "1",1);
+
+
         alumno = Alumno(20021,"12345A", "Ana","Ramon");
+
+
         binding.btnLogin.setOnClickListener {
 
-        globalFun1(binding.email.editText?.text.toString())
+            callApiUserCep(binding.email.editText?.text.toString())
+
         if (userLogin.tipoUser == 2){
-            globalFun2(userLogin.idUserCep)
+            callApiAlumno(userLogin.idUserCep)
 
         }
 
 
             if (validar()) {
-                if (userLogin.tipoUser == 2){
+                if (userLogin!!.tipoUser == 1){
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -53,6 +82,7 @@ class Login : AppCompatActivity() {
 
             }
         }
+
     }
 
 
@@ -94,63 +124,29 @@ class Login : AppCompatActivity() {
         return next;
     }
 
-    private fun globalFun1(email :String ){
+    private suspend fun globalFun1(email :String ):UserCep? {
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
-        GlobalScope.launch() {
+        return GlobalScope.async {
             val call = userCepApi.getUsuarioCep(email)
             val response = call.execute()
-            val localUserCep = response.body()
-            if (localUserCep != null) {
-
-                runOnUiThread() {
-                    userLogin.idUserCep = localUserCep.idUserCep
-                    userLogin.correoCep = localUserCep.correoCep
-                    userLogin.contraUserCep = localUserCep.contraUserCep
-                    userLogin.tipoUser = localUserCep.tipoUser
-                }
-
-
-            } else {
-                runOnUiThread() {
-
-                    Toast.makeText(this@Login, "Error al consultar la API", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-
-        }
-
+            response.body()
+        }.await()
     }
-    private fun globalFun2(idUserCep :Int){
+
+
+    private suspend fun globalFun2(idUserCep :Int):Alumno? {
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
-        GlobalScope.launch() {
+        return GlobalScope.async {
             val call = userCepApi.getAlumno(idUserCep)
             val response = call.execute()
-            val localAlumno = response.body()
-            if (localAlumno != null) {
-
-                runOnUiThread() {
-                    alumno.idAlumno = localAlumno.idAlumno
-                    alumno.dniAlumno = localAlumno.dniAlumno
-                    alumno.nombreAlumno = localAlumno.nombreAlumno
-                    alumno.apellido1Alumno = localAlumno.apellido1Alumno
-                }
-
-
-            } else {
-                runOnUiThread() {
-
-                    Toast.makeText(this@Login, "Error al consultar la API 2", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-
-        }
-
+            response.body()
+        }.await()
     }
+
+
 
 }

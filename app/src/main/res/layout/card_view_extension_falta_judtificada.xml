@@ -60,7 +60,7 @@
                     tools:context=".MainActivity3">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerUf"
+                        android:id="@+id/recyclerUfColorRectangle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingRight="6dp"
