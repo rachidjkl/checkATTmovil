@@ -15,7 +15,6 @@
         android:gravity="top|left"
         android:indeterminate="false"
         android:max="100"
-        android:progress="16"
         android:progressDrawable="@drawable/circular_progress"
         android:rotation="148"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,7 +41,7 @@
             android:gravity="center"
             android:text="0"
             android:textAlignment="center"
-            android:textSize="40sp" />
+            android:textSize="40sp"/>
 
         <TextView
             style="@style/estiloTexto"

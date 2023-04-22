@@ -1,6 +1,7 @@
 package com.example.menulateral.ui.VisorAsistenciaProfe
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +60,10 @@ class VisorAsistenciaProfeFragment : Fragment() {
         val spinnerModulos = binding.autoCompleteTextView7
         val spinnerUf = binding.autoCompleteTextView8
 
+        val defaultNombreModulo = binding.autoCompleteTextView7.text.toString()
+        val defaultNombreUf = binding.autoCompleteTextView8.text.toString()
+
+
 
         val adapterClase = ClaseArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, allClases!!)
         spinnerClase.setAdapter(adapterClase)
@@ -66,10 +71,17 @@ class VisorAsistenciaProfeFragment : Fragment() {
 
         spinnerClase.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val selectedClase = parent.getItemAtPosition(position) as ClasePers
-            Toast.makeText(context, "ID del elemento seleccionado: ${selectedClase.idClase}", Toast.LENGTH_SHORT).show()
-            val idClase = selectedClase.idClase
-            val nombreClase = selectedClase.nombreClase
 
+            val idClase = selectedClase.idClase
+
+            val nombreClaseTextView = binding.autoCompleteTextView6
+            nombreClaseTextView.setText(selectedClase.nombreClase, false)
+
+            val nombreModuloDefault = binding.autoCompleteTextView7
+            nombreModuloDefault.setText(defaultNombreModulo, false)
+
+            val nombreUfDefault = binding.autoCompleteTextView8
+            nombreUfDefault.setText(defaultNombreUf, false)
 
             val apiGets = RetrofitClient.getInstance().create(ApiGets::class.java)
             GlobalScope.launch {
@@ -84,14 +96,20 @@ class VisorAsistenciaProfeFragment : Fragment() {
                     Toast.makeText(context, "No modulos encontrados", Toast.LENGTH_SHORT).show()
                 }
             }
-
         }
 
         spinnerModulos.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val selectedModulo = parent.getItemAtPosition(position) as ModuloClase
-
-            Toast.makeText(context, "ID del elemento seleccionado: ${selectedModulo.idModulo}", Toast.LENGTH_SHORT).show()
             val idModulo = selectedModulo.idModulo
+
+
+            val nombreModuloTextView = binding.autoCompleteTextView7
+            nombreModuloTextView.setText(selectedModulo.siglasModulo + " - " + selectedModulo.nombreModulo, false)
+
+            val nombreUfDefault = binding.autoCompleteTextView8
+            nombreUfDefault.setText(defaultNombreUf, false)
+
+
 
             val apiGetsUf = RetrofitClient.getInstance().create(ApiGets::class.java)
             GlobalScope.launch {
@@ -111,9 +129,10 @@ class VisorAsistenciaProfeFragment : Fragment() {
 
         spinnerUf.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val selectedUf = parent.getItemAtPosition(position) as UFModuloClase
-
-            Toast.makeText(context, "ID del elemento seleccionado: ${selectedUf.idUf}", Toast.LENGTH_SHORT).show()
             val idUf = selectedUf.idUf
+
+            val nombreUfTextView = binding.autoCompleteTextView8
+            nombreUfTextView.setText(selectedUf.nombreUf, false)
 
             val apiGetsAlumnos = RetrofitClient.getInstance().create(ApiGets::class.java)
             GlobalScope.launch {
@@ -125,34 +144,37 @@ class VisorAsistenciaProfeFragment : Fragment() {
                         binding.RecyclerViewAlumnos.hasFixedSize()
                         binding.RecyclerViewAlumnos.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerViewAlumnos.adapter = adapter
+
+
+                        val porcentajeTotal = alumnosUf?.sumByDouble { it.porcentajeAsistencia.toDouble() }
+
+
+
+                        binding.progressBar.max = 100;
+                        binding.progressBar.setProgress(0)
+                        var cont = 0;
+                        val timer = object: CountDownTimer(15000, 5) {
+                            override fun onTick(millisUntilFinished: Long) {
+                                if (cont < porcentajeTotal!!){
+                                    var aux = binding.text.text.toString()
+                                    binding.text.text = (aux.toInt() + 1).toString()
+                                    binding.progressBar.setProgress(binding.progressBar.progress +1)
+                                    cont ++
+                                }
+                            }
+                            override fun onFinish() {
+
+                            }
+                        }
+                        timer.start()
                     }
+
+
                 } else {
                     Toast.makeText(context, "No UF encontradas", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-
-        /**PARA CALCULAR EL PORCENTAJE
-        var sumaPorcentajes = 0
-        var contador = 0
-        uf.ufs.forEach { item ->
-            sumaPorcentajes += item.porcentaje_asistencia.toInt()
-            contador++
-        }
-
-        var porcentajeTotalModulo = if (sumaPorcentajes > contador) {
-        // Si la suma de porcentajes es mayor que el contador, asumimos que son porcentajes
-        (sumaPorcentajes / (contador.toFloat()*100)) * 100
-        } else {
-        // Si la suma de porcentajes es menor o igual al contador, asumimos que son números decimales
-        (sumaPorcentajes / contador) * 100
-        }
-
-        val decimalFormat = DecimalFormat("#.#")
-        decimalFormat.roundingMode = RoundingMode.HALF_UP
-        val porcentajeTruncado = decimalFormat.format(porcentajeTotalModulo).toFloat()
-        **/
-
 
         return root
     }
