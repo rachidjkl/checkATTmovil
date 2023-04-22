@@ -11,17 +11,16 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.menulateral.DataModel.Modulos
+import com.example.menulateral.DataModel.*
 import com.example.menulateral.R
-import com.example.menulateral.DataModel.Uf
-import com.example.menulateral.DataModel.UfConModulo
 import com.example.menulateral.ui.justificarFalta.UFCheckBoxAdapter
 import org.w3c.dom.Text
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
 class AdapterVisorAsistenciaProfe(
-    private val ufModulo: List<UfConModulo>):
+    private val ufAlumno: List<AlumnoUf>
+):
     RecyclerView.Adapter<AdapterVisorAsistenciaProfe.VisorAsistenciaHolder>(), View.OnClickListener {
 
 
@@ -29,47 +28,20 @@ class AdapterVisorAsistenciaProfe(
     private var clickListener: View.OnClickListener? = null
 
     class VisorAsistenciaHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var moduloName: TextView
+        var alumnName: TextView
         var porcentaje: TextView
-        var recyclerViewRellenar: RecyclerView
-        var deployModule: ImageView
-        var cardview: CardView
 
 
         init {
-            moduloName = view.findViewById(R.id.moduleName)
+            alumnName = view.findViewById(R.id.alumnName)
             porcentaje = view.findViewById(R.id.porcentaje)
-            recyclerViewRellenar = view.findViewById(R.id.recyclerUf)
-            recyclerViewRellenar.layoutManager = LinearLayoutManager(view.context)
-            deployModule = view.findViewById(R.id.deployModule)
-            cardview = view.findViewById(R.id.cardView1)
         }
     }
 
     override fun onBindViewHolder(holder: VisorAsistenciaHolder, position: Int) {
-        val uf = ufModulo[position]
+        val alumno = ufAlumno[position]
 
-        holder.cardview.setOnClickListener() {
-            if (holder.recyclerViewRellenar.visibility == View.GONE) {
-                // Creamos un objeto Transition que afecte a los cambios en las vistas
-                val transition = ChangeBounds()
-
-                // Indicamos el tiempo de duración de la animación
-                transition.duration = 300
-
-                // Indicamos que se animen los cambios de manera fluida
-                transition.interpolator = AccelerateDecelerateInterpolator()
-
-                // Llamamos a la función beginDelayedTransition con nuestro ViewGroup y nuestro Transition
-                TransitionManager.beginDelayedTransition(holder.cardview as ViewGroup, transition)
-                holder.recyclerViewRellenar.visibility = View.VISIBLE
-                holder.deployModule.setImageResource(R.drawable.expand_less)
-            } else {
-                holder.recyclerViewRellenar.visibility = View.GONE
-                holder.deployModule.setImageResource(R.drawable.expand_more)
-            }
-        }
-        bindPackage(holder, uf)
+        bindPackage(holder, alumno)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VisorAsistenciaHolder {
@@ -79,43 +51,15 @@ class AdapterVisorAsistenciaProfe(
     }
 
     override fun getItemCount(): Int {
-        return ufModulo.size
+        return ufAlumno.size
     }
 
-    fun bindPackage(holder: VisorAsistenciaHolder, uf: UfConModulo) {
+    fun bindPackage(holder: VisorAsistenciaHolder, alumnoUf: AlumnoUf) {
 
 
+        holder.alumnName?.text = alumnoUf.nombreAlumno + " " + alumnoUf.apellido1_alumno + " " + alumnoUf.apellido2_alumno
 
-        val adapter = AdapterAux(uf.ufs) //ADAPTER INTERNO DEL CARDVIEW
-
-        holder.moduloName?.text = uf.nombreModulo
-        holder.recyclerViewRellenar?.adapter = adapter
-        holder.recyclerViewRellenar.visibility = View.GONE
-
-        var sumaPorcentajes = 0
-        var contador = 0
-        uf.ufs.forEach { item ->
-            sumaPorcentajes += item.porcentaje_asistencia.toInt()
-            contador++
-        }
-
-
-        var porcentajeTotalModulo = if (sumaPorcentajes > contador) {
-            // Si la suma de porcentajes es mayor que el contador, asumimos que son porcentajes
-            (sumaPorcentajes / (contador.toFloat()*100)) * 100
-        } else {
-            // Si la suma de porcentajes es menor o igual al contador, asumimos que son números decimales
-            (sumaPorcentajes / contador) * 100
-        }
-
-        val decimalFormat = DecimalFormat("#.#")
-        decimalFormat.roundingMode = RoundingMode.HALF_UP
-        val porcentajeTruncado = decimalFormat.format(porcentajeTotalModulo).toFloat()
-
-
-
-
-        holder.porcentaje?.text = porcentajeTruncado.toString() + "%"
+        holder.porcentaje?.text = alumnoUf.porcentajeAsistencia.toString()
 
 
     }

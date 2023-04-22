@@ -53,4 +53,7 @@ interface ApiGets {
     @GET("api/UFs/UfModulo/idModulo/{idModulo}")
     fun getUfModulo(@Path("idModulo") idModulo: Int): Call<List<UFModuloClase>>
 
+    @GET("api/Alumno/idUf/{idUf}")
+    fun getAlumnosUf(@Path("idUf") idUf: Int): Call<List<AlumnoUf>>
+
 }

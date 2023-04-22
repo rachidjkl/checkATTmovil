@@ -1,21 +1,19 @@
 package com.example.menulateral.ui.VisorAsistenciaProfe
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
-import com.example.menulateral.DataModel.ClasePers
-import com.example.menulateral.DataModel.ModuloClase
-import com.example.menulateral.DataModel.UFModuloClase
+import com.example.menulateral.DataModel.*
 import com.example.menulateral.databinding.FragmentVisorAsistenciaProfeBinding
+import com.example.menulateral.ui.visorAsistencia.AdapterVisorAsistenciaProfe
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -28,6 +26,7 @@ class VisorAsistenciaProfeFragment : Fragment() {
     private var allClases: List<ClasePers>? = null
     private var moduloClass: List<ModuloClase>? = null
     private var UfModuloClass: List<UFModuloClase>? = null
+    private var alumnosUf: List<AlumnoUf>? = null
 
 
     init {
@@ -69,6 +68,8 @@ class VisorAsistenciaProfeFragment : Fragment() {
             val selectedClase = parent.getItemAtPosition(position) as ClasePers
             Toast.makeText(context, "ID del elemento seleccionado: ${selectedClase.idClase}", Toast.LENGTH_SHORT).show()
             val idClase = selectedClase.idClase
+            val nombreClase = selectedClase.nombreClase
+
 
             val apiGets = RetrofitClient.getInstance().create(ApiGets::class.java)
             GlobalScope.launch {
@@ -107,6 +108,50 @@ class VisorAsistenciaProfeFragment : Fragment() {
             }
 
         }
+
+        spinnerUf.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            val selectedUf = parent.getItemAtPosition(position) as UFModuloClase
+
+            Toast.makeText(context, "ID del elemento seleccionado: ${selectedUf.idUf}", Toast.LENGTH_SHORT).show()
+            val idUf = selectedUf.idUf
+
+            val apiGetsAlumnos = RetrofitClient.getInstance().create(ApiGets::class.java)
+            GlobalScope.launch {
+                val response = apiGetsAlumnos.getAlumnosUf(idUf).execute()
+                if (response.isSuccessful) {
+                    alumnosUf = response.body()
+                    val adapter = alumnosUf?.let { AdapterVisorAsistenciaProfe(it) }
+                    activity?.runOnUiThread {
+                        binding.RecyclerViewAlumnos.hasFixedSize()
+                        binding.RecyclerViewAlumnos.layoutManager = LinearLayoutManager(context)
+                        binding.RecyclerViewAlumnos.adapter = adapter
+                    }
+                } else {
+                    Toast.makeText(context, "No UF encontradas", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        /**PARA CALCULAR EL PORCENTAJE
+        var sumaPorcentajes = 0
+        var contador = 0
+        uf.ufs.forEach { item ->
+            sumaPorcentajes += item.porcentaje_asistencia.toInt()
+            contador++
+        }
+
+        var porcentajeTotalModulo = if (sumaPorcentajes > contador) {
+        // Si la suma de porcentajes es mayor que el contador, asumimos que son porcentajes
+        (sumaPorcentajes / (contador.toFloat()*100)) * 100
+        } else {
+        // Si la suma de porcentajes es menor o igual al contador, asumimos que son números decimales
+        (sumaPorcentajes / contador) * 100
+        }
+
+        val decimalFormat = DecimalFormat("#.#")
+        decimalFormat.roundingMode = RoundingMode.HALF_UP
+        val porcentajeTruncado = decimalFormat.format(porcentajeTotalModulo).toFloat()
+        **/
 
 
         return root
