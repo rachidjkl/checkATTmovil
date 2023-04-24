@@ -130,6 +130,7 @@ class VisorAsistenciaProfeFragment : Fragment() {
         spinnerUf.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val selectedUf = parent.getItemAtPosition(position) as UFModuloClase
             val idUf = selectedUf.idUf
+            binding.text.text = 0.toString()
 
             val nombreUfTextView = binding.autoCompleteTextView8
             nombreUfTextView.setText(selectedUf.nombreUf, false)
@@ -146,7 +147,15 @@ class VisorAsistenciaProfeFragment : Fragment() {
                         binding.RecyclerViewAlumnos.adapter = adapter
 
 
-                        val porcentajeTotal = alumnosUf?.sumByDouble { it.porcentajeAsistencia.toDouble() }
+
+                        val totalListasPasadas = alumnosUf!!.sumBy { it.listasPasadasDeLaClaseTotales }
+                        val porcentajeTotal = if (totalListasPasadas > 0) {
+                            (alumnosUf!!.sumBy { it.asistenciaDelAlumno } / totalListasPasadas.toDouble()) * 100
+                        } else {
+                            0.0 // o cualquier valor que desees establecer en caso de que el denominador sea cero
+                        }
+
+
 
 
 

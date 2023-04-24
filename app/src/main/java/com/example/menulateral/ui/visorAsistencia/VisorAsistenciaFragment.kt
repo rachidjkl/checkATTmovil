@@ -64,19 +64,7 @@ class VisorAsistenciaFragment : Fragment() {
             porcentajePorModulo.add(promedioPorcentaje.toFloat())
         }
 
-
-
-
-
-
-
         var ufModulo = agruparUfPorModulo(modulosUFVisorAsistenciaList)
-
-
-
-
-
-
 
         val porcentajeAlumno = sumaTotal(porcentajePorModulo)
         binding.progressBar.max = 100
