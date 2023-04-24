@@ -8,4 +8,4 @@ data class AlumnoUf(@SerializedName("id_alumno") var idAlumno: Int,
                    @SerializedName("apellido2_alumno") var apellido2_alumno: String,
                     @SerializedName("listasPasadasDeLaClaseTotales") var listasPasadasDeLaClaseTotales: Int,
                     @SerializedName("asistenciaDelAlumno") var asistenciaDelAlumno: Int,
-                    @SerializedName("porcentajeAsistencia") var porcentajeAsistencia: Float)
+                    @SerializedName("porcentajeAsistencia") var porcentajeAsistencia: Double)

@@ -171,7 +171,7 @@ class VisorAsistenciaProfeFragment : Fragment() {
 
 
                 } else {
-                    Toast.makeText(context, "No UF encontradas", Toast.LENGTH_SHORT).show()
+                  //  Toast.makeText(context, "No UF encontradas", Toast.LENGTH_SHORT).show()
                 }
             }
         }

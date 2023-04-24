@@ -79,9 +79,9 @@ class VisorAsistenciaFragment : Fragment() {
 
 
         val porcentajeAlumno = sumaTotal(porcentajePorModulo)
-        binding.progressBar.max = 100;
+        binding.progressBar.max = 100
         binding.progressBar.setProgress(0)
-        var cont = 0;
+        var cont = 0
         val timer = object: CountDownTimer(15000, 5) {
             override fun onTick(millisUntilFinished: Long) {
                 if (cont < porcentajeAlumno){
