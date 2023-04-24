@@ -49,13 +49,15 @@ class Login : AppCompatActivity() {
 
     }
 
+
+
     fun callApiProfe(idUserCep: Int) = runBlocking {
-        var alumnoLogged = globalFun2(idUserCep)
-        if (alumnoLogged == null){
-            alumno = Alumno(20021,"12345A", "ERROR","");
+        var ProfeLogged = globalFun3(idUserCep)
+        if (ProfeLogged == null){
+            profe = Profe(20021,"12345A", "ERROR",55);
             Toast.makeText(this@Login, "Error al consultar el Alumno", Toast.LENGTH_SHORT).show()
         }else{
-            alumno = alumnoLogged
+            profe = ProfeLogged
         }
 
     }
@@ -85,7 +87,7 @@ class Login : AppCompatActivity() {
 
 
             if (validar()) {
-                if (userLogin!!.tipoUser == 1){
+                if (userLogin!!.tipoUser == 2){
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -157,6 +159,17 @@ class Login : AppCompatActivity() {
 
         return GlobalScope.async {
             val call = userCepApi.getAlumno(idUserCep)
+            val response = call.execute()
+            response.body()
+        }.await()
+    }
+
+    private suspend fun globalFun3(idUserCep :Int):Profe? {
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        return GlobalScope.async {
+            val call = userCepApi.getProfesor(idUserCep)
             val response = call.execute()
             response.body()
         }.await()

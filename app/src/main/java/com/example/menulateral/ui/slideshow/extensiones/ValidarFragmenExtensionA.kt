@@ -6,21 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.Alumno
 import com.example.menulateral.DataModel.FaltaJustificada2
 import com.example.menulateral.DataModel.FaltaToShow
-import com.example.menulateral.Login
 import com.example.menulateral.R
-import com.example.menulateral.databinding.FragmentSlideshowBinding
 import com.example.menulateral.databinding.FragmentValidarFragmenExtensionABinding
-import com.example.menulateral.extension.extensionFaltasJustificadas
-import com.example.menulateral.ui.faltasJustificadas.FaltasJustificadasAdapter
-import com.example.menulateral.ui.slideshow.AdapterValidarJustificanteB
-import com.example.menulateral.ui.slideshow.SlideshowViewModel
+import com.example.menulateral.ui.slideshow.AdapterValidarJustificanteA
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -40,9 +34,9 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
     }
 
     fun main() = runBlocking {
-        faltaJustificadaListValidada = cargarListFaltaJustificada(Login.alumno.idAlumno, 1)
-        faltaJustificadaListPendiente = cargarListFaltaJustificada(Login.alumno.idAlumno, 0)
-        faltaJustificadaListRechazada = cargarListFaltaJustificada(Login.alumno.idAlumno, -1)
+        faltaJustificadaListValidada = cargarListFaltaJustificada(alumno.idAlumno, 1)
+        faltaJustificadaListPendiente = cargarListFaltaJustificada(alumno.idAlumno, 0)
+        faltaJustificadaListRechazada = cargarListFaltaJustificada(alumno.idAlumno, -1)
     }
 
 
@@ -92,7 +86,7 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
                     0 -> {
                         if(faltaJustificadaListPendiente != null){
                             binding.RecyclerView.visibility = View.VISIBLE
-                            val adapter = AdapterValidarJustificanteB(this@ValidarFragmenExtensionA, faltaJustificadaListPendiente, 0)
+                            val adapter = AdapterValidarJustificanteA(this@ValidarFragmenExtensionA, faltaJustificadaListPendiente, 0)
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter
@@ -104,7 +98,7 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
                     1 -> {
                         if(faltaJustificadaListValidada != null){
                             binding.RecyclerView.visibility = View.VISIBLE
-                            val adapter = AdapterValidarJustificanteB(this@ValidarFragmenExtensionA, faltaJustificadaListValidada, 1)
+                            val adapter = AdapterValidarJustificanteA(this@ValidarFragmenExtensionA, faltaJustificadaListValidada, 1)
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter
@@ -116,7 +110,7 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
                     2 -> {
                         if(faltaJustificadaListRechazada != null){
                             binding.RecyclerView.visibility = View.VISIBLE
-                            val adapter = AdapterValidarJustificanteB(this@ValidarFragmenExtensionA, faltaJustificadaListRechazada, -1)
+                            val adapter = AdapterValidarJustificanteA(this@ValidarFragmenExtensionA, faltaJustificadaListRechazada, -1)
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter

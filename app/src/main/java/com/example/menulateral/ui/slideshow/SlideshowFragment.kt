@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.menulateral.ApiAcces.ApiGets
+import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.Alumno
 import com.example.menulateral.DataModel.FaltaJustificada2
 import com.example.menulateral.DataModel.FaltaToShow
@@ -18,6 +20,9 @@ import com.example.menulateral.ui.faltasJustificadas.FaltasJustificadasAdapter
 import com.example.menulateral.ui.slideshow.extensiones.ValidarFragmenExtensionA
 import com.example.menulateral.ui.visorAsistencia.AdapterValidarJustificante
 import com.example.menulateral.ui.visorAsistencia.VisorAsistenciaAdapter
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 
 class SlideshowFragment : Fragment() {
 
@@ -25,11 +30,17 @@ class SlideshowFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    val listaAlumnos = arrayListOf(
-        Alumno(1, "12345678A", "Juan", "García"),
-        Alumno(2, "87654321B", "María", "López"),
-        Alumno(3, "11111111C", "Pedro", "Rodríguez")
-    )
+    private var listaAlumnos : MutableList<Alumno>? = null
+
+    init {
+        main()
+    }
+
+    fun main() = runBlocking {
+        listaAlumnos = getAlumnos()
+    }
+
+
 
     fun onItemClick(alumno: Alumno) {
         //-------------------------------------------------Cambiar fragment-------------------------------------------//
@@ -66,5 +77,16 @@ class SlideshowFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private suspend fun getAlumnos(): MutableList<Alumno>? {
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        return GlobalScope.async {
+            val call = userCepApi.getAlumnosClase(10005)
+            val response = call.execute()
+            response.body()
+        }.await()
     }
 }

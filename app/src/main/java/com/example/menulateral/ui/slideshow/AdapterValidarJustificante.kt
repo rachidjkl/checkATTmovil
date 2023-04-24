@@ -12,7 +12,7 @@ import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.R
 import com.example.menulateral.ui.slideshow.SlideshowFragment
 
-class AdapterValidarJustificante (private val listener: SlideshowFragment,private val alumnoList: List<Alumno>):
+class AdapterValidarJustificante (private val listener: SlideshowFragment,private val alumnoList: MutableList<Alumno>?):
     RecyclerView.Adapter<AdapterValidarJustificante.AdapterValidarJustificanteHolder>(), View.OnClickListener {
 
 
@@ -35,12 +35,16 @@ class AdapterValidarJustificante (private val listener: SlideshowFragment,privat
     }
 
     override fun onBindViewHolder(holder: AdapterValidarJustificanteHolder, position: Int) {
-        val alumno = alumnoList[position]
+        val alumno = alumnoList?.get(position)
         holder.cardView.setOnClickListener(){
-            listener.onItemClick(alumno)
+            if (alumno != null) {
+                listener.onItemClick(alumno)
+            }
         }
 
-        bindPackage(holder, alumno)
+        if (alumno != null) {
+            bindPackage(holder, alumno)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterValidarJustificanteHolder {
@@ -50,7 +54,7 @@ class AdapterValidarJustificante (private val listener: SlideshowFragment,privat
     }
 
     override fun getItemCount(): Int {
-        return alumnoList.size
+        return alumnoList!!.size
     }
 
     fun bindPackage(holder: AdapterValidarJustificanteHolder, alumno: Alumno) {

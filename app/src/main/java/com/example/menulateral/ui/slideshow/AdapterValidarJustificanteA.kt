@@ -21,16 +21,14 @@ import com.example.menulateral.DataModel.FaltaJustificada2
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.Login
 import com.example.menulateral.R
-import com.example.menulateral.ui.faltasJustificadas.FaltasJustificadasAdapter
-import com.example.menulateral.ui.faltasJustificadas.FaltasJustificadasFragment
 import com.example.menulateral.ui.faltasJustificadas.UfColorRectangleAdapter
 import com.example.menulateral.ui.slideshow.extensiones.ValidarFragmenExtensionA
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
-class AdapterValidarJustificanteB(private val listener: ValidarFragmenExtensionA, private val justificarFaltasList: MutableList<FaltaJustificada2>?, private val estado: Int):
-    RecyclerView.Adapter<AdapterValidarJustificanteB.AdapterValidarJustificanteBHolder>(), View.OnClickListener{
+class AdapterValidarJustificanteA(private val listener: ValidarFragmenExtensionA, private val justificarFaltasList: MutableList<FaltaJustificada2>?, private val estado: Int):
+    RecyclerView.Adapter<AdapterValidarJustificanteA.AdapterValidarJustificanteAHolder>(), View.OnClickListener{
 
     private var faltasToShowList: List<FaltaToShow>? = null
 
@@ -45,7 +43,7 @@ class AdapterValidarJustificanteB(private val listener: ValidarFragmenExtensionA
     private val layout = R.layout.adapter_item_color // Reemplaza "nuevo_layout" con el nombre del nuevo layout que has proporcionado
     private var clickListener: View.OnClickListener? = null
 
-    class AdapterValidarJustificanteBHolder (view: View): RecyclerView.ViewHolder(view){
+    class AdapterValidarJustificanteAHolder (view: View): RecyclerView.ViewHolder(view){
         var alumnName: TextView
         var recyclerViewRellenar: RecyclerView
         var deployModule : ImageView
@@ -65,7 +63,7 @@ class AdapterValidarJustificanteB(private val listener: ValidarFragmenExtensionA
         }
     }
 
-    override fun onBindViewHolder(holder: AdapterValidarJustificanteB.AdapterValidarJustificanteBHolder, position: Int) {
+    override fun onBindViewHolder(holder: AdapterValidarJustificanteA.AdapterValidarJustificanteAHolder, position: Int) {
         val justificarFalta = justificarFaltasList?.get(position)
         val btn = holder.itemView.findViewById<Button>(R.id.botonVer)
         btn.setOnClickListener {
@@ -102,17 +100,17 @@ class AdapterValidarJustificanteB(private val listener: ValidarFragmenExtensionA
             bindPackage(holder, justificarFalta)
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterValidarJustificanteBHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterValidarJustificanteAHolder {
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         view.setOnClickListener(this)
-        return AdapterValidarJustificanteBHolder(view)
+        return AdapterValidarJustificanteAHolder(view)
     }
 
     override fun getItemCount(): Int {
         return justificarFaltasList!!.size
     }
 
-    fun bindPackage(holder: AdapterValidarJustificanteBHolder, justificarFalta: FaltaJustificada2){
+    fun bindPackage(holder: AdapterValidarJustificanteAHolder, justificarFalta: FaltaJustificada2){
 
         holder.alumnName.text = justificarFalta.motivoFalta
         //val FaltasList: MutableList<Faltas> = cargarListaHoras();
