@@ -8,6 +8,7 @@ import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.Alumno
 import com.example.menulateral.DataModel.FaltaToShow
+import com.example.menulateral.DataModel.Profe
 import com.example.menulateral.DataModel.UserCep
 import com.example.menulateral.databinding.ActivityLoginBinding
 import kotlinx.coroutines.GlobalScope
@@ -21,6 +22,7 @@ class Login : AppCompatActivity() {
     companion object{
         lateinit var userLogin: UserCep
         lateinit var alumno: Alumno
+        lateinit var profe: Profe
     }
 
 
@@ -37,6 +39,17 @@ class Login : AppCompatActivity() {
     }
 
     fun callApiAlumno(idUserCep: Int) = runBlocking {
+        var alumnoLogged = globalFun2(idUserCep)
+        if (alumnoLogged == null){
+            alumno = Alumno(20021,"12345A", "ERROR","");
+            Toast.makeText(this@Login, "Error al consultar el Alumno", Toast.LENGTH_SHORT).show()
+        }else{
+            alumno = alumnoLogged
+        }
+
+    }
+
+    fun callApiProfe(idUserCep: Int) = runBlocking {
         var alumnoLogged = globalFun2(idUserCep)
         if (alumnoLogged == null){
             alumno = Alumno(20021,"12345A", "ERROR","");
@@ -66,11 +79,13 @@ class Login : AppCompatActivity() {
         if (userLogin.tipoUser == 2){
             callApiAlumno(userLogin.idUserCep)
 
+        }else{
+            callApiProfe(userLogin.idUserCep)
         }
 
 
             if (validar()) {
-                if (userLogin!!.tipoUser == 2){
+                if (userLogin!!.tipoUser == 1){
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
