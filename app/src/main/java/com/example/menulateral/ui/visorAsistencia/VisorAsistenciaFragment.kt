@@ -49,20 +49,23 @@ class VisorAsistenciaFragment : Fragment() {
 
         // Crea un HashMap para agrupar los elementos por módulo
         val gruposPorModulo = HashMap<String, MutableList<ModuloUFVisorAsistencia>>()
-// Agrupa los elementos de la lista por módulo y filtra los elementos con porcentaje de asistencia igual a cero
-        for (elemento in modulosUFVisorAsistenciaList!!.filter { it.porcentaje_asistencia > 0 }) {
+
+        // Agrupa los elementos de la lista por módulo y filtra los elementos con porcentaje de asistencia igual a cero
+        for (elemento in modulosUFVisorAsistenciaList!!.filter { it.listas_pasadas != 0 }) {
             if (!gruposPorModulo.containsKey(elemento.siglas_uf)) {
                 gruposPorModulo[elemento.siglas_uf] = ArrayList()
             }
             gruposPorModulo[elemento.siglas_uf]?.add(elemento)
         }
-// Calcula el promedio del porcentaje de asistencia para cada grupo de elementos del mismo módulo
+
+        // Calcula el promedio del porcentaje de asistencia para cada grupo de elementos del mismo módulo
         val porcentajePorModulo = ArrayList<Float>()
         for ((_, elementos) in gruposPorModulo) {
             val sumPorcentaje = elementos.sumOf { it.porcentaje_asistencia.toDouble() }
             val promedioPorcentaje = (sumPorcentaje / elementos.size)
             porcentajePorModulo.add(promedioPorcentaje.toFloat())
         }
+
 
 
 
@@ -161,4 +164,3 @@ class VisorAsistenciaFragment : Fragment() {
 
 
 }
-
