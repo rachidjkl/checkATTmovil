@@ -8,6 +8,7 @@ import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.Alumno
 import com.example.menulateral.DataModel.FaltaToShow
+import com.example.menulateral.DataModel.Profe
 import com.example.menulateral.DataModel.UserCep
 import com.example.menulateral.databinding.ActivityLoginBinding
 import kotlinx.coroutines.GlobalScope
@@ -21,6 +22,7 @@ class Login : AppCompatActivity() {
     companion object{
         lateinit var userLogin: UserCep
         lateinit var alumno: Alumno
+        lateinit var profe: Profe
     }
 
 
@@ -67,6 +69,7 @@ class Login : AppCompatActivity() {
             callApiAlumno(userLogin.idUserCep)
 
         }
+
 
 
             if (validar()) {
@@ -146,6 +149,8 @@ class Login : AppCompatActivity() {
             response.body()
         }.await()
     }
+
+
 
 
 

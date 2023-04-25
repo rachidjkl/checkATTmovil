@@ -26,11 +26,15 @@ class VisorAsistenciaFragment : Fragment() {
     private var nombreUsuario: String = ""
     private var porcentajeAsistenciaModulo: Float = 0.0F
 
+
     init {
-        main()
+        var alumno = arguments?.getSerializable("alumno") as? Alumno
+        if (alumno != null) {
+            main(alumno)
+        }
     }
-    fun main() = runBlocking {
-        modulosUFVisorAsistenciaList = globalFun()
+    fun main(alumno: Alumno) = runBlocking {
+        modulosUFVisorAsistenciaList = globalFun(alumno)
     }
 
     // This property is only valid between onCreateView and
@@ -156,12 +160,12 @@ class VisorAsistenciaFragment : Fragment() {
         _binding = null
     }
 
-    private suspend fun globalFun(): List<ModuloUFVisorAsistencia>? {
+    private suspend fun globalFun(alumno: Alumno): List<ModuloUFVisorAsistencia>? {
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
         return GlobalScope.async {
-            val call = userCepApi.getVisorAistencia(Login.alumno.idAlumno)
+            val call = userCepApi.getVisorAistencia(alumno!!.idAlumno)
             val response = call.execute()
             response.body()
         }.await()

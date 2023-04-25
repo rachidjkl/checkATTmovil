@@ -42,4 +42,10 @@ interface ApiGets {
 
     @GET("api/Modulos/ModuloUf/idAlumno/{idAlumno}")
     fun getVisorAistencia(@Path("idAlumno") idAlumno: Int): Call<List<ModuloUFVisorAsistencia>>
+
+    @GET("api/Alumno/idProfe/{idProfe}")
+    fun getAlumnosClase(@Path("idProfe") idProfe: Int): Call<MutableList<Alumno>>
+
+    @GET("api/Clase/idProfe/{idProfe}")
+    fun checkProfeTutor(@Path("idTutorClase") idProfe: Int): Int
 }
