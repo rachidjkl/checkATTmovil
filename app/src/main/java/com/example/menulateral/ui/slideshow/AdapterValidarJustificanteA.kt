@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.ApiAcces.ApiGets
 import com.example.menulateral.ApiAcces.RetrofitClient
+import com.example.menulateral.DataModel.Alumno
 import com.example.menulateral.DataModel.FaltaJustificada2
 import com.example.menulateral.DataModel.FaltaToShow
-import com.example.menulateral.Login
 import com.example.menulateral.R
 import com.example.menulateral.ui.faltasJustificadas.UfColorRectangleAdapter
 import com.example.menulateral.ui.slideshow.extensiones.ValidarFragmenExtensionA
@@ -27,13 +27,13 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
-class AdapterValidarJustificanteA(private val listener: ValidarFragmenExtensionA, private val justificarFaltasList: MutableList<FaltaJustificada2>?, private val estado: Int):
+class AdapterValidarJustificanteA(private val listener: ValidarFragmenExtensionA, private val justificarFaltasList: MutableList<FaltaJustificada2>?, private val estado: Int, private val alumnoo : Alumno):
     RecyclerView.Adapter<AdapterValidarJustificanteA.AdapterValidarJustificanteAHolder>(), View.OnClickListener{
 
     private var faltasToShowList: List<FaltaToShow>? = null
 
     fun main(justificarFalta: FaltaJustificada2) = runBlocking {
-        faltasToShowList = globalFun(justificarFalta)
+        faltasToShowList = globalFun(justificarFalta, alumnoo)
     }
 
     interface OnItemClickListener {
@@ -147,12 +147,12 @@ class AdapterValidarJustificanteA(private val listener: ValidarFragmenExtensionA
         clickListener = listener
     }
 
-    private suspend fun globalFun(justificarFalta: FaltaJustificada2): List<FaltaToShow>? {
+    private suspend fun globalFun(justificarFalta: FaltaJustificada2, alumno: Alumno): List<FaltaToShow>? {
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
         return GlobalScope.async {
-            val call = userCepApi.getFaltasToShow2(Login.alumno.idAlumno, justificarFalta.idJustificarFaltas)
+            val call = userCepApi.getFaltasToShow2(alumno.idAlumno, justificarFalta.idJustificarFaltas)
             val response = call.execute()
             response.body()
         }.await()

@@ -46,8 +46,12 @@ interface ApiGets {
     fun getVisorAistencia(@Path("idAlumno") idAlumno: Int): Call<List<ModuloUFVisorAsistencia>>
 
     @GET("api/ClasesPersNoName/tutor_clase/{tutor_clase}")
-    fun getAlumnosClase(@Path("tutor_clase") idProfe: Int): Call<MutableList<Alumno>>
+    fun getClase(@Path("tutor_clase") tutor_clase: Int): Call<Int>
 
     @GET("api/Profesors/id_usuario_cep/{id_usuario_cep}")
-    fun getProfesor(@Path("id_usuario_cep") id_usuario_cep: Int): Call<Profe>
+    fun getProfesor(@Path("id_usuario_cep") id_usuario_cep: Int): Call<List<Profe>>
+
+    @GET("api/Alumno/id_tutor/{id_tutor}")
+    fun getAlumnosList(@Path("id_tutor") id_tutor: Int): Call<MutableList<Alumno>>
+
 }

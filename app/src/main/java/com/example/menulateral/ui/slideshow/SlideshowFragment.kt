@@ -13,6 +13,7 @@ import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.Alumno
 import com.example.menulateral.DataModel.FaltaJustificada2
 import com.example.menulateral.DataModel.FaltaToShow
+import com.example.menulateral.Login
 import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentSlideshowBinding
 import com.example.menulateral.extension.extensionFaltasJustificadas
@@ -84,7 +85,7 @@ class SlideshowFragment : Fragment() {
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
         return GlobalScope.async {
-            val call = userCepApi.getAlumnosClase(10005)
+            val call = userCepApi.getAlumnosList(Login.profe.idProfe)
             val response = call.execute()
             response.body()
         }.await()

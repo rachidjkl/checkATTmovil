@@ -34,8 +34,8 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
     }
 
     fun main() = runBlocking {
-        faltaJustificadaListValidada = cargarListFaltaJustificada(alumno.idAlumno, 1)
         faltaJustificadaListPendiente = cargarListFaltaJustificada(alumno.idAlumno, 0)
+        faltaJustificadaListValidada = cargarListFaltaJustificada(alumno.idAlumno, 1)
         faltaJustificadaListRechazada = cargarListFaltaJustificada(alumno.idAlumno, -1)
     }
 
@@ -58,6 +58,16 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
         val root: View = binding.root
 
         binding.nombreTutor.text = alumno.nombreAlumno+" "+alumno.apellido1Alumno
+
+        if(faltaJustificadaListPendiente != null){
+            binding.RecyclerView.visibility = View.VISIBLE
+            val adapter = AdapterValidarJustificanteA(this@ValidarFragmenExtensionA, faltaJustificadaListPendiente, 0, alumno)
+            binding.RecyclerView.hasFixedSize()
+            binding.RecyclerView.layoutManager = LinearLayoutManager(context)
+            binding.RecyclerView.adapter = adapter
+        }else{
+            binding.RecyclerView.visibility = View.GONE
+        }
 
         return root
     }
@@ -86,7 +96,7 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
                     0 -> {
                         if(faltaJustificadaListPendiente != null){
                             binding.RecyclerView.visibility = View.VISIBLE
-                            val adapter = AdapterValidarJustificanteA(this@ValidarFragmenExtensionA, faltaJustificadaListPendiente, 0)
+                            val adapter = AdapterValidarJustificanteA(this@ValidarFragmenExtensionA, faltaJustificadaListPendiente, 0, alumno)
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter
@@ -98,7 +108,7 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
                     1 -> {
                         if(faltaJustificadaListValidada != null){
                             binding.RecyclerView.visibility = View.VISIBLE
-                            val adapter = AdapterValidarJustificanteA(this@ValidarFragmenExtensionA, faltaJustificadaListValidada, 1)
+                            val adapter = AdapterValidarJustificanteA(this@ValidarFragmenExtensionA, faltaJustificadaListValidada, 1, alumno)
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter
@@ -110,7 +120,7 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
                     2 -> {
                         if(faltaJustificadaListRechazada != null){
                             binding.RecyclerView.visibility = View.VISIBLE
-                            val adapter = AdapterValidarJustificanteA(this@ValidarFragmenExtensionA, faltaJustificadaListRechazada, -1)
+                            val adapter = AdapterValidarJustificanteA(this@ValidarFragmenExtensionA, faltaJustificadaListRechazada, -1, alumno)
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter
