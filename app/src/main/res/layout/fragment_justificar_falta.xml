@@ -101,13 +101,18 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="75dp"
+        android:hint="Selecciona una imagen"
         android:textAlignment="textStart"
+        android:clickable="true"
+        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_comentario"
         app:layout_constraintVertical_bias="0.011" />
+
+
 
 
     <TextView

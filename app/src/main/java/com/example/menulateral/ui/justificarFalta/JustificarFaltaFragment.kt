@@ -1,11 +1,15 @@
 package com.example.menulateral.ui.justificarFalta
 
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -27,6 +31,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
+import android.content.ContentResolver
 import java.util.*
 
 
@@ -37,6 +42,10 @@ class JustificarFaltaFragment : Fragment() {
     private var faltasToShowList: List<FaltaToShow>? = null
     private var updateExit: Boolean = true
     private var idFaltaJustificada: Int = -1
+
+    //select imgatge
+    private val PICK_IMAGE_REQUEST = 1
+    private lateinit var editText: EditText
 
 
     // LA CORRUTINA SE HA DE LLAMAR DESDE OTRA CORRUTINA
@@ -103,6 +112,18 @@ class JustificarFaltaFragment : Fragment() {
 
         binding.datePickerButton.text = "${dayOfMonth}/${month + 1}/${year}"
 
+
+
+
+            // seleccionar imagen
+        binding.editAdjuntarDocumento.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Selecciona una imagen"), PICK_IMAGE_REQUEST)
+        }
+
+
         binding.btnEnviar.setOnClickListener(){
             _binding!!.editReason.text.toString()
 
@@ -160,6 +181,22 @@ class JustificarFaltaFragment : Fragment() {
             datePicker.show()
         }
         return root
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
+            val uri = data.data
+            val filePathColumn = arrayOf(MediaStore.Images.Media.DISPLAY_NAME)
+            val cursor = requireActivity().contentResolver.query(uri!!, filePathColumn, null, null, null)
+            cursor?.moveToFirst()
+            val columnIndex = cursor?.getColumnIndex(filePathColumn[0])
+            val fileName = columnIndex?.let { cursor.getString(it) }
+           binding.editAdjuntarDocumento.setText(fileName)
+            cursor?.close()
+        }
     }
 
 
