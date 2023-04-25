@@ -100,7 +100,7 @@
         app:layout_constraintVertical_bias="0.084" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonRechazar"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="123dp"
         android:layout_height="52dp"
@@ -113,7 +113,7 @@
         app:layout_constraintVertical_bias="0.589" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonValidar"
         android:layout_width="126dp"
         android:layout_height="53dp"
         android:text="Validar"

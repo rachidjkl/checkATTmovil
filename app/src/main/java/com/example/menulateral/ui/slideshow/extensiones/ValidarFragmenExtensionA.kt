@@ -14,6 +14,7 @@ import com.example.menulateral.DataModel.FaltaJustificada2
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentValidarFragmenExtensionABinding
+import com.example.menulateral.extension.extensionFaltasJustificadas
 import com.example.menulateral.ui.slideshow.AdapterValidarJustificanteA
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.GlobalScope
@@ -46,6 +47,16 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
     }
 
     fun onItemClick(position: Int, infoFalta: MutableList<FaltaToShow>, infoJustificante: MutableList<FaltaJustificada2>) {
+        //-------------------------------------------------Cambiar fragment-------------------------------------------//
+        val fragmentoPasarLista = ValidarFragmenExtensionB(infoFalta, infoJustificante.get(position))
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        // Agregar el fragmento actual a la pila de fragmentos
+        // Reemplazar el fragmento actual con el FragmentNuevo
+        fragmentTransaction.replace(R.id.nav_host_fragment_content_main2, fragmentoPasarLista)
+        fragmentTransaction.commit()
+
+        //------------------------------------------------------------------------------------------------------------//
 
     }
 

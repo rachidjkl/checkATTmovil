@@ -54,4 +54,7 @@ interface ApiGets {
     @GET("api/Alumno/id_tutor/{id_tutor}")
     fun getAlumnosList(@Path("id_tutor") id_tutor: Int): Call<MutableList<Alumno>>
 
+    @POST("api/JustificarFalta/SetEstado/id_justificar_falta/{id_justificar_falta}/estado_falta/{estado_falta}")
+    fun updateJustificarFalta(@Path("id_justificar_falta") id_justificar_falta: Int, @Path("estado_falta") estado_falta: Int?): Call<Void>
+
 }
