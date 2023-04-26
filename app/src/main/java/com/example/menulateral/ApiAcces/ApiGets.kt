@@ -56,5 +56,16 @@ interface ApiGets {
 
     @POST("api/JustificarFalta/SetEstado/id_justificar_falta/{id_justificar_falta}/estado_falta/{estado_falta}")
     fun updateJustificarFalta(@Path("id_justificar_falta") id_justificar_falta: Int, @Path("estado_falta") estado_falta: Int?): Call<Void>
+    @GET("api/ClasesPers")
+    fun getAllClasses(): Call<List<ClasePers>>
+
+    @GET("api/Modulos/ModuloClase/idClase/{idClase}")
+    fun getModulosClase(@Path("idClase") idClase: Int): Call<List<ModuloClase>>
+
+    @GET("api/UFs/UfModulo/idModulo/{idModulo}")
+    fun getUfModulo(@Path("idModulo") idModulo: Int): Call<List<UFModuloClase>>
+
+    @GET("api/Alumno/idUf/{idUf}")
+    fun getAlumnosUf(@Path("idUf") idUf: Int): Call<List<AlumnoUf>>
 
 }

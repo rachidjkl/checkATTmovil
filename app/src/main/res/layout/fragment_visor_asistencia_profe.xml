@@ -5,7 +5,7 @@
     android:background="@color/gris_claro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.VisorAsistenciaProfe.VisorAsistenciaProfeFragment">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -16,7 +16,6 @@
         android:gravity="top|left"
         android:indeterminate="false"
         android:max="100"
-        android:progress="16"
         android:progressDrawable="@drawable/circular_progress"
         android:rotation="148"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +42,7 @@
             android:gravity="center"
             android:text="0"
             android:textAlignment="center"
-            android:textSize="40sp" />
+            android:textSize="40sp"/>
 
         <TextView
             style="@style/estiloTexto"
@@ -69,7 +68,7 @@
             android:id="@+id/autoCompleteTextView6"
             style="@style/estiloDesplebabes"
             android:inputType="none"
-            android:text="M02 - Base de dades"
+            android:text="Selecciona una clase"
             android:textStyle="bold" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -88,9 +87,8 @@
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextView7"
             style="@style/estiloDesplebabes"
-
             android:inputType="none"
-            android:text="M02 - Base de dades"
+            android:text="Selecciona un modulo"
             android:textStyle="bold" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -109,21 +107,21 @@
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextView8"
             style="@style/estiloDesplebabes"
-
             android:inputType="none"
-            android:text="M02 - Base de dades"
+            android:text="Selecciona una UF"
             android:textStyle="bold" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerView"
-        android:layout_width="388dp"
-        android:layout_height="379dp"
+        android:id="@+id/RecyclerViewAlumnos"
+        android:layout_width="385dp"
+        android:layout_height="353dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.997" />
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

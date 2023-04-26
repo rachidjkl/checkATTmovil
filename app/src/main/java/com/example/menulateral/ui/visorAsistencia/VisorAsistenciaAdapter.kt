@@ -91,27 +91,29 @@ class VisorAsistenciaAdapter(
         var sumaPorcentajes = 0
         var contador = 0
         uf.ufs.forEach { item ->
-            sumaPorcentajes += item.porcentaje_asistencia.toInt()
-            contador++
+
+            if (item.listas_pasadas != 0) { // se verifica si item.listasPasadas es diferente a 0
+                sumaPorcentajes += item.porcentaje_asistencia.toInt()
+                contador++
+                var porcentajeTotalModulo = if (sumaPorcentajes > contador) {
+                    // Si la suma de porcentajes es mayor que el contador, asumimos que son porcentajes
+                    (sumaPorcentajes / (contador.toFloat()*100)) * 100
+                } else {
+                    // Si la suma de porcentajes es menor o igual al contador, asumimos que son números decimales
+                    (sumaPorcentajes / contador) * 100
+                }
+
+                val decimalFormat = DecimalFormat("#.#")
+                decimalFormat.roundingMode = RoundingMode.HALF_UP
+                val porcentajeTruncado = decimalFormat.format(porcentajeTotalModulo).toFloat()
+
+                holder.porcentaje?.text = porcentajeTruncado.toString() + "%"
+            }
+
         }
 
 
-        var porcentajeTotalModulo = if (sumaPorcentajes > contador) {
-            // Si la suma de porcentajes es mayor que el contador, asumimos que son porcentajes
-            (sumaPorcentajes / (contador.toFloat()*100)) * 100
-        } else {
-            // Si la suma de porcentajes es menor o igual al contador, asumimos que son números decimales
-            (sumaPorcentajes / contador) * 100
-        }
 
-        val decimalFormat = DecimalFormat("#.#")
-        decimalFormat.roundingMode = RoundingMode.HALF_UP
-        val porcentajeTruncado = decimalFormat.format(porcentajeTotalModulo).toFloat()
-
-
-
-
-        holder.porcentaje?.text = porcentajeTruncado.toString() + "%"
 
 
     }
