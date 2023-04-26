@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.R
 
-class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>, private val isChecked: Boolean):
+class UFCheckBoxAdapter(private val faltas: List<FaltaToShow>):
     RecyclerView.Adapter<UFCheckBoxAdapter.UfViewHolder>(){
 
     companion object{

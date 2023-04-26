@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.menulateral.DataModel.FaltasPorFecha
 import com.example.menulateral.R
 import com.example.menulateral.ui.justificarFalta.FaltasAgrupadasAdapter
+import com.example.menulateral.ui.justificarFalta.UFCheckBoxAdapter
 
 class verFaltasAdapter ( private val faltasfecha : List<FaltasPorFecha>):
     RecyclerView.Adapter<verFaltasAdapter.verFaltasHolder>(), View.OnClickListener {
@@ -76,7 +77,7 @@ class verFaltasAdapter ( private val faltasfecha : List<FaltasPorFecha>):
 
     fun bindPackage(holder: verFaltasHolder, faltafecha: FaltasPorFecha) {
 
-        val adapter = FaltasAgrupadasAdapter(faltafecha.faltas,false) //ADAPTER INTERNO DEL CARDVIEW
+        val adapter = UFCheckBoxAdapter(faltafecha.faltas) //ADAPTER INTERNO DEL CARDVIEW
 
         holder.moduloName?.text = faltafecha.fecha.toString()
         holder.recyclerViewRellenar?.adapter = adapter
