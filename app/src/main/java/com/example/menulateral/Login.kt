@@ -54,7 +54,7 @@ class Login : AppCompatActivity() {
     fun callApiProfe(idUserCep: Int) = runBlocking {
         var ProfeLogged = globalFun3(idUserCep)
         if (ProfeLogged == null){
-            profe = Profe(20021,"12345A", "ERROR");
+            profe = Profe(20021,"12345A", "ERROR","ggg","gggggg","gg");
             Toast.makeText(this@Login, "Error al consultar el Alumno", Toast.LENGTH_SHORT).show()
         }else{
             profe = ProfeLogged.get(0)
