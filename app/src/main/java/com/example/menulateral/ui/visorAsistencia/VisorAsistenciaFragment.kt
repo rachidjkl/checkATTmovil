@@ -158,9 +158,4 @@ class VisorAsistenciaFragment : Fragment() {
             response.body()
         }.await()
     }
-
-
-
-
-
 }
