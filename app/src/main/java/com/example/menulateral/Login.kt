@@ -86,6 +86,7 @@ class Login : AppCompatActivity() {
         }
 
 
+
             if (validar()) {
                 if (userLogin!!.tipoUser == 2){
                     val intent = Intent(this, MainActivity::class.java)
@@ -174,6 +175,8 @@ class Login : AppCompatActivity() {
             response.body()
         }.await()
     }
+
+
 
 
 
