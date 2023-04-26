@@ -25,16 +25,11 @@ class VisorAsistenciaFragment : Fragment() {
     private var modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>? = null
     private var nombreUsuario: String = ""
     private var porcentajeAsistenciaModulo: Float = 0.0F
+    private var alumno: Alumno? = null
 
 
-    init {
-        var alumno = arguments?.getSerializable("alumno") as? Alumno
-        if (alumno != null) {
-            main(alumno)
-        }
-    }
-    fun main(alumno: Alumno) = runBlocking {
-        modulosUFVisorAsistenciaList = globalFun(alumno)
+    fun main() = runBlocking {
+        modulosUFVisorAsistenciaList = globalFun()
     }
 
     // This property is only valid between onCreateView and
@@ -47,6 +42,13 @@ class VisorAsistenciaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        alumno = arguments?.getSerializable("alumno") as? Alumno
+        if(alumno!=null){
+            Login.alumno.idAlumno = alumno!!.idAlumno
+        }
+        main()
+
 
         _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -70,19 +72,7 @@ class VisorAsistenciaFragment : Fragment() {
             porcentajePorModulo.add(promedioPorcentaje.toFloat())
         }
 
-
-
-
-
-
-
         var ufModulo = agruparUfPorModulo(modulosUFVisorAsistenciaList)
-
-
-
-
-
-
 
         val porcentajeAlumno = sumaTotal(porcentajePorModulo)
         binding.progressBar.max = 100;
@@ -143,14 +133,16 @@ class VisorAsistenciaFragment : Fragment() {
         }
         var suma = 0f
         for (valor in porcentajePorModulo) {
-            suma += valor.toInt()
+            if(valor != 0.0f){
+                suma += valor.toInt()
+            }
         }
         return suma / porcentajePorModulo.size
     }
 
     @SuppressLint("SetTextI18n")
     private fun asignarNombre (){
-        _binding?.textoNombreUsuario?.text = Login.alumno.nombreAlumno + " " + Login.alumno.apellido1Alumno
+        _binding?.textoNombreUsuario?.text = alumno?.nombreAlumno + " " + alumno?.apellido1Alumno
     }
 
 
@@ -160,7 +152,7 @@ class VisorAsistenciaFragment : Fragment() {
         _binding = null
     }
 
-    private suspend fun globalFun(alumno: Alumno): List<ModuloUFVisorAsistencia>? {
+    private suspend fun globalFun(): List<ModuloUFVisorAsistencia>? {
 
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 

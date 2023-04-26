@@ -46,6 +46,7 @@ class TuClaseAdapter (val AlumnosList : MutableList<Alumno>?, val fragment: Frag
     }
 
     fun main(idAlumno: Int) = runBlocking {
+        porcentajeTotal = null
         porcentajeTotal = globalFun(idAlumno)
     }
 
@@ -54,6 +55,7 @@ class TuClaseAdapter (val AlumnosList : MutableList<Alumno>?, val fragment: Frag
         holder.cardview.setOnClickListener() {
 
             val bundle = Bundle()
+            var klk = AlumnosList?.get(position)
             bundle.putSerializable("alumno", AlumnosList?.get(position))
             val visorAsistencia = VisorAsistenciaFragment()
             visorAsistencia.arguments = bundle
