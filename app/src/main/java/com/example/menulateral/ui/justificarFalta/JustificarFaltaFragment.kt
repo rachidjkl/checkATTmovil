@@ -32,6 +32,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 import android.content.ContentResolver
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -46,6 +47,7 @@ class JustificarFaltaFragment : Fragment() {
     //select imgatge
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var editText: EditText
+    private var fecha: String = ""
 
 
     // LA CORRUTINA SE HA DE LLAMAR DESDE OTRA CORRUTINA
@@ -157,6 +159,17 @@ class JustificarFaltaFragment : Fragment() {
 
         }
 
+        val datePicker = DatePickerDialog(requireContext())
+        datePicker.setOnDateSetListener { _, year, month, dayOfMonth ->
+            val selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
+            val position = faltasfecha.indexOfFirst { it.fecha == selectedDate }
+            if (position != -1) {
+                binding.RecyclerViewJustificarFalta.scrollToPosition(position)
+            }
+        }
+        binding.deletePhotoButton.setOnClickListener{
+            binding.editAdjuntarDocumento.setText("")
+        }
         binding.datePickerButton.setOnClickListener {
 
             val datePicker = DatePickerDialog(
@@ -171,8 +184,9 @@ class JustificarFaltaFragment : Fragment() {
 
                     // Obtiene el nombre del día de la semana correspondiente a la fecha seleccionada
                     val selectedDayOfWeek = selectedCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+                    fecha = convertirFecha(selectedDate)
+                    binding.datePickerButton.text = fecha
 
-                    binding.datePickerButton.text = selectedDate
 
                 },
                 year, month, dayOfMonth
@@ -181,6 +195,17 @@ class JustificarFaltaFragment : Fragment() {
             datePicker.show()
         }
         return root
+    }
+
+    fun convertirFecha(fecha: String): String {
+        val formatoEntrada = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            DateTimeFormatter.ofPattern("d/M/yyyy")
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+        val fechaEntrada = LocalDate.parse(fecha, formatoEntrada)
+        val formatoSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        return fechaEntrada.format(formatoSalida)
     }
 
 
@@ -221,8 +246,11 @@ class JustificarFaltaFragment : Fragment() {
             }
         }
 
-        return faltasPorFecha.entries.map { FaltasPorFecha(it.key, it.value) }
+        // Ordena las fechas de más recientes a más antiguas
+        val sortedEntries = faltasPorFecha.entries.sortedByDescending { it.key }
+        return sortedEntries.map { FaltasPorFecha(it.key, it.value) }
     }
+
 
 
 
