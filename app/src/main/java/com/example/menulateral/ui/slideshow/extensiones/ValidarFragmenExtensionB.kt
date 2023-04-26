@@ -52,10 +52,11 @@ class ValidarFragmenExtensionB(val faltasToShowList: MutableList<FaltaToShow>, v
 
         binding.buttonValidar.setOnClickListener(){
             updateApi(justificantes.idJustificarFaltas, 1)
-            Toast.makeText(context,"mmmmmmmmmmgggggggg",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"Falta justificada",Toast.LENGTH_SHORT).show()
         }
-        binding.buttonValidar.setOnClickListener(){
+        binding.buttonRechazar.setOnClickListener(){
             updateApi(justificantes.idJustificarFaltas, -1)
+            Toast.makeText(context,"Falta Rechazada",Toast.LENGTH_SHORT).show()
         }
 
         return root
