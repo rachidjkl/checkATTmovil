@@ -15,6 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
+            android:layout_marginRight="50dp"
             android:layout_weight="0.90"
             android:text="UF1 Base de datos"
             android:maxLines="1"
@@ -26,7 +27,7 @@
             android:id="@+id/ufPercentage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="0dp"
             android:layout_weight="0.10"
             android:text="80%"
 

@@ -9,6 +9,8 @@ import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.ModuloUFVisorAsistencia
 import com.example.menulateral.R
 import com.example.menulateral.DataModel.Uf
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class AdapterAux( private val ufList: List<ModuloUFVisorAsistencia>):
     RecyclerView.Adapter <AdapterAux.UfViewHolder> (){
@@ -49,9 +51,13 @@ class AdapterAux( private val ufList: List<ModuloUFVisorAsistencia>):
     }
 
     fun bindPackage(holder: UfViewHolder, uf: ModuloUFVisorAsistencia){
+        val decimalFormat = DecimalFormat("#.#")
+        decimalFormat.roundingMode = RoundingMode.HALF_UP
+        val porcentajeTruncado = decimalFormat.format(uf.porcentaje_asistencia)
+
 
         holder.ufName?.text = uf.nombre_uf
-        holder.ufPercentage?.text = (uf.porcentaje_asistencia.toString()) + "%"
+        holder.ufPercentage?.text = porcentajeTruncado.toString() + "%"
 
     }
 

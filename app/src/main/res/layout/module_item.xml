@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp"
     android:orientation="vertical">
 
 
@@ -34,7 +36,7 @@
 
                 <TextView
                     android:id="@+id/moduleName"
-                    android:layout_width="280dp"
+                    android:layout_width="240dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:ellipsize="end"
@@ -42,7 +44,7 @@
                     android:singleLine="true"
                     android:text="MO3- Base de datos muy larga que se va a truncar con puntos suspensivos"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
