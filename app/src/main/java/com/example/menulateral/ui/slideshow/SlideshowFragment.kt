@@ -32,6 +32,7 @@ class SlideshowFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var listaAlumnos : MutableList<Alumno>? = null
+    private var numFaltasPendientes : Int? = null
 
     init {
         main()
@@ -39,6 +40,7 @@ class SlideshowFragment : Fragment() {
 
     fun main() = runBlocking {
         listaAlumnos = getAlumnos()
+        numFaltasPendientes = getNumFaltas()
     }
 
 
@@ -67,6 +69,7 @@ class SlideshowFragment : Fragment() {
         _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.text.text= numFaltasPendientes.toString()
         val adapter = AdapterValidarJustificante(this, listaAlumnos)
         binding.RecyclerView.hasFixedSize()
         binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
@@ -86,6 +89,17 @@ class SlideshowFragment : Fragment() {
 
         return GlobalScope.async {
             val call = userCepApi.getAlumnosList(Login.profe.idProfe)
+            val response = call.execute()
+            response.body()
+        }.await()
+    }
+
+    private suspend fun getNumFaltas(): Int? {
+
+        val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
+
+        return GlobalScope.async {
+            val call = userCepApi.numFaltasPendientes(0)
             val response = call.execute()
             response.body()
         }.await()

@@ -69,10 +69,6 @@ class FaltasJustificadasFragment : Fragment() {
 
         _binding = FragmentFaltasJustificadasBinding.inflate(inflater, container, false)
 
-        val modulos = resources.getStringArray(R.array.spinner_options)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, modulos)
-        binding.autoCompleteTextView6.setAdapter(arrayAdapter)
-
 
         val root: View = binding.root
         return root
@@ -89,7 +85,9 @@ class FaltasJustificadasFragment : Fragment() {
             binding.RecyclerView.hasFixedSize()
             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
             binding.RecyclerView.adapter = adapter
+            binding.noTienesFoto.visibility = View.GONE
         }else{
+            binding.noTienesFoto.visibility = View.VISIBLE
             binding.RecyclerView.visibility = View.GONE
         }
 
@@ -132,7 +130,9 @@ class FaltasJustificadasFragment : Fragment() {
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter
+                            binding.noTienesFoto.visibility = View.GONE
                         }else{
+                            binding.noTienesFoto.visibility = View.VISIBLE
                             binding.RecyclerView.visibility = View.GONE
                         }
 
@@ -144,7 +144,9 @@ class FaltasJustificadasFragment : Fragment() {
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter
+                            binding.noTienesFoto.visibility = View.GONE
                         }else{
+                            binding.noTienesFoto.visibility = View.VISIBLE
                             binding.RecyclerView.visibility = View.GONE
                         }
                     }
@@ -155,7 +157,9 @@ class FaltasJustificadasFragment : Fragment() {
                             binding.RecyclerView.hasFixedSize()
                             binding.RecyclerView.layoutManager = LinearLayoutManager(context)
                             binding.RecyclerView.adapter = adapter
+                            binding.noTienesFoto.visibility = View.GONE
                         }else{
+                            binding.noTienesFoto.visibility = View.VISIBLE
                             binding.RecyclerView.visibility = View.GONE
                         }
                     }

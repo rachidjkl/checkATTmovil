@@ -71,5 +71,8 @@ interface ApiGets {
     fun getAlumnosClase(@Path("idProfe") idProfe: Int): Call<MutableList<Alumno>>
 
     @GET("api/Clase/idProfe/{idProfe}")
-    fun checkProfeTutor(@Path("idTutorClase") idProfe: Int): Int
+    fun checkProfeTutor(@Path("idTutorClase") idProfe: Int): Call<Int>
+
+    @GET("api/Justificar_faltas/Count/estadoFalta/{estadoFalta}")
+    fun numFaltasPendientes(@Path("estadoFalta") estadoFalta: Int): Call<Int>
 }
