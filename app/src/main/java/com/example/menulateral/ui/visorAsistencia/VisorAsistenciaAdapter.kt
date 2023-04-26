@@ -105,7 +105,7 @@ class VisorAsistenciaAdapter(
 
                 val decimalFormat = DecimalFormat("#.#")
                 decimalFormat.roundingMode = RoundingMode.HALF_UP
-                val porcentajeTruncado = decimalFormat.format(porcentajeTotalModulo).toFloat()
+                val porcentajeTruncado = decimalFormat.format(porcentajeTotalModulo)
 
                 holder.porcentaje?.text = porcentajeTruncado.toString() + "%"
             }

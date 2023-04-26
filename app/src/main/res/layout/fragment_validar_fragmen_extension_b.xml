@@ -104,6 +104,7 @@
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="123dp"
         android:layout_height="52dp"
+        android:textSize="13dp"
         android:text="Rechazar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
