@@ -23,11 +23,10 @@ class VisorAsistenciaFragment : Fragment() {
 
     private var _binding: FragmentVisorAsistenciaBinding? = null
     private var modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>? = null
-    private var nombreUsuario: String = ""
-    private var porcentajeAsistenciaModulo: Float = 0.0F
-    private var alumno: Alumno? = null
 
-
+    init {
+        main()
+    }
     fun main() = runBlocking {
         modulosUFVisorAsistenciaList = globalFun()
     }
@@ -42,13 +41,6 @@ class VisorAsistenciaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        alumno = arguments?.getSerializable("alumno") as? Alumno
-        if(alumno!=null){
-            Login.alumno.idAlumno = alumno!!.idAlumno
-        }
-        main()
-
 
         _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -139,16 +131,14 @@ class VisorAsistenciaFragment : Fragment() {
         }
         var suma = 0f
         for (valor in porcentajePorModulo) {
-            if(valor != 0.0f){
-                suma += valor.toInt()
-            }
+            suma += valor.toInt()
         }
         return suma / porcentajePorModulo.size
     }
 
     @SuppressLint("SetTextI18n")
     private fun asignarNombre (){
-        _binding?.textoNombreUsuario?.text = alumno?.nombreAlumno + " " + alumno?.apellido1Alumno
+        _binding?.textoNombreUsuario?.text = Login.alumno.nombreAlumno + " " + Login.alumno.apellido1Alumno
     }
 
 
@@ -163,14 +153,9 @@ class VisorAsistenciaFragment : Fragment() {
         val userCepApi = RetrofitClient.getInstance().create(ApiGets::class.java)
 
         return GlobalScope.async {
-            val call = userCepApi.getVisorAistencia(alumno!!.idAlumno)
+            val call = userCepApi.getVisorAistencia(Login.alumno.idAlumno)
             val response = call.execute()
             response.body()
         }.await()
     }
-
-
-
-
-
 }
