@@ -17,6 +17,8 @@ import com.example.menulateral.ui.visorAsistencia.VisorAsistenciaFragment
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class TuClaseAdapter (val AlumnosList : MutableList<Alumno>?, val fragment: Fragment):
     RecyclerView.Adapter<TuClaseAdapter.TuClaseHolder>(), View.OnClickListener {
@@ -97,7 +99,13 @@ class TuClaseAdapter (val AlumnosList : MutableList<Alumno>?, val fragment: Frag
         }
         var result = values/count
         porcientoTotal += result
-        holder.porcentajetxt.text = result.toString()
+
+        val decimalFormat = DecimalFormat("#.#")
+        decimalFormat.roundingMode = RoundingMode.HALF_UP
+        val porcentajeTruncado = decimalFormat.format(result)
+
+
+        holder.porcentajetxt.text = porcentajeTruncado.toString()
     }
 
     override fun onClick(view: View?) {
