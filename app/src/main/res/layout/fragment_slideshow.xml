@@ -9,21 +9,19 @@
 
     <TextView
         android:id="@+id/text_slideshow"
-        android:layout_width="176dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        style="@style/estiloTexto"
+        android:layout_width="150dp"
         android:layout_marginEnd="8dp"
         android:text="Faltas pendientes de validar"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/rectanguloValidar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.867"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.065" />
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toEndOf="@+id/rectanguloValidar"
+        app:layout_constraintTop_toTopOf="@+id/rectanguloValidar"
+        app:layout_constraintVertical_bias="0.412" />
 
     <ImageView
         android:id="@+id/rectanguloValidar"
@@ -44,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="8"
+        android:text="1"
         android:textAlignment="center"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="@+id/rectanguloValidar"

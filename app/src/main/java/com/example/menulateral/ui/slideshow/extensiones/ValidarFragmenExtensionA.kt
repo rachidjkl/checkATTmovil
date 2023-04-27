@@ -94,7 +94,7 @@ class ValidarFragmenExtensionA(val alumno: Alumno) : Fragment() {
 
         binding.tabs.addTab(binding.tabs.newTab().setText("Pendientes"))
         binding.tabs.addTab(binding.tabs.newTab().setText("Validadas"))
-        binding.tabs.addTab(binding.tabs.newTab().setText("Rechazadas"))
+        binding.tabs.addTab(binding.tabs.newTab().setText("Rechazada"))
 
         //Se muestra este tab seleccionado por defecto
         val defaultTab = binding.tabs.getTabAt(0)

@@ -145,6 +145,7 @@ class VisorAsistenciaProfeFragment : Fragment() {
                         binding.RecyclerViewAlumnos.hasFixedSize()
                         binding.RecyclerViewAlumnos.layoutManager = LinearLayoutManager(context)
                         binding.RecyclerViewAlumnos.adapter = adapter
+                        binding.textoRecyclerVacio.visibility = View.GONE
 
 
 
