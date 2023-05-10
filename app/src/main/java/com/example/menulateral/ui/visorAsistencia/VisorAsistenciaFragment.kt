@@ -7,6 +7,7 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.ApiAcces.ApiGets
@@ -23,6 +24,7 @@ class VisorAsistenciaFragment : Fragment() {
 
     private var _binding: FragmentVisorAsistenciaBinding? = null
     private var modulosUFVisorAsistenciaList: List<ModuloUFVisorAsistencia>? = null
+    private var alumno: Alumno? = null
 
     init {
         main()
@@ -41,6 +43,13 @@ class VisorAsistenciaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        alumno = arguments?.getSerializable("alumno") as? Alumno
+        if(alumno!=null){
+            Login.alumno.idAlumno = alumno!!.idAlumno
+
+        }
+        main()
 
         _binding = FragmentVisorAsistenciaBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -138,8 +147,18 @@ class VisorAsistenciaFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun asignarNombre (){
-        _binding?.textoNombreUsuario?.text = Login.alumno.nombreAlumno + " " + Login.alumno.apellido1Alumno
+
+        if(alumno!=null) {
+            val nombreCompleto = alumno?.nombreAlumno + " " + alumno?.apellido1Alumno
+            _binding?.textoNombreUsuario?.text = nombreCompleto
+        } else{
+            _binding?.textoNombreUsuario?.text = Login.alumno.nombreAlumno + " " + Login.alumno.apellido1Alumno
+        }
+
+
+
     }
+
 
 
 
