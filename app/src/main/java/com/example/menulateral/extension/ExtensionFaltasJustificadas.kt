@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menulateral.DataModel.*
+import com.example.menulateral.FullscreenImageDialogFragment
+import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentExtensionFaltasJustificadasBinding
 import com.example.menulateral.ui.visorAsistencia.AdapterExtensionFaltasJustificadas
 import java.time.LocalDate
@@ -40,6 +42,12 @@ class extensionFaltasJustificadas(val faltasToShowList: MutableList<FaltaToShow>
         binding.RecyclerView.hasFixedSize()
         binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.RecyclerView.adapter = adapter
+
+        binding.imagenJustificante.setOnClickListener(){
+            val imageUrl = R.drawable.justificante
+            val dialog = FullscreenImageDialogFragment(imageUrl)
+            dialog.show(requireActivity().supportFragmentManager, "fullscreen_image")
+        }
 
         return root
     }

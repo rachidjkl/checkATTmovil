@@ -93,6 +93,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.02" />
 
+    <ImageView
+        android:id="@+id/imagenJustificante"
+        android:layout_width="147dp"
+        android:layout_height="194dp"
+        android:src="@drawable/justificante"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RecyclerView"
+        app:layout_constraintVertical_bias="0.238" />
+
     <Button
         android:id="@+id/buttonRechazar"
         style="?attr/materialButtonOutlinedStyle"
@@ -104,18 +115,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.22"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/imagenJustificante" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="147dp"
-        android:layout_height="194dp"
-        android:src="@drawable/justificante"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RecyclerView"
-        app:layout_constraintVertical_bias="0.238" />
 
     <Button
         android:id="@+id/buttonValidar"
@@ -126,7 +127,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/imagenJustificante"
         android:clickable="false"/>
 
 

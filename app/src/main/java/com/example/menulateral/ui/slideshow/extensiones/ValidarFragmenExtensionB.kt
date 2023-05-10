@@ -13,12 +13,15 @@ import com.example.menulateral.ApiAcces.RetrofitClient
 import com.example.menulateral.DataModel.FaltaJustificada2
 import com.example.menulateral.DataModel.FaltaToShow
 import com.example.menulateral.DataModel.FaltasPorFecha
+import com.example.menulateral.FullscreenImageDialogFragment
 import com.example.menulateral.R
 import com.example.menulateral.databinding.FragmentExtensionFaltasJustificadasBinding
 import com.example.menulateral.databinding.FragmentValidarFragmenExtensionBBinding
 import com.example.menulateral.ui.visorAsistencia.AdapterExtensionFaltasJustificadas
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import androidx.fragment.app.FragmentManager
+
 import java.time.LocalDate
 
 class ValidarFragmenExtensionB(val faltasToShowList: MutableList<FaltaToShow>, val justificantes: FaltaJustificada2) : Fragment() {
@@ -57,6 +60,12 @@ class ValidarFragmenExtensionB(val faltasToShowList: MutableList<FaltaToShow>, v
         binding.buttonRechazar.setOnClickListener(){
             updateApi(justificantes.idJustificarFaltas, -1)
             Toast.makeText(context,"Falta Rechazada",Toast.LENGTH_SHORT).show()
+        }
+
+        binding.imagenJustificante.setOnClickListener(){
+            val imageUrl = R.drawable.justificante
+            val dialog = FullscreenImageDialogFragment(imageUrl)
+            dialog.show(requireActivity().supportFragmentManager, "fullscreen_image")
         }
 
         return root
