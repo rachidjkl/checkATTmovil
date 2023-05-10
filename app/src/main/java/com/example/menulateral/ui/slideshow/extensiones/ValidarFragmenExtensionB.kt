@@ -21,6 +21,7 @@ import com.example.menulateral.ui.visorAsistencia.AdapterExtensionFaltasJustific
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import androidx.fragment.app.FragmentManager
+import com.example.menulateral.ui.slideshow.SlideshowFragment
 
 import java.time.LocalDate
 
@@ -56,10 +57,30 @@ class ValidarFragmenExtensionB(val faltasToShowList: MutableList<FaltaToShow>, v
         binding.buttonValidar.setOnClickListener(){
             updateApi(justificantes.idJustificarFaltas, 1)
             Toast.makeText(context,"Falta justificada",Toast.LENGTH_SHORT).show()
+            //-------------------------------------------------Cambiar fragment-------------------------------------------//
+            val fragmentoPasarLista = SlideshowFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            // Agregar el fragmento actual a la pila de fragmentos
+            // Reemplazar el fragmento actual con el FragmentNuevo
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_main2, fragmentoPasarLista)
+            fragmentTransaction.commit()
+
+            //------------------------------------------------------------------------------------------------------------//
         }
         binding.buttonRechazar.setOnClickListener(){
             updateApi(justificantes.idJustificarFaltas, -1)
             Toast.makeText(context,"Falta Rechazada",Toast.LENGTH_SHORT).show()
+            //-------------------------------------------------Cambiar fragment-------------------------------------------//
+            val fragmentoPasarLista = SlideshowFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            // Agregar el fragmento actual a la pila de fragmentos
+            // Reemplazar el fragmento actual con el FragmentNuevo
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_main2, fragmentoPasarLista)
+            fragmentTransaction.commit()
+
+            //------------------------------------------------------------------------------------------------------------//
         }
 
         binding.imagenJustificante.setOnClickListener(){
