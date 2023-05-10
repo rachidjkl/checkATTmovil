@@ -15,7 +15,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         android:layout_margin="5dp"
-        android:onClick="expand2">
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

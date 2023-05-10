@@ -69,7 +69,8 @@ class SlideshowFragment : Fragment() {
         _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.text.text= "1"//numFaltasPendientes.toString()
+        numFaltasPendientes = (numFaltasPendientes?.minus(9))
+        binding.text.text= numFaltasPendientes.toString()
         val adapter = AdapterValidarJustificante(this, listaAlumnos)
         binding.RecyclerView.hasFixedSize()
         binding.RecyclerView.layoutManager = LinearLayoutManager(this.context)

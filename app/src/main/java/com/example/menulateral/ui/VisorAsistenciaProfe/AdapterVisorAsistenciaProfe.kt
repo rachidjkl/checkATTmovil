@@ -42,6 +42,7 @@ class AdapterVisorAsistenciaProfe(
         val alumno = ufAlumno[position]
 
         bindPackage(holder, alumno)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VisorAsistenciaHolder {

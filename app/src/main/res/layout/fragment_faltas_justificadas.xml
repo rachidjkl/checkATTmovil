@@ -80,6 +80,7 @@
             style="@style/estiloDesplebabes"
             android:inputType="none"
             android:text="M02 - Base de dades"
+            android:enabled="false"
             android:textStyle="bold"/>
 
     </com.google.android.material.textfield.TextInputLayout>
